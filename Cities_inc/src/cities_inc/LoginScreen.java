@@ -38,6 +38,8 @@ public class LoginScreen extends javax.swing.JDialog {
         TextoPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setType(java.awt.Window.Type.POPUP);
 
         TextUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,6 +143,9 @@ public class LoginScreen extends javax.swing.JDialog {
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
         // TODO add your handling code here:
         //System.out.println(TextoPassword.getSelectedText());
+        MainScreen.main();
+        
+        
     }//GEN-LAST:event_BtnAceptarActionPerformed
 
     /**
