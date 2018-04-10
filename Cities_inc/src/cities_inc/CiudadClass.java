@@ -9,6 +9,6 @@ package cities_inc;
  *
  * @author Patrik
  */
-public class BDview {
+public class CiudadClass {
     
 }

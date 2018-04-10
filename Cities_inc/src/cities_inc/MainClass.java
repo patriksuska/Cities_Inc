@@ -9,7 +9,7 @@ package cities_inc;
  *
  * @author Patrik
  */
-public class Cities_inc {
+public class MainClass {
 
     /**
      * @param args the command line arguments
