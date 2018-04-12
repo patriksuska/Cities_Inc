@@ -14,9 +14,12 @@ public class LoginScreen extends javax.swing.JDialog {
     /**
      * Creates new form MainScreen
      */
-    public LoginScreen(java.awt.Frame parent, boolean modal) {
+    
+
+    LoginScreen(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
+        initComponents(); 
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -61,6 +64,11 @@ public class LoginScreen extends javax.swing.JDialog {
         BtnCancelar.setText("Cancelar");
 
         BtnRegister.setText("Registrarse");
+        BtnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRegisterActionPerformed(evt);
+            }
+        });
 
         BtnGuest.setText("Invitado");
 
@@ -147,6 +155,10 @@ public class LoginScreen extends javax.swing.JDialog {
         
         
     }//GEN-LAST:event_BtnAceptarActionPerformed
+
+    private void BtnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegisterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnRegisterActionPerformed
 
     /**
      * @param args the command line arguments

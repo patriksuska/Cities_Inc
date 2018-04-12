@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package cities_inc;
 import org.json.*;
 import java.sql.Connection;
@@ -13,15 +9,27 @@ import java.sql.Connection;
 public class MainClass {
 
     /**
-     * @param args the command line arguments
+     *
+     * @param args
+     * @throws JSONException
      */
     public static void main(String[] args) throws JSONException {
         // TODO code application logic here
-        
-       CiudadClass.obtenerParadas();
-       CiudadClass.precioCiudad();
-       JDBCclass c1=new JDBCclass();
+       boolean logueado;
        
+    /**
+     *
+     */
+   /* java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+                    new LoginScreen().setVisible(true);
+                }
+
+    });*/
+       JDBCclass c1=new JDBCclass();//conexion con BD
+       CiudadClass.obtenerParadas();//Obtiene el numero de paradas de la ciudad
+       CiudadClass.precioCiudad();//Obtiene el precio de la ciudad
+       CiudadClass.bonificacion();//Obtiene la bonificacion por comprar la ciudad
     }
     
 }

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package cities_inc;
-//import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -16,31 +15,13 @@ import javax.swing.JOptionPane;
  * @author Patrik
  */
 public class JDBCclass {
+    
     public String db = "u634818610_city";
     public String url = "jdbc:mysql://sql151.main-hosting.eu/"+db;
     public String user = "u634818610_pat";
     public String pass = "patsus123";
-      private Connection conn = null;
-   /* public Connection Conectar(){
-
-      Connection link = null;
-
-       try{
-
-           Class.forName("com.mysql.jdbc.Connection");
-
-           link = (Connection)DriverManager.getConnection(this.url, this.user, this.pass);
-           System.out.println("Funciono");
-       }catch(Exception ex){
-
-           JOptionPane.showMessageDialog(null, ex);
-
-       }
-
-
-       
-       return link;
-   }*/
+    private Connection conn = null;
+   
     public JDBCclass() {
        
         try{
@@ -48,8 +29,11 @@ public class JDBCclass {
             conn = (Connection)DriverManager.getConnection(url, user, pass);
             if(conn != null)
             {
-                System.out.println("Conexi-n a base de datos "+url+" . . . Ok");
+                System.out.println("Conexion a BBDD "+url+" . . . Ok");
             }
+            //Statement s = conn.createStatement();
+            //String query1 = "insert into user (nombreUsuario,password,saldo,CSP) value (\"user1\",\"mypassword\",NOW())";
+            //s.executeUpdate(query1);
         }
         catch(SQLException ex)
         {
