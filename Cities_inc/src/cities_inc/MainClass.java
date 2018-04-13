@@ -17,19 +17,13 @@ public class MainClass {
         // TODO code application logic here
        boolean logueado;
        
+       LoginScreen logscreen = new LoginScreen();
+       logscreen.setVisible(true);
+       
     /**
      *
      */
-   /* java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-                    new LoginScreen().setVisible(true);
-                }
-
-    });*/
-       JDBCclass c1=new JDBCclass();//conexion con BD
-       CiudadClass.obtenerParadas();//Obtiene el numero de paradas de la ciudad
-       CiudadClass.precioCiudad();//Obtiene el precio de la ciudad
-       CiudadClass.bonificacion();//Obtiene la bonificacion por comprar la ciudad
+       
     }
     
 }

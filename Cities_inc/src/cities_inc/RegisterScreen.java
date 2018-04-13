@@ -9,13 +9,17 @@ package cities_inc;
  *
  * @author Patrik
  */
-public class RegisterScreen extends javax.swing.JDialog {
-
+public class RegisterScreen extends javax.swing.JFrame {
+    
+    String nombreUsuario;
+    String password;
+    int saldo=333000;
+    int CSP;
     /**
      * Creates new form Register
      */
-    public RegisterScreen(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public RegisterScreen() {
+        
         initComponents();
     }
 
@@ -59,6 +63,11 @@ public class RegisterScreen extends javax.swing.JDialog {
         jLabel3.setText("CSP*");
 
         BtnAceptar.setText("Aceptar");
+        BtnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAceptarActionPerformed(evt);
+            }
+        });
 
         BtnCancelar.setText("Cancelar");
 
@@ -117,6 +126,14 @@ public class RegisterScreen extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
+           // TODO add your handling code here:
+          this.nombreUsuario=TextUsuario.getText();
+          this.password=String.valueOf(TextoPassword.getPassword());
+          this.CSP=Integer.valueOf(TextCSP.getText());
+          System.out.println(password);
+    }//GEN-LAST:event_BtnAceptarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -148,7 +165,7 @@ public class RegisterScreen extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                RegisterScreen dialog = new RegisterScreen(new javax.swing.JFrame(), true);
+                RegisterScreen dialog = new RegisterScreen();
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

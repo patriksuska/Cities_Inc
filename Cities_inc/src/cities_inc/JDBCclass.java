@@ -16,13 +16,16 @@ import javax.swing.JOptionPane;
  */
 public class JDBCclass {
     
-    public String db = "u634818610_city";
-    public String url = "jdbc:mysql://sql151.main-hosting.eu/"+db;
-    public String user = "u634818610_pat";
-    public String pass = "patsus123";
-    private Connection conn = null;
+    private static String db = "u634818610_city";
+    private static String url = "jdbc:mysql://sql151.main-hosting.eu/"+db;
+    private static String user = "u634818610_pat";
+    private static String pass = "patsus123";
+    private static Connection conn = null;
    
-    public JDBCclass() {
+    
+    
+    public static ResultSet consulta(String query1) {//para los select que devuelven multiples resultados
+        ResultSet rs=null;
        
         try{
             Class.forName("com.mysql.jdbc.Connection");
@@ -31,9 +34,55 @@ public class JDBCclass {
             {
                 System.out.println("Conexion a BBDD "+url+" . . . Ok");
             }
-            //Statement s = conn.createStatement();
-            //String query1 = "insert into user (nombreUsuario,password,saldo,CSP) value (\"user1\",\"mypassword\",NOW())";
-            //s.executeUpdate(query1);
+            Statement s = conn.createStatement();
+            rs=s.executeQuery(query1);
+        }
+        catch(SQLException ex)
+        {
+            System.out.println("Hubo un problema al intentar conecarse a la base de datos"+url);
+        }
+        catch(ClassNotFoundException ex)
+        {
+            System.out.println(ex);
+        }      
+        return rs;
+    }
+     public static boolean consulta2(String query2) {//un valor unico para count 
+        boolean estado=false;
+       
+        try{
+            Class.forName("com.mysql.jdbc.Connection");
+            conn = (Connection)DriverManager.getConnection(url, user, pass);
+            if(conn != null)
+            {
+                System.out.println("Conexion a BBDD "+url+" . . . Ok");
+            }
+            Statement s = conn.createStatement();
+            
+            estado=s.execute(query2);
+        }
+        catch(SQLException ex)
+        {
+            System.out.println("Hubo un problema al intentar conecarse a la base de datos"+url);
+        }
+        catch(ClassNotFoundException ex)
+        {
+            System.out.println(ex);
+        }      
+        return estado;
+    }
+      public static void consulta3(String query3) {//update delete o insert
+        
+       
+        try{
+            Class.forName("com.mysql.jdbc.Connection");
+            conn = (Connection)DriverManager.getConnection(url, user, pass);
+            if(conn != null)
+            {
+                System.out.println("Conexion a BBDD "+url+" . . . Ok");
+            }
+            Statement s = conn.createStatement();
+            s.executeQuery(query3);
         }
         catch(SQLException ex)
         {

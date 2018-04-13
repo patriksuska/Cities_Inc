@@ -15,6 +15,9 @@ public class MainScreen extends javax.swing.JFrame {
      * Creates new form MainScreen
      */
     
+    
+    
+    
     public MainScreen() {
         initComponents();
     }
@@ -188,6 +191,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void ComboPaisesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboPaisesActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_ComboPaisesActionPerformed
 
     /**
@@ -217,6 +221,12 @@ public class MainScreen extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        
+        CiudadClass.obtenerParadas();//Obtiene el numero de paradas de la ciudad
+        CiudadClass.precioCiudad();//Obtiene el precio de la ciudad
+        CiudadClass.bonificacion();//Obtiene la bonificacion por comprar la ciudad
+        
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

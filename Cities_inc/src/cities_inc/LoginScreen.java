@@ -9,15 +9,15 @@ package cities_inc;
  *
  * @author Patrik
  */
-public class LoginScreen extends javax.swing.JDialog {
+public class LoginScreen extends javax.swing.JFrame {
 
     /**
      * Creates new form MainScreen
      */
     
 
-    LoginScreen(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    LoginScreen() {
+        
         initComponents(); 
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -151,6 +151,16 @@ public class LoginScreen extends javax.swing.JDialog {
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
         // TODO add your handling code here:
         //System.out.println(TextoPassword.getSelectedText());
+        String nombreUsuario;
+        String password;
+        nombreUsuario=TextUsuario.getText();
+        password=String.valueOf(TextoPassword.getPassword());
+        String sql;
+        sql = "SELECT COUNT (*) ";
+        sql+= "FROM Usuario ";
+        sql+= "WHERE nombreUsuario='"+nombreUsuario+"' and password=MD5('"+password+"');";
+        System.out.println(sql);
+        System.out.println(JDBCclass.consulta(sql).toString());
         MainScreen.main();
         
         
@@ -158,6 +168,8 @@ public class LoginScreen extends javax.swing.JDialog {
 
     private void BtnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegisterActionPerformed
         // TODO add your handling code here:
+        RegisterScreen regscreen = new RegisterScreen();
+        regscreen.setVisible(true);
     }//GEN-LAST:event_BtnRegisterActionPerformed
 
     /**
@@ -191,7 +203,7 @@ public class LoginScreen extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                LoginScreen dialog = new LoginScreen(new javax.swing.JFrame(), true);
+                LoginScreen dialog = new LoginScreen();
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
