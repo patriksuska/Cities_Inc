@@ -9,7 +9,7 @@ package cities_inc;
  *
  * @author Patrik
  */
-public class RankingScreen extends javax.swing.JFrame {
+public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombre de cada usuario y su saldo de la BD
 
     /**
      * Creates new form RankingScreen
@@ -32,6 +32,7 @@ public class RankingScreen extends javax.swing.JFrame {
         BtnCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(500, 250));
 
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(

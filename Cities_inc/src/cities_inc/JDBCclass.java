@@ -36,10 +36,12 @@ public class JDBCclass {
             }
             Statement s = conn.createStatement();
             rs=s.executeQuery(query1);
+            s.close();
+            
         }
         catch(SQLException ex)
         {
-            System.out.println("Hubo un problema al intentar conecarse a la base de datos"+url);
+            System.out.println("Hubo un problema al intentar conectarse a la base de datos"+url);
         }
         catch(ClassNotFoundException ex)
         {
@@ -47,6 +49,7 @@ public class JDBCclass {
         }      
         return rs;
     }
+    
      public static boolean consulta2(String query2) {//un valor unico para count 
         boolean estado=false;
        
@@ -57,13 +60,13 @@ public class JDBCclass {
             {
                 System.out.println("Conexion a BBDD "+url+" . . . Ok");
             }
-            Statement s = conn.createStatement();
+            Statement x = conn.createStatement();
             
-            estado=s.execute(query2);
+            estado=x.execute(query2);
         }
         catch(SQLException ex)
         {
-            System.out.println("Hubo un problema al intentar conecarse a la base de datos"+url);
+            System.out.println("Hubo un problema al intentar conectarse a la base de datos"+url);
         }
         catch(ClassNotFoundException ex)
         {
@@ -71,9 +74,9 @@ public class JDBCclass {
         }      
         return estado;
     }
+     
       public static void consulta3(String query3) {//update delete o insert
-        
-       
+
         try{
             Class.forName("com.mysql.jdbc.Connection");
             conn = (Connection)DriverManager.getConnection(url, user, pass);
@@ -81,12 +84,12 @@ public class JDBCclass {
             {
                 System.out.println("Conexion a BBDD "+url+" . . . Ok");
             }
-            Statement s = conn.createStatement();
-            s.executeQuery(query3);
+            Statement u = conn.createStatement();
+            u.executeQuery(query3);
         }
         catch(SQLException ex)
         {
-            System.out.println("Hubo un problema al intentar conecarse a la base de datos"+url);
+            System.out.println("Hubo un problema al intentar conectarse a la base de datos"+url);
         }
         catch(ClassNotFoundException ex)
         {

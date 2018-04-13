@@ -35,14 +35,13 @@ public class MainScreen extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        BtnComprar = new javax.swing.JButton();
+        BtnVender = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        TextSaldoActual = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -51,16 +50,17 @@ public class MainScreen extends javax.swing.JFrame {
         ComboPaises = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(500, 250));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Ciudad", "Precio", "Bonificacion"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -68,22 +68,30 @@ public class MainScreen extends javax.swing.JFrame {
         jTable2.setAutoCreateRowSorter(true);
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Ciudad", "Numero de paradas"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        jButton1.setText("Comprar");
+        BtnComprar.setText("Comprar");
+        BtnComprar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnComprarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Vender");
-
-        jButton3.setText("Cancelar");
+        BtnVender.setText("Vender");
+        BtnVender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnVenderActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Cerrar Sesion");
 
@@ -102,8 +110,18 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel7.setText("Ciudades disponibles:");
 
         BtnRanking.setText("Ranking");
+        BtnRanking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRankingActionPerformed(evt);
+            }
+        });
 
         ComboPaises.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona Pais", "Item 2", "Item 3", "Item 4" }));
+        ComboPaises.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ComboPaisesMouseClicked(evt);
+            }
+        });
         ComboPaises.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboPaisesActionPerformed(evt);
@@ -118,11 +136,9 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(BtnComprar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
+                        .addComponent(BtnVender)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BtnRanking)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -139,7 +155,7 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addGap(116, 116, 116)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TextSaldoActual, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -162,7 +178,7 @@ public class MainScreen extends javax.swing.JFrame {
                         .addComponent(jLabel3))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TextSaldoActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4)))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -179,9 +195,8 @@ public class MainScreen extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
+                    .addComponent(BtnComprar)
+                    .addComponent(BtnVender)
                     .addComponent(BtnRanking))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -193,6 +208,30 @@ public class MainScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_ComboPaisesActionPerformed
+
+    private void BtnRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRankingActionPerformed
+        // TODO add your handling code here:
+        RankingScreen RK=new RankingScreen();
+        RK.setVisible(true);
+    }//GEN-LAST:event_BtnRankingActionPerformed
+
+    private void BtnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnComprarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnComprarActionPerformed
+
+    private void ComboPaisesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComboPaisesMouseClicked
+        // TODO add your handling code here:
+        String pais=String.valueOf(ComboPaises.getSelectedItem());
+        String sql;
+        sql = "SELECT * ";
+        sql+= "FROM Ciudad ";
+        sql+= "WHERE pais='"+pais+"';";
+        JDBCclass.consulta(sql);
+    }//GEN-LAST:event_ComboPaisesMouseClicked
+
+    private void BtnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVenderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnVenderActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,8 +260,8 @@ public class MainScreen extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        
-        CiudadClass.obtenerParadas();//Obtiene el numero de paradas de la ciudad
+        //JDBCclass.consulta(query1);
+        //CiudadClass.obtenerParadas();//Obtiene el numero de paradas de la ciudad
         CiudadClass.precioCiudad();//Obtiene el precio de la ciudad
         CiudadClass.bonificacion();//Obtiene la bonificacion por comprar la ciudad
         
@@ -237,11 +276,11 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnComprar;
     private javax.swing.JButton BtnRanking;
+    private javax.swing.JButton BtnVender;
     private javax.swing.JComboBox<String> ComboPaises;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JTextField TextSaldoActual;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -254,6 +293,5 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

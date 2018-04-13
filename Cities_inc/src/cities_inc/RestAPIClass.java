@@ -5,10 +5,35 @@
  */
 package cities_inc;
 
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  *
  * @author Patrik
  */
 public class RestAPIClass {
+   static String temp="?fields=stations";
+   static String head="http://api.citybik.es";
+   //aqui hay que pasarle el body de la url de ciudad class 
+   
+   public static int obtenerParadas(String body){//obtiene el numero de paradas de cada ciudad 
+    int paradas=0;
     
+    String URL=head+body+temp;
+
+    try{
+    String txt=MiClienteREST.request(URL);
+    JSONObject obj = new JSONObject(txt);
+    JSONObject obj2 = obj.getJSONObject("network");
+    JSONArray estacion = obj2.getJSONArray("stations");
+    paradas=estacion.length();
+    
+    }
+    catch(Exception e){
+    System.out.print("Error");
+    }
+    return paradas;
+    }
 }

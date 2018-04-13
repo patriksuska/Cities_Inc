@@ -55,6 +55,7 @@ public class RegisterScreen extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocation(new java.awt.Point(500, 250));
 
         jLabel1.setText("Usuario");
 
@@ -70,6 +71,11 @@ public class RegisterScreen extends javax.swing.JFrame {
         });
 
         BtnCancelar.setText("Cancelar");
+        BtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCancelarActionPerformed(evt);
+            }
+        });
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Codigo de seguridad privado (CSP)");
@@ -128,11 +134,26 @@ public class RegisterScreen extends javax.swing.JFrame {
 
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
            // TODO add your handling code here:
-          this.nombreUsuario=TextUsuario.getText();
-          this.password=String.valueOf(TextoPassword.getPassword());
-          this.CSP=Integer.valueOf(TextCSP.getText());
-          System.out.println(password);
+           //aqui hay que insertar un usuario en la base de datos usando el JDBC class
+        this.nombreUsuario=TextUsuario.getText();
+        this.password=String.valueOf(TextoPassword.getPassword());
+        this.CSP=Integer.valueOf(TextCSP.getText());
+        System.out.println(password);
+        String sql;
+        sql = "INSERT INTO Usuario (nombreUsuario,password,saldo,CSP) ";
+        sql+= "values () ";
+        sql+= " nombreUsuario='"+nombreUsuario+"' and password=MD5('"+password+"');";
+        LoginScreen Ls=new LoginScreen();
+        Ls.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_BtnAceptarActionPerformed
+
+    private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
+        // TODO add your handling code here:
+        LoginScreen Ls=new LoginScreen();
+        Ls.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_BtnCancelarActionPerformed
 
     /**
      * @param args the command line arguments

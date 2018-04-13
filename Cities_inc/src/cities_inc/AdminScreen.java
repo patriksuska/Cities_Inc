@@ -9,7 +9,7 @@ package cities_inc;
  *
  * @author Patrik
  */
-public class AdminScreen extends javax.swing.JFrame {
+public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos de todos los usuarios
 
     /**
      * Creates new form AdminScreen
@@ -36,6 +36,7 @@ public class AdminScreen extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(500, 250));
 
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(

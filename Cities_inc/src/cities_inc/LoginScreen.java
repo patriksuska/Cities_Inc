@@ -42,6 +42,8 @@ public class LoginScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
+        setBackground(new java.awt.Color(153, 153, 153));
+        setLocation(new java.awt.Point(500, 250));
         setType(java.awt.Window.Type.POPUP);
 
         TextUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -62,6 +64,11 @@ public class LoginScreen extends javax.swing.JFrame {
         });
 
         BtnCancelar.setText("Cancelar");
+        BtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCancelarActionPerformed(evt);
+            }
+        });
 
         BtnRegister.setText("Registrarse");
         BtnRegister.addActionListener(new java.awt.event.ActionListener() {
@@ -71,6 +78,11 @@ public class LoginScreen extends javax.swing.JFrame {
         });
 
         BtnGuest.setText("Invitado");
+        BtnGuest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGuestActionPerformed(evt);
+            }
+        });
 
         TextoPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,23 +157,31 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void TextoPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextoPasswordActionPerformed
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_TextoPasswordActionPerformed
 
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
         // TODO add your handling code here:
-        //System.out.println(TextoPassword.getSelectedText());
+        
         String nombreUsuario;
         String password;
         nombreUsuario=TextUsuario.getText();
         password=String.valueOf(TextoPassword.getPassword());
+        if(nombreUsuario=="administrador" && password=="admin12345"){
+            AdminScreen AD=new AdminScreen();
+            AD.setVisible(true);
+            this.setVisible(false);
+        }
+        else{
         String sql;
         sql = "SELECT COUNT (*) ";
         sql+= "FROM Usuario ";
         sql+= "WHERE nombreUsuario='"+nombreUsuario+"' and password=MD5('"+password+"');";
         System.out.println(sql);
-        System.out.println(JDBCclass.consulta(sql).toString());
+        System.out.println(String.valueOf(JDBCclass.consulta2(sql)));
         MainScreen.main();
+        this.setVisible(false);
+        }
+        
         
         
     }//GEN-LAST:event_BtnAceptarActionPerformed
@@ -170,7 +190,21 @@ public class LoginScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         RegisterScreen regscreen = new RegisterScreen();
         regscreen.setVisible(true);
+        this.setVisible(false);
+        
     }//GEN-LAST:event_BtnRegisterActionPerformed
+
+    private void BtnGuestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuestActionPerformed
+        // TODO add your handling code here:
+        RankingScreen RK=new RankingScreen();
+        RK.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_BtnGuestActionPerformed
+
+    private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_BtnCancelarActionPerformed
 
     /**
      * @param args the command line arguments

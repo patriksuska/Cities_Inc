@@ -10,5 +10,10 @@ package cities_inc;
  * @author Patrik
  */
 public class TransaccionClass {
+    public void venta(){
     
+    }
+    public void compra(){
+    
+    }
 }
