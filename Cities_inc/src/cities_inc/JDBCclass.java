@@ -63,6 +63,7 @@ public class JDBCclass {
             Statement x = conn.createStatement();
             
             estado=x.execute(query2);
+            x.close();
         }
         catch(SQLException ex)
         {
@@ -86,6 +87,7 @@ public class JDBCclass {
             }
             Statement u = conn.createStatement();
             u.executeQuery(query3);
+            u.close();
         }
         catch(SQLException ex)
         {

@@ -166,7 +166,7 @@ public class LoginScreen extends javax.swing.JFrame {
         String password;
         nombreUsuario=TextUsuario.getText();
         password=String.valueOf(TextoPassword.getPassword());
-        if(nombreUsuario=="administrador" && password=="admin12345"){
+        if(nombreUsuario.equals("administrador") && password.equals("admin12345")){
             AdminScreen AD=new AdminScreen();
             AD.setVisible(true);
             this.setVisible(false);
@@ -178,6 +178,7 @@ public class LoginScreen extends javax.swing.JFrame {
         sql+= "WHERE nombreUsuario='"+nombreUsuario+"' and password=MD5('"+password+"');";
         System.out.println(sql);
         System.out.println(String.valueOf(JDBCclass.consulta2(sql)));
+        
         MainScreen.main();
         this.setVisible(false);
         }

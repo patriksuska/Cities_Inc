@@ -29,11 +29,11 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        BtnCrearUsuario = new javax.swing.JButton();
+        BtnBorrarUsuario = new javax.swing.JButton();
+        BtnCambiarPassword = new javax.swing.JButton();
+        BtnModificarUsuario = new javax.swing.JButton();
+        BtnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(500, 250));
@@ -52,15 +52,40 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Crear Usuario");
+        BtnCrearUsuario.setText("Crear Usuario");
+        BtnCrearUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCrearUsuarioActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Borrar usuario");
+        BtnBorrarUsuario.setText("Borrar usuario");
+        BtnBorrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBorrarUsuarioActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Restablecer contraseña");
+        BtnCambiarPassword.setText("Restablecer contraseña");
+        BtnCambiarPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCambiarPasswordActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Modificar usuario");
+        BtnModificarUsuario.setText("Modificar usuario");
+        BtnModificarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnModificarUsuarioActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Salir");
+        BtnSalir.setText("Salir");
+        BtnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,15 +96,15 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(BtnCrearUsuario)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(BtnBorrarUsuario)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)
+                        .addComponent(BtnModificarUsuario)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)
+                        .addComponent(BtnCambiarPassword)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton5)
+                        .addComponent(BtnSalir)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -90,16 +115,49 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3)
-                    .addComponent(jButton5))
+                    .addComponent(BtnCrearUsuario)
+                    .addComponent(BtnBorrarUsuario)
+                    .addComponent(BtnModificarUsuario)
+                    .addComponent(BtnCambiarPassword)
+                    .addComponent(BtnSalir))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCrearUsuarioActionPerformed
+        // TODO add your handling code here:
+        RegisterScreen regscreen = new RegisterScreen();
+        regscreen.setVisible(true);
+    }//GEN-LAST:event_BtnCrearUsuarioActionPerformed
+
+    private void BtnBorrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBorrarUsuarioActionPerformed
+        // TODO add your handling code here:
+        /*codigo query para jdbc
+        String sql;
+        sql = "DELETE FROM Usuario (nombreUsuario,password,saldo,CSP) ";
+        sql+= "values () ";
+        sql+= " nombreUsuario='"+nombreUsuario+"' and password=MD5('"+password+"')and saldo='"+saldo+"'and CSP='"+CSP+"';";
+        JDBCclass.consulta3(sql);*/
+    }//GEN-LAST:event_BtnBorrarUsuarioActionPerformed
+
+    private void BtnModificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarUsuarioActionPerformed
+        // TODO add your handling code here:
+        //codigo query para modificar usuario
+    }//GEN-LAST:event_BtnModificarUsuarioActionPerformed
+
+    private void BtnCambiarPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCambiarPasswordActionPerformed
+        // TODO add your handling code here:
+        //codigo query para actualizar la contraseña del usuario
+    }//GEN-LAST:event_BtnCambiarPasswordActionPerformed
+
+    private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
+        // TODO add your handling code here:
+        LoginScreen logscreen = new LoginScreen();
+        logscreen.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_BtnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,11 +195,11 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton BtnBorrarUsuario;
+    private javax.swing.JButton BtnCambiarPassword;
+    private javax.swing.JButton BtnCrearUsuario;
+    private javax.swing.JButton BtnModificarUsuario;
+    private javax.swing.JButton BtnSalir;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

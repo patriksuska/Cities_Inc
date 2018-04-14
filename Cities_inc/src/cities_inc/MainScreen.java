@@ -37,7 +37,7 @@ public class MainScreen extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         BtnComprar = new javax.swing.JButton();
         BtnVender = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        BtnLogout = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -93,7 +93,12 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Cerrar Sesion");
+        BtnLogout.setText("Cerrar Sesion");
+        BtnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLogoutActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("¡  Hola: ");
 
@@ -161,7 +166,7 @@ public class MainScreen extends javax.swing.JFrame {
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton4)
+                            .addComponent(BtnLogout)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
@@ -172,7 +177,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton4)
+                        .addComponent(BtnLogout)
                         .addComponent(jLabel1)
                         .addComponent(jLabel2)
                         .addComponent(jLabel3))
@@ -231,7 +236,13 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void BtnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVenderActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_BtnVenderActionPerformed
+
+    private void BtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogoutActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_BtnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -261,10 +272,18 @@ public class MainScreen extends javax.swing.JFrame {
         //</editor-fold>
 
         //JDBCclass.consulta(query1);
-        //CiudadClass.obtenerParadas();//Obtiene el numero de paradas de la ciudad
-        CiudadClass.precioCiudad();//Obtiene el precio de la ciudad
-        CiudadClass.bonificacion();//Obtiene la bonificacion por comprar la ciudad
-        
+        //RestAPIClass.obtenerParadas();//Obtiene el numero de paradas de la ciudad
+        int paradas=0;
+        int precio=CiudadClass.precioCiudad(paradas);//Obtiene el precio de la ciudad
+        int bonificacion=CiudadClass.bonificacion();//Obtiene la bonificacion por comprar la ciudad
+        String sql2;
+        sql2 = "SELECT Pais FROM Ciudad; ";
+        String []paises=new String[60];
+        /*for (int i=0;i<60;i++){
+            paises[i]=String.valueOf(JDBCclass.consulta(sql2));
+        }
+        */
+       // ComboPaises.addItem(paises);
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -277,11 +296,11 @@ public class MainScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnComprar;
+    private javax.swing.JButton BtnLogout;
     private javax.swing.JButton BtnRanking;
     private javax.swing.JButton BtnVender;
     private javax.swing.JComboBox<String> ComboPaises;
     private javax.swing.JTextField TextSaldoActual;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

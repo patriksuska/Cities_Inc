@@ -18,7 +18,7 @@ public class RestAPIClass {
    static String head="http://api.citybik.es";
    //aqui hay que pasarle el body de la url de ciudad class 
    
-   public static int obtenerParadas(String body){//obtiene el numero de paradas de cada ciudad 
+   public int obtenerParadas(String body){//obtiene el numero de paradas de cada ciudad 
     int paradas=0;
     
     String URL=head+body+temp;
