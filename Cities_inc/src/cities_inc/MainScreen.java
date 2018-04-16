@@ -239,7 +239,7 @@ public class MainScreen extends javax.swing.JFrame {
         String pais=String.valueOf(ComboPaises.getSelectedItem()); 
         String sql;
         sql = "SELECT * ";
-        sql+= "FROM Ciudad ";
+        sql+= "FROM ciudad ";
         sql+= "WHERE pais='"+pais+"';";
         ResultSet temporal=JDBCclass.consulta(sql);
         while(!temporal.isLast()){
@@ -278,7 +278,7 @@ public class MainScreen extends javax.swing.JFrame {
     public static void main(/*String args[]*/) {   
         try {
             String sql;
-            sql = "SELECT Pais FROM Ciudad; ";
+            sql = "SELECT pais FROM ciudad; ";
             ResultSet temporal=JDBCclass.consulta(sql);
             while(!temporal.isLast()){
                 String pais=temporal.getString("pais");

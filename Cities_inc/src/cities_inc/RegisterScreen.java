@@ -10,11 +10,6 @@ package cities_inc;
  * @author Patrik
  */
 public class RegisterScreen extends javax.swing.JFrame {
-    
-    String nombreUsuario;
-    String password;
-    int saldo=333000;
-    int CSP;
     /**
      * Creates new form Register
      */
@@ -22,7 +17,6 @@ public class RegisterScreen extends javax.swing.JFrame {
         
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -135,14 +129,14 @@ public class RegisterScreen extends javax.swing.JFrame {
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
            // TODO add your handling code here:
            //aqui hay que insertar un usuario en la base de datos usando el JDBC class
-        this.nombreUsuario=TextUsuario.getText();
-        this.password=String.valueOf(TextoPassword.getPassword());
-        this.CSP=Integer.valueOf(TextCSP.getText());
-        
+        String nombreUsuario=TextUsuario.getText();
+        String password=String.valueOf(TextoPassword.getPassword());
+        int CSP=Integer.valueOf(TextCSP.getText());
+        int saldo=333000;
         String sql;
-        sql = "INSERT INTO Usuario (nombreUsuario,password,saldo,CSP) ";
+        sql = "INSERT INTO usuario (nombreUsuario,password,saldo,CSP) ";
         sql+= "values () ";
-        sql+= " nombreUsuario='"+nombreUsuario+"' and password=MD5('"+password+"')and saldo='"+saldo+"'and CSP='"+CSP+"';";
+        sql+= " nombreUsuario='"+nombreUsuario+"'and password=MD5('"+password+"')and saldo='"+saldo+"'and CSP='"+CSP+"';";
         JDBCclass.consulta3(sql);
         LoginScreen Ls=new LoginScreen();
         Ls.setVisible(true);

@@ -99,7 +99,7 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
         // TODO add your handling code here:
         RankingScreen RK=new RankingScreen();
         String sql;
-        sql = "SELECT * FROM Usuario";
+        sql = "SELECT * FROM usuario";
         ResultSet temporal=JDBCclass.consulta(sql);
         while(!temporal.isLast()){
             String user=temporal.getString("nombreUsuario");

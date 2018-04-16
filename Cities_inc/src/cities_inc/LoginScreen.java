@@ -175,7 +175,7 @@ public class LoginScreen extends javax.swing.JFrame {
         else{
         String sql;
         sql = "SELECT COUNT (*) ";
-        sql+= "FROM Usuario ";
+        sql+= "FROM usuario ";
         sql+= "WHERE nombreUsuario='"+nombreUsuario+"' and password=MD5('"+password+"');";
         boolean temp=JDBCclass.consulta2(sql);
         if(!temp){
