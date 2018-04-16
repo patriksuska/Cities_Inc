@@ -191,7 +191,16 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             public void run() {
                 new AdminScreen().setVisible(true);
             }
+            
         });
+        String []usuarios=new String[20];
+        String sql4;
+        sql4 = "SELECT nombreUsuario,password FROM Usuario ;";
+        for (int i=0;i<60;i++){
+            usuarios[i]=String.valueOf(JDBCclass.consulta(sql4));
+            jTable1.setValueAt(usuarios, i, i);
+        }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -201,6 +210,6 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     private javax.swing.JButton BtnModificarUsuario;
     private javax.swing.JButton BtnSalir;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public static javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

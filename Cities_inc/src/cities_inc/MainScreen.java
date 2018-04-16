@@ -4,13 +4,19 @@
  * and open the template in the editor.
  */
 package cities_inc;
-
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Patrik
  */
-public class MainScreen extends javax.swing.JFrame {
 
+public class MainScreen extends javax.swing.JFrame {
+public static String []paises=new String[60];
+public static String []ciudades=new String[paises.length];
     /**
      * Creates new form MainScreen
      */
@@ -32,7 +38,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableCiudades = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         BtnComprar = new javax.swing.JButton();
@@ -52,7 +58,7 @@ public class MainScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(500, 250));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableCiudades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -63,7 +69,7 @@ public class MainScreen extends javax.swing.JFrame {
                 "Ciudad", "Precio", "Bonificacion"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableCiudades);
 
         jTable2.setAutoCreateRowSorter(true);
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -225,13 +231,29 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnComprarActionPerformed
 
     private void ComboPaisesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComboPaisesMouseClicked
+    try {
         // TODO add your handling code here:
         String pais=String.valueOf(ComboPaises.getSelectedItem());
+        
+        
         String sql;
-        sql = "SELECT * ";
+        sql = "SELECT nombreCiudad,URL ";
         sql+= "FROM Ciudad ";
         sql+= "WHERE pais='"+pais+"';";
-        JDBCclass.consulta(sql);
+        ResultSet temporal=JDBCclass.consulta(sql);
+        while(!temporal.isLast()){
+            String URL=temporal.getString("URL");
+            
+            temporal.next();
+        }
+        /*for (int i=0;i<60;i++){
+            
+            ciudades[i]=temporal;//guarda el valor de la consulta en un vector
+            jTableCiudades.setValueAt(ciudades[i], i, i);//muestra las ciudades de cada pais en la tabla
+        }*/
+    } catch (SQLException ex) {
+        Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }//GEN-LAST:event_ComboPaisesMouseClicked
 
     private void BtnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVenderActionPerformed
@@ -271,19 +293,20 @@ public class MainScreen extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        //JDBCclass.consulta(query1);
-        //RestAPIClass.obtenerParadas();//Obtiene el numero de paradas de la ciudad
-        int paradas=0;
-        int precio=CiudadClass.precioCiudad(paradas);//Obtiene el precio de la ciudad
+        
+        
+        int precio=CiudadClass.precioCiudad();//Obtiene el precio de la ciudad
         int bonificacion=CiudadClass.bonificacion();//Obtiene la bonificacion por comprar la ciudad
+        
         String sql2;
         sql2 = "SELECT Pais FROM Ciudad; ";
-        String []paises=new String[60];
-        /*for (int i=0;i<60;i++){
-            paises[i]=String.valueOf(JDBCclass.consulta(sql2));
+        
+        for (int i=0;i<60;i++){
+            paises[i]=String.valueOf(JDBCclass.consulta(sql2));//guarda el valor de la consulta en un vector
+            ComboPaises.addItem(paises[i]);//añade los paises al combobox
         }
-        */
-       // ComboPaises.addItem(paises);
+        
+        
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -292,6 +315,11 @@ public class MainScreen extends javax.swing.JFrame {
                 
             }
         });
+        
+       
+        
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -299,8 +327,8 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton BtnLogout;
     private javax.swing.JButton BtnRanking;
     private javax.swing.JButton BtnVender;
-    private javax.swing.JComboBox<String> ComboPaises;
-    private javax.swing.JTextField TextSaldoActual;
+    public static javax.swing.JComboBox<String> ComboPaises;
+    public static javax.swing.JTextField TextSaldoActual;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -310,7 +338,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    public static javax.swing.JTable jTable2;
+    public static javax.swing.JTable jTableCiudades;
     // End of variables declaration//GEN-END:variables
 }

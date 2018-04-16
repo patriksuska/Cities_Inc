@@ -11,17 +11,15 @@ package cities_inc;
  */
 public class CiudadClass {
    
-   /*static String temp="?fields=stations";
-   static String head="http://api.citybik.es";*/
-   String body="/v2/networks/valenbisi";
+   public static String body= ;//"/v2/networks/valenbisi";//variable url de la bd ciudad
    
    static int preciobase=1000;
-   String nombreCiudad;
-   String Pais;
+   static int paradas=RestAPIClass.obtenerParadas(body);
    
-   RestAPIClass rac=new RestAPIClass();
+   //conectar a rest api class dentro de ciudad class
+   //pasar a ciudad class parametros de la bd
    
-   public static int precioCiudad(int paradas){//precio de cada ciudad basado en el preciobase y las paradas
+   public static int precioCiudad(String URL){//precio de cada ciudad basado en el preciobase y las paradas
        int precio=preciobase*paradas;
        System.out.println(precio);
        return precio;
@@ -32,6 +30,9 @@ public class CiudadClass {
        int bonificacion=(int)(Math.random()*10)+1;
        System.out.println(bonificacion);
        return bonificacion;
+   }
+   public static void dinero (String URL){
+       
    }
 }
 
