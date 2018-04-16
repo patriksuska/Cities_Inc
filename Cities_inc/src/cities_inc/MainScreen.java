@@ -13,21 +13,16 @@ import java.util.logging.Logger;
  *
  * @author Patrik
  */
-
 public class MainScreen extends javax.swing.JFrame {
-public static String []paises=new String[60];
-public static String []ciudades=new String[paises.length];
+//  public static String []paises=new String[60];
+//  public static String []ciudades=new String[paises.length];
+    
     /**
      * Creates new form MainScreen
      */
-    
-    
-    
-    
     public MainScreen() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,15 +55,23 @@ public static String []ciudades=new String[paises.length];
 
         jTableCiudades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Ciudad", "Precio", "Bonificacion"
+                "Ciudad", "Precio(€)", "Bonificacion", "Paradas(num)"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTableCiudades);
 
         jTable2.setAutoCreateRowSorter(true);
@@ -221,36 +224,39 @@ public static String []ciudades=new String[paises.length];
     }//GEN-LAST:event_ComboPaisesActionPerformed
 
     private void BtnRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRankingActionPerformed
-        // TODO add your handling code here:
         RankingScreen RK=new RankingScreen();
         RK.setVisible(true);
     }//GEN-LAST:event_BtnRankingActionPerformed
 
     private void BtnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnComprarActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_BtnComprarActionPerformed
 
     private void ComboPaisesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComboPaisesMouseClicked
     try {
         // TODO add your handling code here:
-        String pais=String.valueOf(ComboPaises.getSelectedItem());
-        
-        
+        String pais=String.valueOf(ComboPaises.getSelectedItem()); 
         String sql;
-        sql = "SELECT nombreCiudad,URL ";
+        sql = "SELECT * ";
         sql+= "FROM Ciudad ";
         sql+= "WHERE pais='"+pais+"';";
         ResultSet temporal=JDBCclass.consulta(sql);
         while(!temporal.isLast()){
             String URL=temporal.getString("URL");
+            int paradas=RestAPIClass.obtenerParadas(URL);
+            int precioCiudad=CiudadClass.precioCiudad(paradas);
+            int bonificacion=CiudadClass.bonificacion();
+            String nombreCiudad=temporal.getString("nombreCiudad");
+            //DefaultTableModel model = (DefaultTableModel) jTableCiudades.getModel();
+            jTableCiudades = new javax.swing.JTable();
+            /*DefaultTableModel modelo = new DefaultTableModel();
+            jTableCiudades.setModel(modelo);
+            jTableCiudades.addRow(nombreCiudad,precioCiudad,bonificacion,paradas);*/
+
             
             temporal.next();
         }
-        /*for (int i=0;i<60;i++){
-            
-            ciudades[i]=temporal;//guarda el valor de la consulta en un vector
-            jTableCiudades.setValueAt(ciudades[i], i, i);//muestra las ciudades de cada pais en la tabla
-        }*/
     } catch (SQLException ex) {
         Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -269,56 +275,25 @@ public static String []ciudades=new String[paises.length];
     /**
      * @param args the command line arguments
      */
-    public static void main(/*String args[]*/) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    public static void main(/*String args[]*/) {   
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+            String sql;
+            sql = "SELECT Pais FROM Ciudad; ";
+            ResultSet temporal=JDBCclass.consulta(sql);
+            while(!temporal.isLast()){
+                String pais=temporal.getString("pais");
+                ComboPaises.addItem(pais);//añade los paises al combobox
+                temporal.next();
+            }
+            /* Create and display the form */
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new MainScreen().setVisible(true);
                 }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            });
+        } catch (SQLException ex) {
+            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        
-        
-        int precio=CiudadClass.precioCiudad();//Obtiene el precio de la ciudad
-        int bonificacion=CiudadClass.bonificacion();//Obtiene la bonificacion por comprar la ciudad
-        
-        String sql2;
-        sql2 = "SELECT Pais FROM Ciudad; ";
-        
-        for (int i=0;i<60;i++){
-            paises[i]=String.valueOf(JDBCclass.consulta(sql2));//guarda el valor de la consulta en un vector
-            ComboPaises.addItem(paises[i]);//añade los paises al combobox
-        }
-        
-        
-        
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainScreen().setVisible(true);
-                
-            }
-        });
-        
-       
-        
-        
         
     }
 

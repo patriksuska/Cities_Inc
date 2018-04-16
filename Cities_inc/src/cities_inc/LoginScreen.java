@@ -5,6 +5,9 @@
  */
 package cities_inc;
 
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Patrik
@@ -162,10 +165,8 @@ public class LoginScreen extends javax.swing.JFrame {
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
         // TODO add your handling code here:
         
-        String nombreUsuario;
-        String password;
-        nombreUsuario=TextUsuario.getText();
-        password=String.valueOf(TextoPassword.getPassword());
+        String nombreUsuario=TextUsuario.getText();
+        String password=String.valueOf(TextoPassword.getPassword());
         if(nombreUsuario.equals("administrador") && password.equals("admin12345")){
             AdminScreen AD=new AdminScreen();
             AD.setVisible(true);
@@ -176,11 +177,13 @@ public class LoginScreen extends javax.swing.JFrame {
         sql = "SELECT COUNT (*) ";
         sql+= "FROM Usuario ";
         sql+= "WHERE nombreUsuario='"+nombreUsuario+"' and password=MD5('"+password+"');";
-        System.out.println(sql);
-        System.out.println(String.valueOf(JDBCclass.consulta2(sql)));
-        
+        boolean temp=JDBCclass.consulta2(sql);
+        if(!temp){
+            JOptionPane.showMessageDialog(null,"Debe de registrarse previamente");
+        }else{
         MainScreen.main();
         this.setVisible(false);
+        }
         }
         
         

@@ -5,6 +5,11 @@
  */
 package cities_inc;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Patrik
@@ -145,6 +150,12 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     private void BtnModificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarUsuarioActionPerformed
         // TODO add your handling code here:
         //codigo query para modificar usuario
+        
+        /*String sql;
+        sql = "UPDATE INTO Usuario (nombreUsuario,password,saldo,CSP) ";
+        sql+= "values () ";
+        sql+= " nombreUsuario='"+nombreUsuario+"' and password=MD5('"+password+"')and saldo='"+saldo+"'and CSP='"+CSP+"';";
+        JDBCclass.consulta3(sql);*/
     }//GEN-LAST:event_BtnModificarUsuarioActionPerformed
 
     private void BtnCambiarPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCambiarPasswordActionPerformed
@@ -163,43 +174,58 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AdminScreen().setVisible(true);
+        try {
+            /* Set the Nimbus look and feel */
+            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+            /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+            * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+            */
+            try {
+                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                    if ("Nimbus".equals(info.getName())) {
+                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                        break;
+                    }
+                }
+            } catch (ClassNotFoundException ex) {
+                java.util.logging.Logger.getLogger(AdminScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                java.util.logging.Logger.getLogger(AdminScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                java.util.logging.Logger.getLogger(AdminScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                java.util.logging.Logger.getLogger(AdminScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+            //</editor-fold>
+            
+            /* Create and display the form */
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new AdminScreen().setVisible(true);
+                }
+                
+            });
+            
+            String sql;
+            sql = "SELECT * FROM Usuario; ";
+            ResultSet temporal=JDBCclass.consulta(sql);
+            while(!temporal.isLast()){
+                String nombreUsuario=temporal.getString("nombreUsuario");
+                String contraseña=temporal.getString("password");
+                temporal.next();
             }
             
-        });
-        String []usuarios=new String[20];
-        String sql4;
-        sql4 = "SELECT nombreUsuario,password FROM Usuario ;";
-        for (int i=0;i<60;i++){
-            usuarios[i]=String.valueOf(JDBCclass.consulta(sql4));
-            jTable1.setValueAt(usuarios, i, i);
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
+            
+        
         
     }
 

@@ -16,7 +16,7 @@ import org.json.JSONObject;
 public class RestAPIClass {
    static String temp="?fields=stations";
    static String head="http://api.citybik.es";
-   //aqui hay que pasarle el body de la url de ciudad class 
+   //aqui hay que pasarle el body de la url de MainScreen
    
    public static int obtenerParadas(String body){//obtiene el numero de paradas de cada ciudad 
     int paradas=0;

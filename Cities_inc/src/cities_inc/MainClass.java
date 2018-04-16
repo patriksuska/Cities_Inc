@@ -1,13 +1,9 @@
-
 package cities_inc;
-
-
 /**
  *
  * @author Patrik
  */
 public class MainClass {
-
     /**
      *
      * @param args
@@ -18,11 +14,8 @@ public class MainClass {
        //abre la pantalla de Login 
        LoginScreen logscreen = new LoginScreen();
        logscreen.setVisible(true);
-       
     /**
      *
      */
-       
     }
-    
 }

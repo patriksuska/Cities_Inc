@@ -138,7 +138,7 @@ public class RegisterScreen extends javax.swing.JFrame {
         this.nombreUsuario=TextUsuario.getText();
         this.password=String.valueOf(TextoPassword.getPassword());
         this.CSP=Integer.valueOf(TextCSP.getText());
-        System.out.println(password);
+        
         String sql;
         sql = "INSERT INTO Usuario (nombreUsuario,password,saldo,CSP) ";
         sql+= "values () ";
