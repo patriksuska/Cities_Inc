@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Patrik
@@ -248,13 +249,12 @@ public class MainScreen extends javax.swing.JFrame {
             int precioCiudad=CiudadClass.precioCiudad(paradas);
             int bonificacion=CiudadClass.bonificacion();
             String nombreCiudad=temporal.getString("nombreCiudad");
-            //DefaultTableModel model = (DefaultTableModel) jTableCiudades.getModel();
+            DefaultTableModel model = (DefaultTableModel) jTableCiudades.getModel();
             jTableCiudades = new javax.swing.JTable();
-            /*DefaultTableModel modelo = new DefaultTableModel();
+            DefaultTableModel modelo = new DefaultTableModel();
             jTableCiudades.setModel(modelo);
-            jTableCiudades.addRow(nombreCiudad,precioCiudad,bonificacion,paradas);*/
-
             
+            modelo.addRow(new String[nombreCiudad,precioCiudad,bonificacion,paradas]);
             temporal.next();
         }
     } catch (SQLException ex) {

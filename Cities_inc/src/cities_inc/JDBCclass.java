@@ -21,12 +21,9 @@ public class JDBCclass {
     private static String user = "u634818610_pat";
     private static String pass = "patsus123";
     private static Connection conn = null;
-   
-    
-    
+
     public static ResultSet consulta(String query1) {//para los select que devuelven multiples resultados
         ResultSet rs=null;
-       
         try{
             Class.forName("com.mysql.jdbc.Connection");
             conn = (Connection)DriverManager.getConnection(url, user, pass);
@@ -36,8 +33,7 @@ public class JDBCclass {
             }
             Statement s = conn.createStatement();
             rs=s.executeQuery(query1);
-            s.close();
-            
+            s.close(); 
         }
         catch(SQLException ex)
         {
@@ -98,5 +94,4 @@ public class JDBCclass {
             System.out.println(ex);
         }      
     }
-
 }

@@ -180,8 +180,10 @@ public class LoginScreen extends javax.swing.JFrame {
                 sql += "WHERE nombreUsuario='" + nombreUsuario + "' and password=MD5('" + password + "')";
                 System.out.println(sql);
                 ResultSet temp = JDBCclass.consulta(sql);
+                System.out.println(temp);
                 
-                while (temp.next()) {
+                while (temp)
+                /*while (temp.next()) {
                     int tmp=temp.getInt(1);
                 if(tmp==1){
                     MainScreen.main();
@@ -190,7 +192,7 @@ public class LoginScreen extends javax.swing.JFrame {
                 else {
                     JOptionPane.showMessageDialog(null, "Debe de registrarse previamente");
                 }
-                }
+                }*/
             } catch (SQLException ex) {
                 Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
