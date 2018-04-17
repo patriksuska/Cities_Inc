@@ -6,6 +6,9 @@
 package cities_inc;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,11 +20,9 @@ public class LoginScreen extends javax.swing.JFrame {
     /**
      * Creates new form MainScreen
      */
-    
-
     LoginScreen() {
-        
-        initComponents(); 
+
+        initComponents();
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -164,30 +165,36 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
         // TODO add your handling code here:
-        
-        String nombreUsuario=TextUsuario.getText();
-        String password=String.valueOf(TextoPassword.getPassword());
-        if(nombreUsuario.equals("administrador") && password.equals("admin12345")){
-            AdminScreen AD=new AdminScreen();
+
+        String nombreUsuario = TextUsuario.getText();
+        String password = String.valueOf(TextoPassword.getPassword());
+        if (nombreUsuario.equals("administrador") && password.equals("admin12345")) {
+            AdminScreen AD = new AdminScreen();
             AD.setVisible(true);
             this.setVisible(false);
+        } else {
+            try {
+                String sql;
+                sql = "SELECT COUNT(nombreUsuario) ";
+                sql += "FROM usuario ";
+                sql += "WHERE nombreUsuario='" + nombreUsuario + "' and password=MD5('" + password + "')";
+                System.out.println(sql);
+                ResultSet temp = JDBCclass.consulta(sql);
+                
+                while (temp.next()) {
+                    int tmp=temp.getInt(1);
+                if(tmp==1){
+                    MainScreen.main();
+                    this.setVisible(false);
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Debe de registrarse previamente");
+                }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        else{
-        String sql;
-        sql = "SELECT COUNT (*) ";
-        sql+= "FROM usuario ";
-        sql+= "WHERE nombreUsuario='"+nombreUsuario+"' and password=MD5('"+password+"');";
-        boolean temp=JDBCclass.consulta2(sql);
-        if(!temp){
-            JOptionPane.showMessageDialog(null,"Debe de registrarse previamente");
-        }else{
-        MainScreen.main();
-        this.setVisible(false);
-        }
-        }
-        
-        
-        
     }//GEN-LAST:event_BtnAceptarActionPerformed
 
     private void BtnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegisterActionPerformed
@@ -195,12 +202,12 @@ public class LoginScreen extends javax.swing.JFrame {
         RegisterScreen regscreen = new RegisterScreen();
         regscreen.setVisible(true);
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_BtnRegisterActionPerformed
 
     private void BtnGuestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuestActionPerformed
         // TODO add your handling code here:
-        RankingScreen RK=new RankingScreen();
+        RankingScreen RK = new RankingScreen();
         RK.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BtnGuestActionPerformed
