@@ -254,7 +254,7 @@ public class MainScreen extends javax.swing.JFrame {
             DefaultTableModel modelo = new DefaultTableModel();
             jTableCiudades.setModel(modelo);
             
-            modelo.addRow(new String[nombreCiudad,precioCiudad,bonificacion,paradas]);
+            modelo.addRow(new Object[]{nombreCiudad,precioCiudad,bonificacion,paradas});
             temporal.next();
         }
     } catch (SQLException ex) {

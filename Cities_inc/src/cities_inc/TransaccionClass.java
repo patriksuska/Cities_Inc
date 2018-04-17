@@ -10,12 +10,6 @@ package cities_inc;
  * @author Patrik
  */
 public class TransaccionClass {
-    public void venta(){
-       int perdidas=(int)(Math.random()*20-10)+1;
-       System.out.println(perdidas);
-       
-    }
-    public void compra(){
-        
-    }
+    
+    
 }

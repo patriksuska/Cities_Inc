@@ -135,8 +135,7 @@ public class RegisterScreen extends javax.swing.JFrame {
         int saldo=333000;
         String sql;
         sql = "INSERT INTO usuario (nombreUsuario,password,saldo,CSP) ";
-        sql+= "values () ";
-        sql+= " nombreUsuario='"+nombreUsuario+"'and password=MD5('"+password+"')and saldo='"+saldo+"'and CSP='"+CSP+"';";
+        sql+= "values (nombreUsuario='"+nombreUsuario+"'and password=MD5('"+password+"')and saldo='"+saldo+"'and CSP='"+CSP+"');";
         JDBCclass.consulta3(sql);
         LoginScreen Ls=new LoginScreen();
         Ls.setVisible(true);

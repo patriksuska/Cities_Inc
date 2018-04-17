@@ -168,6 +168,7 @@ public class LoginScreen extends javax.swing.JFrame {
 
         String nombreUsuario = TextUsuario.getText();
         String password = String.valueOf(TextoPassword.getPassword());
+        System.out.println(nombreUsuario + " " + password);
         if (nombreUsuario.equals("administrador") && password.equals("admin12345")) {
             AdminScreen AD = new AdminScreen();
             AD.setVisible(true);
@@ -180,19 +181,18 @@ public class LoginScreen extends javax.swing.JFrame {
                 sql += "WHERE nombreUsuario='" + nombreUsuario + "' and password=MD5('" + password + "')";
                 System.out.println(sql);
                 ResultSet temp = JDBCclass.consulta(sql);
-                System.out.println(temp);
-                
-                while (temp)
-                /*while (temp.next()) {
-                    int tmp=temp.getInt(1);
-                if(tmp==1){
-                    MainScreen.main();
-                    this.setVisible(false);
+                //System.out.println(temp);
+
+                if (temp.next()) {
+                    int tmp = temp.getInt(0);
+                    System.out.println(tmp);
+                    if (tmp == 1) {
+                        MainScreen.main();
+                        this.setVisible(false);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Debe de registrarse previamente");
+                    }
                 }
-                else {
-                    JOptionPane.showMessageDialog(null, "Debe de registrarse previamente");
-                }
-                }*/
             } catch (SQLException ex) {
                 Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
