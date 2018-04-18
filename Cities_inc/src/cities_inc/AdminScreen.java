@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -150,7 +151,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     private void BtnModificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarUsuarioActionPerformed
         // TODO add your handling code here:
         //codigo query para modificar usuario
-        
+
         /*String sql;
         sql = "UPDATE INTO Usuario (nombreUsuario,password,saldo,CSP) ";
         sql+= "values () ";
@@ -180,7 +181,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
             /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
             * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-            */
+             */
             try {
                 for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                     if ("Nimbus".equals(info.getName())) {
@@ -198,36 +199,34 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
                 java.util.logging.Logger.getLogger(AdminScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
             //</editor-fold>
-            
+
             /* Create and display the form */
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     new AdminScreen().setVisible(true);
                 }
-                
+
             });
-            
+
             String sql;
             sql = "SELECT * FROM usuario; ";
-            JDBCclass JDBC=new JDBCclass();
-            ResultSet temporal=JDBC.consulta1(sql);
-            while(!temporal.isLast()){
-                String nombreUsuario=temporal.getString("nombreUsuario");
-                String contraseña=temporal.getString("password");
+            JDBCclass JDBC = new JDBCclass();
+            ResultSet temporal = JDBC.consulta1(sql);
+            while (!temporal.isLast()) {
+                String nombreUsuario = temporal.getString("nombreUsuario");
+                String contraseña = temporal.getString("password");
                 temporal.next();
+                DefaultTableModel modelo = new DefaultTableModel();
+                jTable1.setModel(modelo);
+                modelo.addRow(new Object[]{nombreUsuario, contraseña});
             }
-            
-            
-            
-            
+            JDBC.state.close();
+
         } catch (SQLException ex) {
             Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
-            
-        
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

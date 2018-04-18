@@ -23,51 +23,46 @@ public class JDBCclass {
     private static String url = "jdbc:mysql://sql151.main-hosting.eu/" + db;
     private static String user = "u634818610_pat";
     private static String pass = "patsus123";
-    private static Connection conn=null;
-    public static Statement state;
+    private static Connection conn = null;
+    public Statement state;
 
     public JDBCclass() throws SQLException {
-       
-        try{
+
+        try {
             Class.forName("com.mysql.jdbc.Connection");
-            conn = (Connection)DriverManager.getConnection(url, user, pass);
-            if(conn != null)
-            {
+            conn = (Connection) DriverManager.getConnection(url, user, pass);
+            if (conn != null) {
                 System.out.println("Conexion a base de datos establecida");
             }
-        }
-        catch(SQLException ex)
-        {
+        } catch (SQLException ex) {
             System.out.println("Hubo un problema al conecarse a la base de datos");
-        }
-        catch(ClassNotFoundException ex)
-        {
+        } catch (ClassNotFoundException ex) {
             System.out.println(ex);
-        }  
- 
+        }
+
     }
-   
-    public ResultSet consulta1(String sql) throws SQLException{//todos los select con multiples valores
+
+    public ResultSet consulta1(String sql) throws SQLException {//todos los select con multiples valores
         //Statement state = null;
         ResultSet resultado = null;
         state = (Statement) conn.createStatement();
         resultado = state.executeQuery(sql);
-       // state.close();
+        // state.close();
         return resultado;
     }
-   
-    public boolean consulta2(String sql) throws SQLException{//count de un valor unico
+
+    public boolean consulta2(String sql) throws SQLException {//count de un valor unico
         //Statement state = null;
-        boolean estado=false;
-        state=(Statement) conn.createStatement();
+        boolean estado = false;
+        state = (Statement) conn.createStatement();
         state.executeQuery(sql);
         //state.close();
         return estado;
     }
-    
-    public void consulta3(String sql) throws SQLException{//update delete o insert
+
+    public void consulta3(String sql) throws SQLException {//update delete o insert
         //Statement state = null;
-        state=(Statement) conn.createStatement();
+        state = (Statement) conn.createStatement();
         state.execute(sql);
         //state.close();
     }

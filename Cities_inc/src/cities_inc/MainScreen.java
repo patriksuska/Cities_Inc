@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 package cities_inc;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Patrik
@@ -17,13 +19,14 @@ import javax.swing.table.DefaultTableModel;
 public class MainScreen extends javax.swing.JFrame {
 //  public static String []paises=new String[60];
 //  public static String []ciudades=new String[paises.length];
-    
+
     /**
      * Creates new form MainScreen
      */
     public MainScreen() {
         initComponents();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -131,7 +134,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
-        ComboPaises.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona Pais", "Item 2", "Item 3", "Item 4" }));
+        ComboPaises.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona Pais", " " }));
         ComboPaises.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ComboPaisesMouseClicked(evt);
@@ -221,51 +224,51 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void ComboPaisesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboPaisesActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_ComboPaisesActionPerformed
 
     private void BtnRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRankingActionPerformed
-        RankingScreen RK=new RankingScreen();
+        RankingScreen RK = new RankingScreen();
         RK.setVisible(true);
     }//GEN-LAST:event_BtnRankingActionPerformed
 
     private void BtnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnComprarActionPerformed
         // TODO add your handling code here:
-        
+        //jTableCiudades.get
     }//GEN-LAST:event_BtnComprarActionPerformed
 
     private void ComboPaisesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComboPaisesMouseClicked
-    try {
-        // TODO add your handling code here:
-        String pais=String.valueOf(ComboPaises.getSelectedItem()); 
-        String sql;
-        sql = "SELECT * ";
-        sql+= "FROM ciudad ";
-        sql+= "WHERE pais='"+pais+"';";
-        JDBCclass JDBC=new JDBCclass();
-        ResultSet temporal=JDBC.consulta1(sql);
-        while(!temporal.isLast()){
-            String URL=temporal.getString("URL");
-            int paradas=RestAPIClass.obtenerParadas(URL);
-            int precioCiudad=CiudadClass.precioCiudad(paradas);
-            int bonificacion=CiudadClass.bonificacion();
-            String nombreCiudad=temporal.getString("nombreCiudad");
-            DefaultTableModel model = (DefaultTableModel) jTableCiudades.getModel();
-            jTableCiudades = new javax.swing.JTable();
-            DefaultTableModel modelo = new DefaultTableModel();
-            jTableCiudades.setModel(modelo);
-            
-            modelo.addRow(new Object[]{nombreCiudad,precioCiudad,bonificacion,paradas});
-            temporal.next();
+        try {
+            // TODO add your handling code here:
+            String pais = String.valueOf(ComboPaises.getSelectedItem());
+            String sql;
+            sql = "SELECT * ";
+            sql += "FROM ciudad ";
+            sql += "WHERE pais='" + pais + "';";
+            JDBCclass JDBC = new JDBCclass();
+            ResultSet temporal = JDBC.consulta1(sql);
+            while (!temporal.isLast()) {
+                String URL = temporal.getString("URL");
+                int paradas = RestAPIClass.obtenerParadas(URL);
+                int precioCiudad = CiudadClass.precioCiudad(paradas);
+                int bonificacion = CiudadClass.bonificacion();
+                String nombreCiudad = temporal.getString("nombreCiudad");
+                DefaultTableModel model = (DefaultTableModel) jTableCiudades.getModel();
+                jTableCiudades = new javax.swing.JTable();
+                DefaultTableModel modelo = new DefaultTableModel();
+                jTableCiudades.setModel(modelo);
+                modelo.addRow(new Object[]{nombreCiudad, precioCiudad, bonificacion, paradas});
+                temporal.next();
+            }
+            JDBC.state.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } catch (SQLException ex) {
-        Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
-    }
     }//GEN-LAST:event_ComboPaisesMouseClicked
 
     private void BtnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVenderActionPerformed
         // TODO add your handling code here:
-        
+        //jTableCiudades.get
     }//GEN-LAST:event_BtnVenderActionPerformed
 
     private void BtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogoutActionPerformed
@@ -276,17 +279,22 @@ public class MainScreen extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(/*String args[]*/) {   
+    public static void main(/*String args[]*/) {
         try {
             String sql;
             sql = "SELECT pais FROM ciudad; ";
-            JDBCclass JDBC=new JDBCclass();
-            ResultSet temporal=JDBC.consulta1(sql);
-            while(!temporal.isLast()){
-                String pais=temporal.getString("pais");
-                ComboPaises.addItem(pais);//añade los paises al combobox
+            JDBCclass JDBC = new JDBCclass();
+            ResultSet temporal = JDBC.consulta1(sql);
+            while (!temporal.isLast()) {
+                String pais = temporal.getString("pais");
+                System.out.println("Insertando datos porfavor espere");
+                for(int i=1;i<pais.length();i++){
+                ComboPaises.insertItemAt(pais,i);//añade los paises al combobox
+                }
+                
                 temporal.next();
             }
+            JDBC.state.close();
             /* Create and display the form */
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
@@ -296,7 +304,7 @@ public class MainScreen extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

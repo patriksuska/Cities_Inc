@@ -4,11 +4,13 @@
  * and open the template in the editor.
  */
 package cities_inc;
+
 import java.util.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -96,59 +98,60 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
      */
     public static void main(String args[]) {
         try {
-        // TODO add your handling code here:
-        RankingScreen RK=new RankingScreen();
-        String sql;
-        sql = "SELECT * FROM usuario";
-        JDBCclass JDBC=new JDBCclass();
-        ResultSet temporal=JDBC.consulta1(sql);
-        while(!temporal.isLast()){
-            String user=temporal.getString("nombreUsuario");
-            String saldo=temporal.getString("saldo");
-            jTable1= new javax.swing.JTable();
-            temporal.next();
-        }
-        RK.setVisible(true);
-    } catch (SQLException ex) {
-        Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
-    }
-        
-            /* Set the Nimbus look and feel */
-            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-            /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-            * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-            */
-            try {
-                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                    if ("Nimbus".equals(info.getName())) {
-                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                        break;
-                    }
-                }
-            } catch (ClassNotFoundException ex) {
-                java.util.logging.Logger.getLogger(RankingScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (InstantiationException ex) {
-                java.util.logging.Logger.getLogger(RankingScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                java.util.logging.Logger.getLogger(RankingScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-                java.util.logging.Logger.getLogger(RankingScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            // TODO add your handling code here:
+            RankingScreen RK = new RankingScreen();
+            String sql;
+            sql = "SELECT * FROM usuario;";
+            JDBCclass JDBC = new JDBCclass();
+            ResultSet temporal = JDBC.consulta1(sql);
+            while (!temporal.isLast()) {
+                String user = temporal.getString("nombreUsuario");
+                String saldo = temporal.getString("saldo");
+                jTable1 = new javax.swing.JTable();
+                DefaultTableModel modelo = new DefaultTableModel();
+                jTable1.setModel(modelo);
+                modelo.addRow(new Object[]{user, saldo});
+                temporal.next();
             }
-            //</editor-fold>
-            
-            /* Create and display the form */
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    new RankingScreen().setVisible(true);
+            RK.setVisible(true);
+            JDBC.state.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+            * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
                 }
-            });
-    }
-            
-        
-            // Variables declaration - do not modify
-            
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(RankingScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(RankingScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(RankingScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(RankingScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         //</editor-fold>
 
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new RankingScreen().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify
+    //</editor-fold>
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCerrar;
@@ -156,4 +159,3 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
     public static javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
-

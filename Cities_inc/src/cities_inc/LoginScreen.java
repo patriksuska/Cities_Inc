@@ -165,10 +165,10 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
         // TODO add your handling code here:
-        
+
         String nombreUsuario = TextUsuario.getText();
         String password = String.valueOf(TextoPassword.getPassword());
-        System.out.println(nombreUsuario + " " + password);
+        //System.out.println(nombreUsuario + " " + password);
         if (nombreUsuario.equals("administrador") && password.equals("admin12345")) {
             AdminScreen AD = new AdminScreen();
             AD.setVisible(true);
@@ -180,22 +180,22 @@ public class LoginScreen extends javax.swing.JFrame {
                 sql += "FROM usuario ";
                 sql += "WHERE nombreUsuario='" + nombreUsuario + "' and password=MD5('" + password + "')";
                 System.out.println(sql);
-                JDBCclass JDBC=new JDBCclass();
+                JDBCclass JDBC = new JDBCclass();
                 ResultSet temp = JDBC.consulta1(sql);
                 //System.out.println(temp);
 
                 if (temp.next()) {
-                   // int tmp = temp.get;
                     System.out.println(temp.getInt(1));
                     if (temp.getInt(1) == 1) {
-                        MainScreen MS= new MainScreen();
+                        MainScreen MS = new MainScreen();
                         MS.setVisible(true);
-                        JDBC.state.close();
+                        
                         this.setVisible(false);
                     } else {
                         JOptionPane.showMessageDialog(null, "Debe de registrarse previamente");
                     }
                 }
+                JDBC.state.close();
             } catch (SQLException ex) {
                 Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
