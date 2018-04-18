@@ -209,7 +209,8 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             
             String sql;
             sql = "SELECT * FROM usuario; ";
-            ResultSet temporal=JDBCclass.consulta(sql);
+            JDBCclass JDBC=new JDBCclass();
+            ResultSet temporal=JDBC.consulta1(sql);
             while(!temporal.isLast()){
                 String nombreUsuario=temporal.getString("nombreUsuario");
                 String contraseña=temporal.getString("password");

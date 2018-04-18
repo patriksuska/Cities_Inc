@@ -242,7 +242,8 @@ public class MainScreen extends javax.swing.JFrame {
         sql = "SELECT * ";
         sql+= "FROM ciudad ";
         sql+= "WHERE pais='"+pais+"';";
-        ResultSet temporal=JDBCclass.consulta(sql);
+        JDBCclass JDBC=new JDBCclass();
+        ResultSet temporal=JDBC.consulta1(sql);
         while(!temporal.isLast()){
             String URL=temporal.getString("URL");
             int paradas=RestAPIClass.obtenerParadas(URL);
@@ -279,7 +280,8 @@ public class MainScreen extends javax.swing.JFrame {
         try {
             String sql;
             sql = "SELECT pais FROM ciudad; ";
-            ResultSet temporal=JDBCclass.consulta(sql);
+            JDBCclass JDBC=new JDBCclass();
+            ResultSet temporal=JDBC.consulta1(sql);
             while(!temporal.isLast()){
                 String pais=temporal.getString("pais");
                 ComboPaises.addItem(pais);//añade los paises al combobox

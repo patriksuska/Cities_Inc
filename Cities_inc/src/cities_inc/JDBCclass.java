@@ -23,20 +23,67 @@ public class JDBCclass {
     private static String url = "jdbc:mysql://sql151.main-hosting.eu/" + db;
     private static String user = "u634818610_pat";
     private static String pass = "patsus123";
+    private static Connection conn=null;
+    public static Statement state;
 
-    public static ResultSet consulta(String query1) {//para los select que devuelven multiples resultados
+    public JDBCclass() throws SQLException {
+       
+        try{
+            Class.forName("com.mysql.jdbc.Connection");
+            conn = (Connection)DriverManager.getConnection(url, user, pass);
+            if(conn != null)
+            {
+                System.out.println("Conexion a base de datos establecida");
+            }
+        }
+        catch(SQLException ex)
+        {
+            System.out.println("Hubo un problema al conecarse a la base de datos");
+        }
+        catch(ClassNotFoundException ex)
+        {
+            System.out.println(ex);
+        }  
+ 
+    }
+   
+    public ResultSet consulta1(String sql) throws SQLException{//todos los select con multiples valores
+        //Statement state = null;
+        ResultSet resultado = null;
+        state = (Statement) conn.createStatement();
+        resultado = state.executeQuery(sql);
+       // state.close();
+        return resultado;
+    }
+   
+    public boolean consulta2(String sql) throws SQLException{//count de un valor unico
+        //Statement state = null;
+        boolean estado=false;
+        state=(Statement) conn.createStatement();
+        state.executeQuery(sql);
+        //state.close();
+        return estado;
+    }
+    
+    public void consulta3(String sql) throws SQLException{//update delete o insert
+        //Statement state = null;
+        state=(Statement) conn.createStatement();
+        state.execute(sql);
+        //state.close();
+    }
+    /*public static ResultSet consulta(String query1) {//para los select que devuelven multiples resultados
         ResultSet rs = null;
         try {
             Class.forName("com.mysql.jdbc.Connection");
-            Connection conn = (Connection) DriverManager.getConnection(url, user, pass);
-            if (conn != null) {
+            Connection conn1 = (Connection) DriverManager.getConnection(url, user, pass);
+            if (conn1 != null) {
                 System.out.println("Conectado.");
                 //System.out.println("Conexion a BBDD: " + url + " . . . Ok");
             }
-            Statement s = conn.createStatement();
+            Statement s = conn1.createStatement();
             rs = s.executeQuery(query1);
             s.close();
-            conn.close();
+            conn1.close();
         } catch (SQLException ex) {
             System.out.println("Ups..¡Algo falla de esta conexion!: " + url);
         } catch (ClassNotFoundException ex) {
@@ -49,16 +96,16 @@ public class JDBCclass {
         boolean estado = false;
         try {
             Class.forName("com.mysql.jdbc.Connection");
-            Connection conn = (Connection) DriverManager.getConnection(url, user, pass);
-            if (conn != null) {
+            Connection conn2 = (Connection) DriverManager.getConnection(url, user, pass);
+            if (conn2 != null) {
                 System.out.println("Conectado.");
                 //System.out.println("Conexion a BBDD: " + url + " . . . Ok");
             }
-            Statement x = conn.createStatement();
+            Statement x = conn2.createStatement();
 
             estado = x.execute(query2);
             x.close();
-            conn.close();
+            conn2.close();
         } catch (SQLException ex) {
             System.out.println("Ups..¡Algo falla de esta conexion!: " + url);
         } catch (ClassNotFoundException ex) {
@@ -70,15 +117,15 @@ public class JDBCclass {
     public static void consulta3(String query3) {//update delete o insert
         try {
             Class.forName("com.mysql.jdbc.Connection");
-            Connection conn = (Connection) DriverManager.getConnection(url, user, pass);
-            if (conn != null) {
+            Connection conn3 = (Connection) DriverManager.getConnection(url, user, pass);
+            if (conn3 != null) {
                 System.out.println("Conectado.");
                 //System.out.println("Conexion a BBDD: " + url + " . . . Ok");
             }
-            Statement u = conn.createStatement();
+            Statement u = conn3.createStatement();
             u.executeQuery(query3);
             u.close();
-            conn.close();
+            conn3.close();
         } catch (SQLException ex) {
             System.out.println("Ups..¡Algo falla de esta conexion!: " + url);
         } catch (ClassNotFoundException ex) {

@@ -5,6 +5,12 @@
  */
 package cities_inc;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Patrik
@@ -129,17 +135,24 @@ public class RegisterScreen extends javax.swing.JFrame {
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
            // TODO add your handling code here:
            //aqui hay que insertar un usuario en la base de datos usando el JDBC class
-        String nombreUsuario=TextUsuario.getText();
-        String password=String.valueOf(TextoPassword.getPassword());
-        int CSP=Integer.valueOf(TextCSP.getText());
-        int saldo=333000;
-        String sql;
-        sql = "INSERT INTO usuario (nombreUsuario,password,saldo,CSP) ";
-        sql+= "values (nombreUsuario='"+nombreUsuario+"'and password=MD5('"+password+"')and saldo='"+saldo+"'and CSP='"+CSP+"');";
-        JDBCclass.consulta3(sql);
-        LoginScreen Ls=new LoginScreen();
-        Ls.setVisible(true);
-        this.setVisible(false);
+         try {
+                String nombreUsuario=TextUsuario.getText();
+                String password=String.valueOf(TextoPassword.getPassword());
+                int CSP=Integer.valueOf(TextCSP.getText());
+                int saldo=333000;
+                String sql;
+                sql = "INSERT INTO usuario (nombreUsuario,password,saldo,CSP) ";
+                sql+= "values (nombreUsuario='"+nombreUsuario+"'and password=MD5('"+password+"')and saldo='"+saldo+"'and CSP='"+CSP+"');";
+                JDBCclass JDBC=new JDBCclass();
+                JDBC.consulta3(sql);
+                LoginScreen Ls=new LoginScreen();
+                Ls.setVisible(true);
+                this.setVisible(false);  
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
     }//GEN-LAST:event_BtnAceptarActionPerformed
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
