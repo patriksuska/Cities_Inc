@@ -1,4 +1,7 @@
 package cities_inc;
+
+import java.sql.SQLException;
+
 /**
  *
  * @author Patrik
@@ -14,6 +17,7 @@ public class MainClass {
        //abre la pantalla de Login 
        LoginScreen logscreen = new LoginScreen();
        logscreen.setVisible(true);
+      
     /**
      *
      */

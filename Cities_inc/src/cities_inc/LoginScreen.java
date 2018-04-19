@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  * @author Patrik
  */
 public class LoginScreen extends javax.swing.JFrame {
-
+static String nombreUsuario;
     /**
      * Creates new form MainScreen
      */
@@ -165,9 +165,14 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
         // TODO add your handling code here:
-
-        String nombreUsuario = TextUsuario.getText();
+        
+        nombreUsuario = TextUsuario.getText();
         String password = String.valueOf(TextoPassword.getPassword());
+        String sql;
+                sql = "SELECT COUNT(nombreUsuario) ";
+                sql += "FROM usuario ";
+                sql += "WHERE nombreUsuario='" + nombreUsuario + "' and password=MD5('" + password + "')";
+                
         //System.out.println(nombreUsuario + " " + password);
         if (nombreUsuario.equals("administrador") && password.equals("admin12345")) {
             AdminScreen AD = new AdminScreen();
@@ -175,26 +180,22 @@ public class LoginScreen extends javax.swing.JFrame {
             this.setVisible(false);
         } else {
             try {
-                String sql;
-                sql = "SELECT COUNT(nombreUsuario) ";
-                sql += "FROM usuario ";
-                sql += "WHERE nombreUsuario='" + nombreUsuario + "' and password=MD5('" + password + "')";
+                MainScreen MS = new MainScreen();
                 System.out.println(sql);
                 JDBCclass JDBC = new JDBCclass();
                 ResultSet temp = JDBC.consulta1(sql);
                 //System.out.println(temp);
-
+                int a=0;
                 if (temp.next()) {
                     System.out.println(temp.getInt(1));
-                    if (temp.getInt(1) == 1) {
-                        MainScreen MS = new MainScreen();
-                        MS.setVisible(true);
-                        
+                    a=temp.getInt(1);
+                }
+                if (a == 1) {                       
+                        MS.setVisible(true);                        
                         this.setVisible(false);
                     } else {
                         JOptionPane.showMessageDialog(null, "Debe de registrarse previamente");
                     }
-                }
                 JDBC.state.close();
             } catch (SQLException ex) {
                 Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
