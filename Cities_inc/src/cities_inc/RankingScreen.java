@@ -104,14 +104,13 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
             sql = "SELECT * FROM usuario;";
             JDBCclass JDBC = new JDBCclass();
             ResultSet temporal = JDBC.consulta1(sql);
-            while (!temporal.isLast()) {
+            jTable1 = new javax.swing.JTable();
+            DefaultTableModel modelo = new DefaultTableModel();
+            while (temporal.next()) {
                 String user = temporal.getString("nombreUsuario");
                 String saldo = temporal.getString("saldo");
-                jTable1 = new javax.swing.JTable();
-                DefaultTableModel modelo = new DefaultTableModel();
                 jTable1.setModel(modelo);
                 modelo.addRow(new Object[]{user, saldo});
-                temporal.next();
             }
             RK.setVisible(true);
             JDBC.state.close();

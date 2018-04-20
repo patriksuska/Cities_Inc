@@ -24,7 +24,7 @@ public class JDBCclass {
     private static String user = "u634818610_pat";
     private static String pass = "patsus123";
     private static Connection conn = null;
-    public Statement state;
+    public static Statement state;
 
     public JDBCclass() throws SQLException {
 
@@ -60,10 +60,10 @@ public class JDBCclass {
         return estado;
     }
 
-    public void consulta3(String sql) throws SQLException {//update delete o insert
+    public static void consulta3(String sql) throws SQLException {//update delete o insert
         //Statement state = null;
         state = (Statement) conn.createStatement();
-        state.execute(sql);
+        state.executeUpdate(sql);
         //state.close();
     }
     /*public static ResultSet consulta(String query1) {//para los select que devuelven multiples resultados

@@ -140,28 +140,46 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
 
     private void BtnBorrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBorrarUsuarioActionPerformed
         // TODO add your handling code here:
-        /*codigo query para jdbc
+        //codigo query para eliminar un usuario seleccionado
         String sql;
-        sql = "DELETE FROM Usuario (nombreUsuario,password,saldo,CSP) ";
-        sql+= "values () ";
-        sql+= " nombreUsuario='"+nombreUsuario+"' and password=MD5('"+password+"')and saldo='"+saldo+"'and CSP='"+CSP+"';";
-        JDBCclass.consulta3(sql);*/
+        String nombreUsuario = null;
+        sql = "DELETE * FROM usuario WHERE usuario.nombreUsuario='" + nombreUsuario + "';";
+        try {
+            JDBCclass.consulta3(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BtnBorrarUsuarioActionPerformed
 
     private void BtnModificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarUsuarioActionPerformed
         // TODO add your handling code here:
         //codigo query para modificar usuario
-
-        /*String sql;
+        String sql;
+        String nombreUsuario=null;
+        String password=null;
         sql = "UPDATE INTO Usuario (nombreUsuario,password,saldo,CSP) ";
         sql+= "values () ";
-        sql+= " nombreUsuario='"+nombreUsuario+"' and password=MD5('"+password+"')and saldo='"+saldo+"'and CSP='"+CSP+"';";
-        JDBCclass.consulta3(sql);*/
+        sql+= " nombreUsuario='"+nombreUsuario+"' and password=MD5('"+password+"');";
+        try {
+            JDBCclass.consulta3(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BtnModificarUsuarioActionPerformed
 
     private void BtnCambiarPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCambiarPasswordActionPerformed
         // TODO add your handling code here:
         //codigo query para actualizar la contraseña del usuario
+        String password=null;
+        String sql;
+        sql = "UPDATE INTO Usuario (nombreUsuario,password,saldo,CSP) ";
+        sql+= "values () ";
+        sql+= "password=MD5('"+password+"');";
+        try {
+            JDBCclass.consulta3(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BtnCambiarPasswordActionPerformed
 
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
@@ -207,26 +225,22 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
                 }
 
             });
-
+            DefaultTableModel modelo = new DefaultTableModel();           
             String sql;
             sql = "SELECT * FROM usuario; ";
             JDBCclass JDBC = new JDBCclass();
             ResultSet temporal = JDBC.consulta1(sql);
-            while (!temporal.isLast()) {
+            while (temporal.next()) {
                 String nombreUsuario = temporal.getString("nombreUsuario");
                 String contraseña = temporal.getString("password");
-                temporal.next();
-                DefaultTableModel modelo = new DefaultTableModel();
                 jTable1.setModel(modelo);
-                modelo.addRow(new Object[]{nombreUsuario, contraseña});
+                modelo.addRow(new Object[]{nombreUsuario, contraseña});          
             }
             JDBC.state.close();
-
         } catch (SQLException ex) {
             Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

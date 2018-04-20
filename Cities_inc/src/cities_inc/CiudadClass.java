@@ -16,13 +16,13 @@ public class CiudadClass {
 
     public static int precioCiudad(int paradas) {//precio de cada ciudad basado en el preciobase y las paradas
         int precio = preciobase * paradas;
-        System.out.println(precio);
+        System.out.println("El precio de la ciudad"+precio);
         return precio;
     }
 
     public static int bonificacion() {//bonificacion por cada ciudad comprada
         int bonificacion = (int) (Math.random() * 10) + 1;
-        System.out.println(bonificacion);
+        System.out.println("La bonificacion de la ciudad"+bonificacion);
         return bonificacion;
     }
 
