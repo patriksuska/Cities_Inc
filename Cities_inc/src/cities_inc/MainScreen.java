@@ -27,6 +27,7 @@ public class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen() throws SQLException {
         initComponents();
+        rellenausuario();
         rellenapais();
     }
 
@@ -121,6 +122,8 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel2.setText("Nombre de Usuario");
 
         jLabel3.setText("!");
+
+        TextSaldoActual.setEditable(false);
 
         jLabel4.setText("€");
 
@@ -237,13 +240,21 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void BtnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnComprarActionPerformed
         // TODO add your handling code here:
-        //jTableCiudades.get
+        try {
+        //String ciudadcomprada=jTableCiudades.get();
+        String sql;
+            sql = "INSERT INTO ciudad () values(); ";
+            JDBCclass JDBC = new JDBCclass();
+            JDBC.consulta3(sql);
+            System.out.println("Operacion de compra realizada correctamente");
+        }catch (SQLException ex) {
+            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BtnComprarActionPerformed
 
     private void ComboPaisesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComboPaisesMouseClicked
         try {
-            // TODO add your handling code here:
-
+            // TODO add your handling code here
             String pais = String.valueOf(ComboPaises.getSelectedItem());
             String sql;
             sql = "SELECT * ";
@@ -261,7 +272,7 @@ public class MainScreen extends javax.swing.JFrame {
                 int paradas = RestAPIClass.obtenerParadas(URL);
                 int precioCiudad = CiudadClass.precioCiudad(paradas);
                 int bonificacion = CiudadClass.bonificacion();
-                
+
                 modelo.addRow(new Object[]{nombreCiudad, precioCiudad, bonificacion, paradas});
             }
             JDBC.state.close();
@@ -272,7 +283,16 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void BtnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVenderActionPerformed
         // TODO add your handling code here:
-        //jTableCiudades.get
+        try {
+        //String ciudadvendida=jTableCiudades.get();
+        String sql;
+            sql = "DELETE FROM ciudad () values(); ";
+            JDBCclass JDBC = new JDBCclass();
+            JDBC.consulta3(sql);
+            System.out.println("Operacion de venta realizada correctamente");
+        }catch (SQLException ex) {
+            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BtnVenderActionPerformed
 
     private void BtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogoutActionPerformed
@@ -283,8 +303,21 @@ public class MainScreen extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void rellenapais(/*String args[]*/) throws SQLException {
+    public static void rellenausuario() throws SQLException {
         String user = LoginScreen.nombreUsuario;
+        JDBCclass JDBC = new JDBCclass();
+        String sql;
+        sql = "SELECT saldo FROM usuario WHERE nombreUsuario='" + user + "';";
+        ResultSet temp = JDBC.consulta1(sql);
+        while (temp.next()) {
+            int saldo = temp.getInt("saldo");
+            TextSaldoActual.setText(String.valueOf(saldo));
+        }
+        jLabel2.setText(user);
+        JDBC.state.close();
+    }
+
+    public static void rellenapais(/*String args[]*/) throws SQLException {
         JDBCclass JDBC = new JDBCclass();
         String sql;
         sql = "SELECT pais FROM ciudad GROUP BY pais;";
@@ -293,7 +326,6 @@ public class MainScreen extends javax.swing.JFrame {
             String pais = temporal.getString("pais");
             ComboPaises.addItem(pais);//añade los paises al combobox              
         }
-        jLabel2.setText(user);
         JDBC.state.close();
         // Create and display the form 
     }

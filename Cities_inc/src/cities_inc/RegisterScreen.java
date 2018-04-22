@@ -138,11 +138,35 @@ public class RegisterScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         //aqui hay que insertar un usuario en la base de datos usando el JDBC class
         try {
+            JDBCclass JDBC = new JDBCclass();
             String nombreUsuario = TextUsuario.getText();
             String password = String.valueOf(TextoPassword.getPassword());
             int CSP = Integer.valueOf(TextCSP.getText());
             int saldo = 333000;
-            String sql;
+            String sql1;
+            sql1 = "SELECT COUNT(nombreUsuario) ";
+            sql1 += "FROM usuario ";
+            sql1 += "WHERE nombreUsuario='" + nombreUsuario + "' and password=MD5('" + password + "') and CSP='" + CSP + "';";
+            ResultSet temp = JDBC.consulta1(sql1);
+            int a = 0;
+            if (temp.next()) {
+                System.out.println(temp.getInt(1));
+                a = temp.getInt(1);
+            }           
+            if (a == 1) {
+                JOptionPane.showMessageDialog(null, "¡El usuario ya existe!");
+            } else {
+                String sql;
+                sql = "INSERT INTO usuario (nombreUsuario,password,saldo,CSP) ";
+                sql += "values ('" + nombreUsuario + "',MD5('" + password + "'),'" + saldo + "','" + CSP + "');";
+                //JDBCclass JDBC = new JDBCclass();
+                JDBC.consulta3(sql);
+                LoginScreen Ls = new LoginScreen();
+                Ls.setVisible(true);
+                this.setVisible(false);
+            }
+            JDBC.state.close();
+           /* String sql;
             sql = "INSERT INTO usuario (nombreUsuario,password,saldo,CSP) ";
             sql += "values ('" + nombreUsuario + "',MD5('" + password + "'),'" + saldo + "','" + CSP + "');";
             JDBCclass JDBC = new JDBCclass();
@@ -150,7 +174,7 @@ public class RegisterScreen extends javax.swing.JFrame {
             LoginScreen Ls = new LoginScreen();
             Ls.setVisible(true);
             this.setVisible(false);
-            JDBC.state.close();
+            JDBC.state.close();*/
         } catch (SQLException ex) {
             Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
