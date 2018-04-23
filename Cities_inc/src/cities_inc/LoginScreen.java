@@ -214,6 +214,7 @@ static String nombreUsuario;
     private void BtnGuestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuestActionPerformed
         // TODO add your handling code here:
         RankingScreen RK = new RankingScreen();
+        RankingScreen.main();
         RK.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BtnGuestActionPerformed

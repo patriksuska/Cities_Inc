@@ -47,13 +47,13 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Usuario", "Contraseña(MD5)"
+
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -225,7 +225,11 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
                 }
 
             });
-            DefaultTableModel modelo = new DefaultTableModel();           
+           DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Contraseña MD5");
+            jTable1.setModel(modelo);
+            Object[] usuarios= new Object[2];         
             String sql;
             sql = "SELECT * FROM usuario; ";
             JDBCclass JDBC = new JDBCclass();
@@ -233,8 +237,9 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             while (temporal.next()) {
                 String nombreUsuario = temporal.getString("nombreUsuario");
                 String contraseña = temporal.getString("password");
-                jTable1.setModel(modelo);
-                modelo.addRow(new Object[]{nombreUsuario, contraseña});          
+                usuarios[0]=nombreUsuario;
+                usuarios[1]=contraseña;
+                modelo.addRow(usuarios);          
             }
             JDBC.state.close();
         } catch (SQLException ex) {

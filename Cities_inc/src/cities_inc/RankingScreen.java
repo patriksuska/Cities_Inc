@@ -44,13 +44,13 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Usuario", "Dinero"
+
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -82,7 +82,7 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnCerrar)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
@@ -96,23 +96,28 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main() {
         try {
             // TODO add your handling code here:
-            RankingScreen RK = new RankingScreen();
+            
             String sql;
             sql = "SELECT * FROM usuario;";
             JDBCclass JDBC = new JDBCclass();
             ResultSet temporal = JDBC.consulta1(sql);
-            jTable1 = new javax.swing.JTable();
+            
             DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Usuario");
+            modelo.addColumn("Saldo (€)");
+            jTable1.setModel(modelo);
+            Object[] ranking= new Object[2];
             while (temporal.next()) {
                 String user = temporal.getString("nombreUsuario");
                 String saldo = temporal.getString("saldo");
-                jTable1.setModel(modelo);
-                modelo.addRow(new Object[]{user, saldo});
+                ranking[0]=user;
+                ranking[1]=saldo;
+                modelo.addRow(ranking);
             }
-            RK.setVisible(true);
+            
             JDBC.state.close();
         } catch (SQLException ex) {
             Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
@@ -142,11 +147,11 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new RankingScreen().setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify

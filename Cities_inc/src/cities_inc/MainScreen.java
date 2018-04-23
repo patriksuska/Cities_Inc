@@ -29,6 +29,8 @@ public class MainScreen extends javax.swing.JFrame {
         initComponents();
         rellenausuario();
         rellenapais();
+        rellenatablapropiedad();
+        
     }
 
     /**
@@ -43,7 +45,7 @@ public class MainScreen extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCiudades = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTablePropiedad = new javax.swing.JTable();
         BtnComprar = new javax.swing.JButton();
         BtnVender = new javax.swing.JButton();
         BtnLogout = new javax.swing.JButton();
@@ -57,44 +59,37 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         BtnRanking = new javax.swing.JButton();
         ComboPaises = new javax.swing.JComboBox<>();
+        BtnSeleccionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(500, 250));
 
         jTableCiudades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Ciudad", "Precio(€)", "Bonificacion", "Paradas(num)"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTableCiudades);
-
-        jTable2.setAutoCreateRowSorter(true);
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Ciudad", "Numero de paradas"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane1.setViewportView(jTableCiudades);
+
+        jTablePropiedad.setAutoCreateRowSorter(true);
+        jTablePropiedad.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(jTablePropiedad);
 
         BtnComprar.setText("Comprar");
         BtnComprar.addActionListener(new java.awt.event.ActionListener() {
@@ -152,6 +147,13 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        BtnSeleccionar.setText("Seleccionar");
+        BtnSeleccionar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnSeleccionarMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -168,7 +170,6 @@ public class MainScreen extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ComboPaises, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane1)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel1)
@@ -182,7 +183,11 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addComponent(TextSaldoActual, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(ComboPaises, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(BtnSeleccionar)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(BtnLogout)
@@ -210,8 +215,10 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(ComboPaises, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ComboPaises, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtnSeleccionar))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -235,6 +242,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void BtnRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRankingActionPerformed
         RankingScreen RK = new RankingScreen();
+        RankingScreen.main();
         RK.setVisible(true);
     }//GEN-LAST:event_BtnRankingActionPerformed
 
@@ -253,7 +261,7 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnComprarActionPerformed
 
     private void ComboPaisesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComboPaisesMouseClicked
-        try {
+       /* try {
             // TODO add your handling code here
             String pais = String.valueOf(ComboPaises.getSelectedItem());
             String sql;
@@ -262,7 +270,7 @@ public class MainScreen extends javax.swing.JFrame {
             sql += "WHERE pais='" + pais + "';";
             JDBCclass JDBC = new JDBCclass();
             ResultSet temporal = JDBC.consulta1(sql);
-            jTableCiudades = new javax.swing.JTable();
+            //jTableCiudades = new javax.swing.JTable();
             DefaultTableModel modelo = new DefaultTableModel();
             jTableCiudades.setModel(modelo);
             Object[] ciudades= new Object[4];
@@ -282,7 +290,7 @@ public class MainScreen extends javax.swing.JFrame {
             JDBC.state.close();
         } catch (SQLException ex) {
             Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }//GEN-LAST:event_ComboPaisesMouseClicked
 
     private void BtnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVenderActionPerformed
@@ -304,11 +312,49 @@ public class MainScreen extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_BtnLogoutActionPerformed
 
+    private void BtnSeleccionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnSeleccionarMouseClicked
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here
+            String pais = String.valueOf(ComboPaises.getSelectedItem());
+            String sql;
+            sql = "SELECT * ";
+            sql += "FROM ciudad ";
+            sql += "WHERE pais='" + pais + "';";
+            JDBCclass JDBC = new JDBCclass();
+            ResultSet temporal = JDBC.consulta1(sql);
+            //jTableCiudades = new javax.swing.JTable();
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Precio (€)");
+            modelo.addColumn("Bonificacion (%)");
+            modelo.addColumn("Paradas");
+            jTableCiudades.setModel(modelo);
+            Object[] ciudades= new Object[4];
+            //falta saber como meter en jtable la informacion que obtiene
+            while (temporal.next()) {
+                String URL = temporal.getString("URL");
+                String nombreCiudad = temporal.getString("nombreCiudad");
+                int paradas = RestAPIClass.obtenerParadas(URL);
+                int precioCiudad = CiudadClass.precioCiudad(paradas);
+                int bonificacion = CiudadClass.bonificacion();
+                ciudades[0]=nombreCiudad;
+                ciudades[1]=precioCiudad;
+                ciudades[2]=bonificacion;
+                ciudades[3]=paradas;
+                modelo.addRow(ciudades);
+            }
+            JDBC.state.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BtnSeleccionarMouseClicked
+
     /**
      * @param args the command line arguments
-     */
+     */static String user = LoginScreen.nombreUsuario;
     public static void rellenausuario() throws SQLException {
-        String user = LoginScreen.nombreUsuario;
+        
         JDBCclass JDBC = new JDBCclass();
         String sql;
         sql = "SELECT saldo FROM usuario WHERE nombreUsuario='" + user + "';";
@@ -320,7 +366,31 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel2.setText(user);
         JDBC.state.close();
     }
-
+    public static void rellenatablapropiedad() throws SQLException{
+        //aqui todo el query para obtener las ciudades compradas
+        String sql;
+            sql = "SELECT * ";
+            sql += "FROM ciudad ";
+            sql += "WHERE nombreUsuario='" + user + "';";
+            JDBCclass JDBC = new JDBCclass();
+            ResultSet temporal = JDBC.consulta1(sql);
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Paradas");
+            jTablePropiedad.setModel(modelo);
+            Object[] propiedad= new Object[2];
+            while (temporal.next()) {
+                String URL = temporal.getString("URL");
+                String nombreCiudad = temporal.getString("nombreCiudad");
+                int paradas = RestAPIClass.obtenerParadas(URL);
+//                int precioCiudad = CiudadClass.precioCiudad(paradas);
+//                int bonificacion = CiudadClass.bonificacion();
+                propiedad[0]=nombreCiudad;
+                propiedad[1]=paradas;               
+                modelo.addRow(propiedad);
+            }
+            JDBC.state.close();           
+    }
     public static void rellenapais(/*String args[]*/) throws SQLException {
         JDBCclass JDBC = new JDBCclass();
         String sql;
@@ -338,6 +408,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton BtnComprar;
     private javax.swing.JButton BtnLogout;
     private javax.swing.JButton BtnRanking;
+    private javax.swing.JButton BtnSeleccionar;
     private javax.swing.JButton BtnVender;
     public static javax.swing.JComboBox<String> ComboPaises;
     public static javax.swing.JTextField TextSaldoActual;
@@ -350,7 +421,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    public static javax.swing.JTable jTable2;
     public static javax.swing.JTable jTableCiudades;
+    public static javax.swing.JTable jTablePropiedad;
     // End of variables declaration//GEN-END:variables
 }
