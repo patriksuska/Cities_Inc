@@ -265,6 +265,7 @@ public class MainScreen extends javax.swing.JFrame {
             jTableCiudades = new javax.swing.JTable();
             DefaultTableModel modelo = new DefaultTableModel();
             jTableCiudades.setModel(modelo);
+            Object[] ciudades= new Object[4];
             //falta saber como meter en jtable la informacion que obtiene
             while (temporal.next()) {
                 String URL = temporal.getString("URL");
@@ -272,8 +273,11 @@ public class MainScreen extends javax.swing.JFrame {
                 int paradas = RestAPIClass.obtenerParadas(URL);
                 int precioCiudad = CiudadClass.precioCiudad(paradas);
                 int bonificacion = CiudadClass.bonificacion();
-
-                modelo.addRow(new Object[]{nombreCiudad, precioCiudad, bonificacion, paradas});
+                ciudades[0]=nombreCiudad;
+                ciudades[1]=precioCiudad;
+                ciudades[2]=bonificacion;
+                ciudades[3]=paradas;
+                modelo.addRow(ciudades);
             }
             JDBC.state.close();
         } catch (SQLException ex) {
