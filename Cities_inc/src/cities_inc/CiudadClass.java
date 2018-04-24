@@ -26,16 +26,13 @@ public class CiudadClass {
         return bonificacion;
     }
 
-    public void venta() {
-        //int perdidas = 25 * precioCiudad;
+    public void venta(int precioCiudad) {
+        int perdidas = 25 * precioCiudad;
         //System.out.println(perdidas);
 
     }
 
-    public void compra() {
-
+    public void compra(String nombreCiudad,int precioCiudad,String nombreUsuario,int saldo,int bonificacion) {
+        
     }
-    /*public static void dinero (String URL){
-       
-   }*/
 }

@@ -50,12 +50,6 @@ static String nombreUsuario;
         setLocation(new java.awt.Point(500, 250));
         setType(java.awt.Window.Type.POPUP);
 
-        TextUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextUsuarioActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Usuario");
 
         jLabel2.setText("Contraseña");
@@ -85,17 +79,6 @@ static String nombreUsuario;
         BtnGuest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnGuestActionPerformed(evt);
-            }
-        });
-
-        TextoPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextoPasswordActionPerformed(evt);
-            }
-        });
-        TextoPassword.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                TextoPasswordKeyTyped(evt);
             }
         });
 
@@ -150,18 +133,6 @@ static String nombreUsuario;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void TextUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextUsuarioActionPerformed
-
-    private void TextoPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextoPasswordKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextoPasswordKeyTyped
-
-    private void TextoPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextoPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextoPasswordActionPerformed
 
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
         // TODO add your handling code here:

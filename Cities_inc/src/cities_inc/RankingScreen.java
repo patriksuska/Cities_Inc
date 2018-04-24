@@ -145,13 +145,7 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
             java.util.logging.Logger.getLogger(RankingScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the form */
-        /*java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RankingScreen().setVisible(true);
-            }
-        });*/
+      
     }
 
     // Variables declaration - do not modify

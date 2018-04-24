@@ -95,9 +95,6 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="TextUsuario">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TextUsuarioActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -142,10 +139,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="TextoPassword">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TextoPasswordActionPerformed"/>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TextoPasswordKeyTyped"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

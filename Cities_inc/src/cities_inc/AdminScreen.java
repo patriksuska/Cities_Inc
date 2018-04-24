@@ -279,13 +279,6 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             }
             //</editor-fold>
 
-            /* Create and display the form */
-            /*java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    new AdminScreen().setVisible(true);
-                }
-
-            });*/
            DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Nombre");
             modelo.addColumn("Contraseña MD5");
