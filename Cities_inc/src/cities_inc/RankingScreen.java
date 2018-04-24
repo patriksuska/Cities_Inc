@@ -82,7 +82,7 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnCerrar)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -90,7 +90,7 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
 
     private void BtnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCerrarActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        this.setVisible(false);
     }//GEN-LAST:event_BtnCerrarActionPerformed
 
     /**

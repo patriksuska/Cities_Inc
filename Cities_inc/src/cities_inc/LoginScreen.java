@@ -177,6 +177,7 @@ static String nombreUsuario;
         if (nombreUsuario.equals("administrador") && password.equals("admin12345")) {
             AdminScreen AD = new AdminScreen();
             AD.setVisible(true);
+            AdminScreen.main();
             this.setVisible(false);
         } else {
             try {
@@ -216,7 +217,7 @@ static String nombreUsuario;
         RankingScreen RK = new RankingScreen();
         RankingScreen.main();
         RK.setVisible(true);
-        this.setVisible(false);
+        
     }//GEN-LAST:event_BtnGuestActionPerformed
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed

@@ -22,6 +22,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
      */
     public AdminScreen() {
         initComponents();
+        
     }
 
     /**
@@ -40,6 +41,12 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
         BtnCambiarPassword = new javax.swing.JButton();
         BtnModificarUsuario = new javax.swing.JButton();
         BtnSalir = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldNombre = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jTextFieldCSP = new javax.swing.JTextField();
+        jPasswordFieldContrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(500, 250));
@@ -93,39 +100,81 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             }
         });
 
+        jLabel1.setText("Nombre:");
+
+        jLabel2.setText("Contraseña:");
+
+        jLabel3.setText("CSP:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnCrearUsuario)
-                        .addGap(18, 18, 18)
-                        .addComponent(BtnBorrarUsuario)
-                        .addGap(18, 18, 18)
-                        .addComponent(BtnModificarUsuario)
-                        .addGap(18, 18, 18)
-                        .addComponent(BtnCambiarPassword)
-                        .addGap(18, 18, 18)
-                        .addComponent(BtnSalir)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3))
+                                        .addGap(12, 12, 12)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jTextFieldCSP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addComponent(jPasswordFieldContrasena))))
+                                .addGap(18, 18, 18))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(BtnSalir)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BtnCambiarPassword)
+                            .addComponent(BtnCrearUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(BtnBorrarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BtnModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnCrearUsuario)
-                    .addComponent(BtnBorrarUsuario)
-                    .addComponent(BtnModificarUsuario)
-                    .addComponent(BtnCambiarPassword)
-                    .addComponent(BtnSalir))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jPasswordFieldContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jTextFieldCSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addComponent(BtnCrearUsuario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnBorrarUsuario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnModificarUsuario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnCambiarPassword)
+                        .addGap(35, 35, 35)
+                        .addComponent(BtnSalir))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -134,8 +183,17 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
 
     private void BtnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCrearUsuarioActionPerformed
         // TODO add your handling code here:
-        RegisterScreen regscreen = new RegisterScreen();
-        regscreen.setVisible(true);
+        String sql;
+        String nombreUsuario=null;
+        String password=null;
+        int CSP=0;
+        sql = "INSERT INTO usuario(nombreUsuario,password,saldo,CSP) ";
+        sql+= "values (nombreUsuario='"+nombreUsuario+"' and password=MD5('"+password+"'));";
+        try {
+            JDBCclass.consulta3(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BtnCrearUsuarioActionPerformed
 
     private void BtnBorrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBorrarUsuarioActionPerformed
@@ -157,6 +215,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
         String sql;
         String nombreUsuario=null;
         String password=null;
+        int CSP=0;
         sql = "UPDATE INTO Usuario (nombreUsuario,password,saldo,CSP) ";
         sql+= "values () ";
         sql+= " nombreUsuario='"+nombreUsuario+"' and password=MD5('"+password+"');";
@@ -170,7 +229,9 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     private void BtnCambiarPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCambiarPasswordActionPerformed
         // TODO add your handling code here:
         //codigo query para actualizar la contraseña del usuario
+        String nombreUsuario=null;
         String password=null;
+        int CSP=0;
         String sql;
         sql = "UPDATE INTO Usuario (nombreUsuario,password,saldo,CSP) ";
         sql+= "values () ";
@@ -192,7 +253,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main() {
 
         try {
             /* Set the Nimbus look and feel */
@@ -219,12 +280,12 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             //</editor-fold>
 
             /* Create and display the form */
-            java.awt.EventQueue.invokeLater(new Runnable() {
+            /*java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     new AdminScreen().setVisible(true);
                 }
 
-            });
+            });*/
            DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Nombre");
             modelo.addColumn("Contraseña MD5");
@@ -254,7 +315,13 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     private javax.swing.JButton BtnCrearUsuario;
     private javax.swing.JButton BtnModificarUsuario;
     private javax.swing.JButton BtnSalir;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPasswordField jPasswordFieldContrasena;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextFieldCSP;
+    private javax.swing.JTextField jTextFieldNombre;
     // End of variables declaration//GEN-END:variables
 }

@@ -29,8 +29,7 @@ public class MainScreen extends javax.swing.JFrame {
         initComponents();
         rellenausuario();
         rellenapais();
-        rellenatablapropiedad();
-        
+        rellenatablapropiedad();        
     }
 
     /**
@@ -136,16 +135,6 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         ComboPaises.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona Pais" }));
-        ComboPaises.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ComboPaisesMouseClicked(evt);
-            }
-        });
-        ComboPaises.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComboPaisesActionPerformed(evt);
-            }
-        });
 
         BtnSeleccionar.setText("Seleccionar");
         BtnSeleccionar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -235,11 +224,6 @@ public class MainScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ComboPaisesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboPaisesActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_ComboPaisesActionPerformed
-
     private void BtnRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRankingActionPerformed
         RankingScreen RK = new RankingScreen();
         RankingScreen.main();
@@ -248,63 +232,30 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void BtnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnComprarActionPerformed
         // TODO add your handling code here:
-        try {
-        //String ciudadcomprada=jTableCiudades.get();
-        String sql;
-            sql = "INSERT INTO ciudad () values(); ";
-            JDBCclass JDBC = new JDBCclass();
-            JDBC.consulta3(sql);
-            System.out.println("Operacion de compra realizada correctamente");
-        }catch (SQLException ex) {
-            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//        //String ciudadcomprada=jTableCiudades.get();
+//        String sql;
+//            sql = "INSERT INTO `ciudad`(`nombreCiudad`, `pais`, `URL`, `precioCiudad`, `nombreUsuario`, `bonificacion`) VALUES () ";
+//            JDBCclass JDBC = new JDBCclass();
+//            JDBC.consulta3(sql);
+//            System.out.println("Operacion de compra realizada correctamente");
+//        }catch (SQLException ex) {
+//            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_BtnComprarActionPerformed
-
-    private void ComboPaisesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComboPaisesMouseClicked
-       /* try {
-            // TODO add your handling code here
-            String pais = String.valueOf(ComboPaises.getSelectedItem());
-            String sql;
-            sql = "SELECT * ";
-            sql += "FROM ciudad ";
-            sql += "WHERE pais='" + pais + "';";
-            JDBCclass JDBC = new JDBCclass();
-            ResultSet temporal = JDBC.consulta1(sql);
-            //jTableCiudades = new javax.swing.JTable();
-            DefaultTableModel modelo = new DefaultTableModel();
-            jTableCiudades.setModel(modelo);
-            Object[] ciudades= new Object[4];
-            //falta saber como meter en jtable la informacion que obtiene
-            while (temporal.next()) {
-                String URL = temporal.getString("URL");
-                String nombreCiudad = temporal.getString("nombreCiudad");
-                int paradas = RestAPIClass.obtenerParadas(URL);
-                int precioCiudad = CiudadClass.precioCiudad(paradas);
-                int bonificacion = CiudadClass.bonificacion();
-                ciudades[0]=nombreCiudad;
-                ciudades[1]=precioCiudad;
-                ciudades[2]=bonificacion;
-                ciudades[3]=paradas;
-                modelo.addRow(ciudades);
-            }
-            JDBC.state.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-    }//GEN-LAST:event_ComboPaisesMouseClicked
 
     private void BtnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVenderActionPerformed
         // TODO add your handling code here:
-        try {
-        //String ciudadvendida=jTableCiudades.get();
-        String sql;
-            sql = "DELETE FROM ciudad () values(); ";
-            JDBCclass JDBC = new JDBCclass();
-            JDBC.consulta3(sql);
-            System.out.println("Operacion de venta realizada correctamente");
-        }catch (SQLException ex) {
-            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//        //String ciudadvendida=jTableCiudades.get();
+//        String sql;
+//            sql = "DELETE FROM `ciudad`(`nombreCiudad`, `pais`, `URL`, `precioCiudad`, `nombreUsuario`, `bonificacion`) VALUES(); ";
+//            JDBCclass JDBC = new JDBCclass();
+//            JDBC.consulta3(sql);
+//            System.out.println("Operacion de venta realizada correctamente");
+//        }catch (SQLException ex) {
+//            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_BtnVenderActionPerformed
 
     private void BtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogoutActionPerformed
@@ -352,7 +303,8 @@ public class MainScreen extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
-     */static String user = LoginScreen.nombreUsuario;
+     */
+    static String user = LoginScreen.nombreUsuario;
     public static void rellenausuario() throws SQLException {
         
         JDBCclass JDBC = new JDBCclass();

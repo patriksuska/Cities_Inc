@@ -16,15 +16,12 @@ import javax.swing.JOptionPane;
  * @author Patrik
  */
 public class RegisterScreen extends javax.swing.JFrame {
-
     /**
      * Creates new form Register
      */
     public RegisterScreen() {
-
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -166,15 +163,6 @@ public class RegisterScreen extends javax.swing.JFrame {
                 this.setVisible(false);
             }
             JDBC.state.close();
-           /* String sql;
-            sql = "INSERT INTO usuario (nombreUsuario,password,saldo,CSP) ";
-            sql += "values ('" + nombreUsuario + "',MD5('" + password + "'),'" + saldo + "','" + CSP + "');";
-            JDBCclass JDBC = new JDBCclass();
-            JDBC.consulta3(sql);
-            LoginScreen Ls = new LoginScreen();
-            Ls.setVisible(true);
-            this.setVisible(false);
-            JDBC.state.close();*/
         } catch (SQLException ex) {
             Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
