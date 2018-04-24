@@ -33,7 +33,7 @@ public class JDBCclass {
                 System.out.println("Conexion establecida");
             }
         } catch (SQLException ex) {
-            System.out.println("Hubo un problema al conecarse a la base de datos");
+            System.out.println("Hubo un problema al conectarse a la base de datos");
         } catch (ClassNotFoundException ex) {
             System.out.println(ex);
         }

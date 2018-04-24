@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -39,7 +40,6 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
         BtnCrearUsuario = new javax.swing.JButton();
         BtnBorrarUsuario = new javax.swing.JButton();
         BtnCambiarPassword = new javax.swing.JButton();
-        BtnModificarUsuario = new javax.swing.JButton();
         BtnSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldNombre = new javax.swing.JTextField();
@@ -83,13 +83,6 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
         BtnCambiarPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCambiarPasswordActionPerformed(evt);
-            }
-        });
-
-        BtnModificarUsuario.setText("Modificar usuario");
-        BtnModificarUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnModificarUsuarioActionPerformed(evt);
             }
         });
 
@@ -140,9 +133,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtnCambiarPassword)
                             .addComponent(BtnCrearUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(BtnBorrarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BtnModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(BtnBorrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -166,13 +157,11 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
                             .addComponent(jTextFieldCSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addComponent(BtnCrearUsuario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(BtnBorrarUsuario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnModificarUsuario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(BtnCambiarPassword)
-                        .addGap(35, 35, 35)
+                        .addGap(40, 40, 40)
                         .addComponent(BtnSalir))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
@@ -184,15 +173,17 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     private void BtnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCrearUsuarioActionPerformed
         // TODO add your handling code here:
         String sql;
-        String nombreUsuario=null;
-        String password=null;
-        int CSP=0;
-        sql = "INSERT INTO usuario(nombreUsuario,password,saldo,CSP) ";
-        sql+= "values (nombreUsuario='"+nombreUsuario+"' and password=MD5('"+password+"'));";
+        String nombreUsuario=jTextFieldNombre.getText();
+        String password=String.valueOf(jPasswordFieldContrasena.getPassword());
+        int CSP=Integer.valueOf(jTextFieldCSP.getText());
+        int saldo=333000;
+        sql = "INSERT INTO usuario (nombreUsuario,password,saldo,CSP) ";
+        sql += "values ('" + nombreUsuario + "',MD5('" + password + "'),'" + saldo + "','" + CSP + "');";
         try {
             JDBCclass.consulta3(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "El usuario ya existe");
+            //Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnCrearUsuarioActionPerformed
 
@@ -201,30 +192,14 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
         //codigo query para eliminar un usuario seleccionado
         String sql;
         String nombreUsuario = null;
-        sql = "DELETE * FROM usuario WHERE usuario.nombreUsuario='" + nombreUsuario + "';";
+        sql = "DELETE * FROM usuario WHERE nombreUsuario='" + nombreUsuario + "';";
         try {
             JDBCclass.consulta3(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se puede eliminar el usuario");
+            //Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnBorrarUsuarioActionPerformed
-
-    private void BtnModificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarUsuarioActionPerformed
-        // TODO add your handling code here:
-        //codigo query para modificar usuario
-        String sql;
-        String nombreUsuario=null;
-        String password=null;
-        int CSP=0;
-        sql = "UPDATE INTO Usuario (nombreUsuario,password,saldo,CSP) ";
-        sql+= "values () ";
-        sql+= " nombreUsuario='"+nombreUsuario+"' and password=MD5('"+password+"');";
-        try {
-            JDBCclass.consulta3(sql);
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_BtnModificarUsuarioActionPerformed
 
     private void BtnCambiarPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCambiarPasswordActionPerformed
         // TODO add your handling code here:
@@ -233,13 +208,15 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
         String password=null;
         int CSP=0;
         String sql;
-        sql = "UPDATE INTO Usuario (nombreUsuario,password,saldo,CSP) ";
-        sql+= "values () ";
-        sql+= "password=MD5('"+password+"');";
+        sql="UPDATE usuario SET password=MD5('"+password+"') WHERE nombreUsuario='"+nombreUsuario+"'; ";
+        /*sql = "UPDATE password FROM usuario WHERE nombreUsuario='"+nombreUsuario+"'; ";
+        sql+= "values (password=MD5('"+password+"')); ";*/
+        
         try {
             JDBCclass.consulta3(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se puede cambiar la contraseña");
+            //Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnCambiarPasswordActionPerformed
 
@@ -297,7 +274,8 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             }
             JDBC.state.close();
         } catch (SQLException ex) {
-            Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Hubo un problema con la visualizacion de las tablas");
+            //Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
         //</editor-fold>
     }
@@ -306,7 +284,6 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     private javax.swing.JButton BtnBorrarUsuario;
     private javax.swing.JButton BtnCambiarPassword;
     private javax.swing.JButton BtnCrearUsuario;
-    private javax.swing.JButton BtnModificarUsuario;
     private javax.swing.JButton BtnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

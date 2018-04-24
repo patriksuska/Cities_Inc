@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -240,6 +241,7 @@ public class MainScreen extends javax.swing.JFrame {
 //            JDBC.consulta3(sql);
 //            System.out.println("Operacion de compra realizada correctamente");
 //        }catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "No se puede comprar la ciudad");
 //            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
 //        }
     }//GEN-LAST:event_BtnComprarActionPerformed
@@ -254,6 +256,7 @@ public class MainScreen extends javax.swing.JFrame {
 //            JDBC.consulta3(sql);
 //            System.out.println("Operacion de venta realizada correctamente");
 //        }catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "No se puede vender la ciudad");
 //            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
 //        }
     }//GEN-LAST:event_BtnVenderActionPerformed
@@ -297,7 +300,8 @@ public class MainScreen extends javax.swing.JFrame {
             }
             JDBC.state.close();
         } catch (SQLException ex) {
-            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al mostrar el listado de ciudades");
+            //Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnSeleccionarMouseClicked
 

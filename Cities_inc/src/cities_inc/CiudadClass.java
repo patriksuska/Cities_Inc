@@ -26,10 +26,10 @@ public class CiudadClass {
         return bonificacion;
     }
 
-    public void venta(int precioCiudad) {
+    public static int venta(int precioCiudad) {
         int perdidas = 25 * precioCiudad;
-        //System.out.println(perdidas);
-
+        System.out.println(perdidas);
+        return perdidas;
     }
 
     public void compra(String nombreCiudad,int precioCiudad,String nombreUsuario,int saldo,int bonificacion) {
