@@ -9,7 +9,6 @@ package cities_inc;
  *
  * @author Patrik
  */
-public class TransaccionClass {
-    
+public class Thread {
     
 }

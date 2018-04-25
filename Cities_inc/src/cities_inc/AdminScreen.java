@@ -4,14 +4,12 @@
  * and open the template in the editor.
  */
 package cities_inc;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author Patrik
@@ -23,7 +21,6 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
      */
     public AdminScreen() {
         initComponents();
-        
     }
 
     /**
@@ -172,6 +169,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
 
     private void BtnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCrearUsuarioActionPerformed
         // TODO add your handling code here:
+        //codigo query para crear un usuario desde la pantalla de administrador
         String sql;
         String nombreUsuario=jTextFieldNombre.getText();
         String password=String.valueOf(jPasswordFieldContrasena.getPassword());
@@ -183,7 +181,6 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             JDBCclass.consulta3(sql);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "El usuario ya existe");
-            //Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnCrearUsuarioActionPerformed
 
@@ -191,13 +188,15 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
         // TODO add your handling code here:
         //codigo query para eliminar un usuario seleccionado
         String sql;
-        String nombreUsuario = null;
+        String nombreUsuario = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 0));
         sql = "DELETE * FROM usuario WHERE nombreUsuario='" + nombreUsuario + "';";
+        String sql2;
+        sql2="UPDATE ciudad SET precioCiudad=null, nombreUsuario=null, bonificacion=null WHERE nombreUsuario='"+nombreUsuario+"';";
         try {
             JDBCclass.consulta3(sql);
+            JDBCclass.consulta3(sql2);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se puede eliminar el usuario");
-            //Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnBorrarUsuarioActionPerformed
 
@@ -209,14 +208,10 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
         int CSP=0;
         String sql;
         sql="UPDATE usuario SET password=MD5('"+password+"') WHERE nombreUsuario='"+nombreUsuario+"'; ";
-        /*sql = "UPDATE password FROM usuario WHERE nombreUsuario='"+nombreUsuario+"'; ";
-        sql+= "values (password=MD5('"+password+"')); ";*/
-        
         try {
             JDBCclass.consulta3(sql);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se puede cambiar la contraseña");
-            //Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnCambiarPasswordActionPerformed
 
@@ -231,7 +226,6 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
      * @param args the command line arguments
      */
     public static void main() {
-
         try {
             /* Set the Nimbus look and feel */
             //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -255,7 +249,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
                 java.util.logging.Logger.getLogger(AdminScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
             //</editor-fold>
-
+            // codigo para añadir a la tabla los usuarios y sus contraseñas
            DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Nombre");
             modelo.addColumn("Contraseña MD5");
@@ -275,7 +269,6 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             JDBC.state.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Hubo un problema con la visualizacion de las tablas");
-            //Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
         //</editor-fold>
     }

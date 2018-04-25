@@ -11,20 +11,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author Patrik
  */
 public class JDBCclass {
-
+    //datos de acceso a la BD
     private static String db = "u634818610_city";
     private static String url = "jdbc:mysql://sql151.main-hosting.eu/" + db;
     private static String user = "u634818610_pat";
     private static String pass = "patsus123";
     private static Connection conn = null;
     public static Statement state;
-
+    // funcion de conexion con la BD
     public JDBCclass() throws SQLException {
         try {
             Class.forName("com.mysql.jdbc.Connection");
@@ -38,29 +37,23 @@ public class JDBCclass {
             System.out.println(ex);
         }
     }
-
-    public ResultSet consulta1(String sql) throws SQLException {//todos los select con multiples valores
-        //Statement state = null;
+    // funcion de consulta para los select
+    public ResultSet consulta1(String sql) throws SQLException {
         ResultSet resultado = null;
         state = (Statement) conn.createStatement();
         resultado = state.executeQuery(sql);
-        // state.close();
         return resultado;
     }
-
-    public boolean consulta2(String sql) throws SQLException {//count de un valor unico
-        //Statement state = null;
+    //funcion de consulta para los select count(en general los que devuelven un true/false
+    public boolean consulta2(String sql) throws SQLException {
         boolean estado = false;
         state = (Statement) conn.createStatement();
         state.executeQuery(sql);
-        //state.close();
         return estado;
     }
-
-    public static void consulta3(String sql) throws SQLException {//update delete o insert
-        //Statement state = null;
+    //funcion para el update delete o insert que no devuelve nada
+    public static void consulta3(String sql) throws SQLException {
         state = (Statement) conn.createStatement();
         state.executeUpdate(sql);
-        //state.close();
     }
 }

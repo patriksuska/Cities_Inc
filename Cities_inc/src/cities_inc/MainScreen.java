@@ -4,22 +4,17 @@
  * and open the template in the editor.
  */
 package cities_inc;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author Patrik
  */
 public class MainScreen extends javax.swing.JFrame {
-//  public static String []paises=new String[60];
-//  public static String []ciudades=new String[paises.length];
-
     /**
      * Creates new form MainScreen
      *
@@ -233,6 +228,7 @@ public class MainScreen extends javax.swing.JFrame {
 static int precioCiudad;
     private void BtnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnComprarActionPerformed
         // TODO add your handling code here:
+        //codigo query para comprar una ciudad
         try {
             String ciudadcomprada= String.valueOf(jTableCiudades.getValueAt(jTableCiudades.getSelectedRow(), 0));
             precioCiudad=(int)(jTableCiudades.getValueAt(jTableCiudades.getSelectedRow(), 1));
@@ -255,22 +251,22 @@ static int precioCiudad;
 
     private void BtnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVenderActionPerformed
         // TODO add your handling code here:
-//        try {
-//        String ciudadvendida= String.valueOf(jTablePropiedad.getValueAt(jTablePropiedad.getSelectedRow(), 0));
-//        String sql;
-//            sql = "UPDATE ciudad SET precioCiudad=null, nombreUsuario=null, bonificacion=null WHERE nombreCiudad='"+ciudadvendida+"';";
-//            JDBCclass JDBC = new JDBCclass();
-//            JDBC.consulta3(sql);
-//            saldo =saldo+75*precioCiudad/100;
-//            String sql2="UPDATE usuario SET saldo="+saldo+" where nombreUsuario='"+user+"';";
-//            JDBC.consulta3(sql2);
-//            rellenausuario();
-//            rellenatablapropiedad();
-//            JOptionPane.showMessageDialog(null,"Operacion de venta realizada correctamente");
-//        }catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "No se puede vender la ciudad");
-//            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        //codigo query para vender una ciudad
+        try {
+        String ciudadvendida= String.valueOf(jTablePropiedad.getValueAt(jTablePropiedad.getSelectedRow(), 0));
+        String sql;
+            sql = "UPDATE ciudad SET precioCiudad=null, nombreUsuario=null, bonificacion=null WHERE nombreCiudad='"+ciudadvendida+"';";
+            JDBCclass JDBC = new JDBCclass();
+            JDBC.consulta3(sql);
+            saldo =saldo+75*precioCiudad/100;
+            String sql2="UPDATE usuario SET saldo="+saldo+" where nombreUsuario='"+user+"';";
+            JDBC.consulta3(sql2);
+            rellenausuario();
+            rellenatablapropiedad();
+            JOptionPane.showMessageDialog(null,"Operacion de venta realizada correctamente");
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se puede vender la ciudad");
+        }
     }//GEN-LAST:event_BtnVenderActionPerformed
 
     private void BtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogoutActionPerformed
@@ -281,7 +277,7 @@ static int precioCiudad;
     private void BtnSeleccionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnSeleccionarMouseClicked
         // TODO add your handling code here:
         try {
-            // TODO add your handling code here
+            // codigo para insertar ciudades de un pais seleccionado en la tabla
             String pais = String.valueOf(ComboPaises.getSelectedItem());
             String sql;
             sql = "SELECT * ";
@@ -318,6 +314,7 @@ static int precioCiudad;
      */
     static String user = LoginScreen.nombreUsuario;
     static int saldo;
+    //codigo para rellenar los campos sobre el usuario(nombre y su saldo)
     public static void rellenausuario() throws SQLException {
         JDBCclass JDBC = new JDBCclass();
         String sql;
@@ -330,7 +327,7 @@ static int precioCiudad;
         jLabel2.setText(user);
         JDBC.state.close();
     }
-
+    //codigo para rellenar la tabla de tus ciudades
     public static void rellenatablapropiedad() throws SQLException {
         //aqui todo el query para obtener las ciudades compradas
         String sql;
@@ -348,15 +345,13 @@ static int precioCiudad;
             String URL = temporal.getString("URL");
             String nombreCiudad = temporal.getString("nombreCiudad");
             int paradas = RestAPIClass.obtenerParadas(URL);
-//                int precioCiudad = CiudadClass.precioCiudad(paradas);
-//                int bonificacion = CiudadClass.bonificacion();
             propiedad[0] = nombreCiudad;
             propiedad[1] = paradas;
             modelo.addRow(propiedad);
         }
         JDBC.state.close();
     }
-
+    //codigo para rellenar el combobox de paises desde la BD
     public static void rellenapais(/*String args[]*/) throws SQLException {
         JDBCclass JDBC = new JDBCclass();
         String sql;
@@ -364,7 +359,7 @@ static int precioCiudad;
         ResultSet temporal = JDBC.consulta1(sql);
         while (temporal.next()) {
             String pais = temporal.getString("pais");
-            ComboPaises.addItem(pais);//añade los paises al combobox              
+            ComboPaises.addItem(pais);             
         }
         JDBC.state.close();
         // Create and display the form 

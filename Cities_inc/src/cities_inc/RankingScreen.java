@@ -4,14 +4,12 @@
  * and open the template in the editor.
  */
 package cities_inc;
-
 import java.util.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author Patrik
@@ -98,13 +96,11 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
      */
     public static void main() {
         try {
-            // TODO add your handling code here:
-            
+            // codigo para añadir los usuarios y su saldo a la tabla
             String sql;
             sql = "SELECT * FROM usuario;";
             JDBCclass JDBC = new JDBCclass();
             ResultSet temporal = JDBC.consulta1(sql);
-            
             DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Usuario");
             modelo.addColumn("Saldo (€)");
@@ -117,7 +113,6 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
                 ranking[1]=saldo;
                 modelo.addRow(ranking);
             }
-            
             JDBC.state.close();
         } catch (SQLException ex) {
             Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);

@@ -4,13 +4,11 @@
  * and open the template in the editor.
  */
 package cities_inc;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author Patrik
@@ -133,7 +131,7 @@ public class RegisterScreen extends javax.swing.JFrame {
 
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
         // TODO add your handling code here:
-        //aqui hay que insertar un usuario en la base de datos usando el JDBC class
+        // codigo para insertar un usuario en la base de datos usando el JDBC class
         try {
             JDBCclass JDBC = new JDBCclass();
             String nombreUsuario = TextUsuario.getText();
@@ -156,7 +154,6 @@ public class RegisterScreen extends javax.swing.JFrame {
                 String sql;
                 sql = "INSERT INTO usuario (nombreUsuario,password,saldo,CSP) ";
                 sql += "values ('" + nombreUsuario + "',MD5('" + password + "'),'" + saldo + "','" + CSP + "');";
-                //JDBCclass JDBC = new JDBCclass();
                 JDBC.consulta3(sql);
                 LoginScreen Ls = new LoginScreen();
                 Ls.setVisible(true);
@@ -164,9 +161,8 @@ public class RegisterScreen extends javax.swing.JFrame {
             }
             JDBC.state.close();
         } catch (SQLException ex) {
-            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "¡No se ha podido realizar la operacion!");
         }
-
     }//GEN-LAST:event_BtnAceptarActionPerformed
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed

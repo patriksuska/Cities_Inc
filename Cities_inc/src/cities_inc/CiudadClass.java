@@ -4,35 +4,29 @@
  * and open the template in the editor.
  */
 package cities_inc;
-
 /**
  *
  * @author Patrik
  */
 public class CiudadClass {
-
     static int preciobase = 1000;
-    //conectar a rest api class dentro de ciudad class
-
-    public static int precioCiudad(int paradas) {//precio de cada ciudad basado en el preciobase y las paradas
+    // funcion para obtener el precio de cada ciudad basado en el preciobase y las paradas
+    public static int precioCiudad(int paradas) {
         int precio = preciobase * paradas;
         System.out.println("El precio de la ciudad"+precio);
         return precio;
     }
-
-    public static int bonificacion() {//bonificacion por cada ciudad comprada
+    // funcion para obtener la bonificacion por cada ciudad comprada
+    public static int bonificacion() {
         int bonificacion = (int) (Math.random() * 10) + 1;
         System.out.println("La bonificacion de la ciudad"+bonificacion);
         return bonificacion;
     }
-
-    public static int venta(int precioCiudad) {
-        int perdidas = 25 * precioCiudad;
-        System.out.println(perdidas);
-        return perdidas;
-    }
-
-    public void compra(String nombreCiudad,int precioCiudad,String nombreUsuario,int saldo,int bonificacion) {
-        
-    }
+//    public static int venta(int precioCiudad) {
+//        int perdidas = 25 * precioCiudad;
+//        System.out.println(perdidas);
+//        return perdidas;
+//    }
+//    public void compra(String nombreCiudad,int precioCiudad,String nombreUsuario,int saldo,int bonificacion) {
+//    }
 }

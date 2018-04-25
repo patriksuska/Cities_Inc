@@ -4,13 +4,11 @@
  * and open the template in the editor.
  */
 package cities_inc;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author Patrik
@@ -21,7 +19,6 @@ static String nombreUsuario;
      * Creates new form MainScreen
      */
     LoginScreen() {
-
         initComponents();
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -135,16 +132,13 @@ static String nombreUsuario;
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
-        // TODO add your handling code here:
-        
+        // Iniciar sesion en el programa
         nombreUsuario = TextUsuario.getText();
         String password = String.valueOf(TextoPassword.getPassword());
         String sql;
                 sql = "SELECT COUNT(nombreUsuario) ";
                 sql += "FROM usuario ";
-                sql += "WHERE nombreUsuario='" + nombreUsuario + "' and password=MD5('" + password + "')";
-                
-        //System.out.println(nombreUsuario + " " + password);
+                sql += "WHERE nombreUsuario='" + nombreUsuario + "' and password=MD5('" + password + "')";                
         if (nombreUsuario.equals("administrador") && password.equals("admin12345")) {
             AdminScreen AD = new AdminScreen();
             AD.setVisible(true);
@@ -156,7 +150,6 @@ static String nombreUsuario;
                 System.out.println(sql);
                 JDBCclass JDBC = new JDBCclass();
                 ResultSet temp = JDBC.consulta1(sql);
-                //System.out.println(temp);
                 int a=0;
                 if (temp.next()) {
                     System.out.println(temp.getInt(1));
@@ -170,29 +163,27 @@ static String nombreUsuario;
                     }
                 JDBC.state.close();
             } catch (SQLException ex) {
-                Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Ha ocurrido un error en el SQL");
             }
         }
     }//GEN-LAST:event_BtnAceptarActionPerformed
 
     private void BtnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegisterActionPerformed
-        // TODO add your handling code here:
+        // Abre la ventana de registrarse
         RegisterScreen regscreen = new RegisterScreen();
         regscreen.setVisible(true);
         this.setVisible(false);
-
     }//GEN-LAST:event_BtnRegisterActionPerformed
 
     private void BtnGuestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuestActionPerformed
-        // TODO add your handling code here:
+        // Abre la ventana de invitado(ranking)
         RankingScreen RK = new RankingScreen();
         RankingScreen.main();
-        RK.setVisible(true);
-        
+        RK.setVisible(true);      
     }//GEN-LAST:event_BtnGuestActionPerformed
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
-        // TODO add your handling code here:
+        // Salir de la aplicacion
         System.exit(0);
     }//GEN-LAST:event_BtnCancelarActionPerformed
 

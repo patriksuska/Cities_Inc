@@ -12,9 +12,9 @@ import org.json.JSONObject;
  */
 public class RestAPIClass {
    static String temp="?fields=stations";
-   static String head="http://api.citybik.es";
-   //aqui hay que pasarle el body de la url de MainScreen
-   public static int obtenerParadas(String body){//obtiene el numero de paradas de cada ciudad 
+   static String head="http://api.citybik.es";  
+   // funcion que obtiene el numero de paradas de cada ciudad 
+   public static int obtenerParadas(String body){//aqui hay que pasarle el body de la url de MainScreen
     int paradas=0;
     String URL=head+body+temp;
     try{
