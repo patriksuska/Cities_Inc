@@ -22,11 +22,4 @@ public class CiudadClass {
         System.out.println("La bonificacion de la ciudad"+bonificacion);
         return bonificacion;
     }
-//    public static int venta(int precioCiudad) {
-//        int perdidas = 25 * precioCiudad;
-//        System.out.println(perdidas);
-//        return perdidas;
-//    }
-//    public void compra(String nombreCiudad,int precioCiudad,String nombreUsuario,int saldo,int bonificacion) {
-//    }
 }

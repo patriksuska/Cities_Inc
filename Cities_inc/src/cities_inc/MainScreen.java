@@ -4,17 +4,20 @@
  * and open the template in the editor.
  */
 package cities_inc;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Patrik
  */
 public class MainScreen extends javax.swing.JFrame {
+
     /**
      * Creates new form MainScreen
      *
@@ -26,7 +29,6 @@ public class MainScreen extends javax.swing.JFrame {
         rellenapais();
         rellenatablapropiedad();
     }
-    DefaultTableModel modelo = new DefaultTableModel();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -225,25 +227,27 @@ public class MainScreen extends javax.swing.JFrame {
         RankingScreen.main();
         RK.setVisible(true);
     }//GEN-LAST:event_BtnRankingActionPerformed
-static int precioCiudad;
+    static int precioCiudad;
     private void BtnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnComprarActionPerformed
         // TODO add your handling code here:
         //codigo query para comprar una ciudad
         try {
-            String ciudadcomprada= String.valueOf(jTableCiudades.getValueAt(jTableCiudades.getSelectedRow(), 0));
-            precioCiudad=(int)(jTableCiudades.getValueAt(jTableCiudades.getSelectedRow(), 1));
-            int bonificacion=(int)(jTableCiudades.getValueAt(jTableCiudades.getSelectedRow(), 2));            
-            String sql;
-            sql = "UPDATE ciudad SET precioCiudad="+precioCiudad+", nombreUsuario='"+user+"', bonificacion="+bonificacion+" WHERE nombreCiudad='"+ciudadcomprada+"';";
-            System.out.println(sql);
             JDBCclass JDBC = new JDBCclass();
+            String ciudadcomprada = String.valueOf(jTableCiudades.getValueAt(jTableCiudades.getSelectedRow(), 0));
+            precioCiudad = (int) (jTableCiudades.getValueAt(jTableCiudades.getSelectedRow(), 1));
+            int bonificacion = (int) (jTableCiudades.getValueAt(jTableCiudades.getSelectedRow(), 2));
+            String sql;
+            sql = "UPDATE ciudad SET precioCiudad=" + precioCiudad + ", nombreUsuario='" + user + "', bonificacion=" + bonificacion + " WHERE nombreCiudad='" + ciudadcomprada + "';";
+            System.out.println(sql);
             JDBC.consulta3(sql);
-            saldo =saldo-precioCiudad;
-            String sql2="UPDATE usuario SET saldo="+saldo+" where nombreUsuario='"+user+"';";
+            saldo = saldo - precioCiudad;           
+            String sql2 = "UPDATE usuario SET saldo=" + saldo + " where nombreUsuario='" + user + "';";
             JDBC.consulta3(sql2);
             rellenausuario();
+            insertarciudades();
             rellenatablapropiedad();
             JOptionPane.showMessageDialog(null, "Operacion de compra realizada correctamente");
+            JDBC.state.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se puede comprar la ciudad");
         }
@@ -253,18 +257,26 @@ static int precioCiudad;
         // TODO add your handling code here:
         //codigo query para vender una ciudad
         try {
-        String ciudadvendida= String.valueOf(jTablePropiedad.getValueAt(jTablePropiedad.getSelectedRow(), 0));
-        String sql;
-            sql = "UPDATE ciudad SET precioCiudad=null, nombreUsuario=null, bonificacion=null WHERE nombreCiudad='"+ciudadvendida+"';";
             JDBCclass JDBC = new JDBCclass();
+            String ciudadvendida = String.valueOf(jTablePropiedad.getValueAt(jTablePropiedad.getSelectedRow(), 0));
+            String sql3="SELECT precioCiudad FROM ciudad WHERE nombreCiudad='"+ciudadvendida+"';";
+            ResultSet tmp=JDBC.consulta1(sql3);
+            int preuCiudad=0;
+            if(tmp.next()){
+                preuCiudad=tmp.getInt("precioCiudad");
+            }
+            String sql;
+            sql = "UPDATE ciudad SET precioCiudad=null, nombreUsuario=null, bonificacion=null WHERE nombreCiudad='" + ciudadvendida + "';";           
             JDBC.consulta3(sql);
-            saldo =saldo+75*precioCiudad/100;
-            String sql2="UPDATE usuario SET saldo="+saldo+" where nombreUsuario='"+user+"';";
+            saldo = saldo+75*preuCiudad/100;
+            String sql2 = "UPDATE usuario SET saldo=" + saldo + " where nombreUsuario='" + user + "';";          
             JDBC.consulta3(sql2);
             rellenausuario();
             rellenatablapropiedad();
-            JOptionPane.showMessageDialog(null,"Operacion de venta realizada correctamente");
-        }catch (SQLException ex) {
+            insertarciudades();
+            JOptionPane.showMessageDialog(null, "Operacion de venta realizada correctamente");
+            JDBC.state.close();
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se puede vender la ciudad");
         }
     }//GEN-LAST:event_BtnVenderActionPerformed
@@ -273,29 +285,28 @@ static int precioCiudad;
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_BtnLogoutActionPerformed
-
-    private void BtnSeleccionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnSeleccionarMouseClicked
-        // TODO add your handling code here:
+    public void insertarciudades() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Precio (€)");
+        modelo.addColumn("Bonificacion (%)");
+        modelo.addColumn("Paradas");
+        jTableCiudades.setModel(modelo);
         try {
             // codigo para insertar ciudades de un pais seleccionado en la tabla
             String pais = String.valueOf(ComboPaises.getSelectedItem());
             String sql;
             sql = "SELECT * ";
             sql += "FROM ciudad ";
-            sql += "WHERE pais='" + pais + "';";
+            sql += "WHERE pais='" + pais + "' and nombreUsuario is null;";
             JDBCclass JDBC = new JDBCclass();
             ResultSet temporal = JDBC.consulta1(sql);
-            modelo.addColumn("Nombre");
-            modelo.addColumn("Precio (€)");
-            modelo.addColumn("Bonificacion (%)");
-            modelo.addColumn("Paradas");
-            jTableCiudades.setModel(modelo);
             Object[] ciudades = new Object[4];
             while (temporal.next()) {
                 String URL = temporal.getString("URL");
                 String nombreCiudad = temporal.getString("nombreCiudad");
                 int paradas = RestAPIClass.obtenerParadas(URL);
-                int precioCiudad = CiudadClass.precioCiudad(paradas);
+                precioCiudad = CiudadClass.precioCiudad(paradas);
                 int bonificacion = CiudadClass.bonificacion();
                 ciudades[0] = nombreCiudad;
                 ciudades[1] = precioCiudad;
@@ -307,6 +318,10 @@ static int precioCiudad;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al mostrar el listado de ciudades");
         }
+    }
+    private void BtnSeleccionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnSeleccionarMouseClicked
+        // TODO add your handling code here:
+        insertarciudades();
     }//GEN-LAST:event_BtnSeleccionarMouseClicked
 
     /**
@@ -314,6 +329,7 @@ static int precioCiudad;
      */
     static String user = LoginScreen.nombreUsuario;
     static int saldo;
+
     //codigo para rellenar los campos sobre el usuario(nombre y su saldo)
     public static void rellenausuario() throws SQLException {
         JDBCclass JDBC = new JDBCclass();
@@ -327,6 +343,7 @@ static int precioCiudad;
         jLabel2.setText(user);
         JDBC.state.close();
     }
+
     //codigo para rellenar la tabla de tus ciudades
     public static void rellenatablapropiedad() throws SQLException {
         //aqui todo el query para obtener las ciudades compradas
@@ -336,10 +353,10 @@ static int precioCiudad;
         sql += "WHERE nombreUsuario='" + user + "';";
         JDBCclass JDBC = new JDBCclass();
         ResultSet temporal = JDBC.consulta1(sql);
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Paradas");
-        jTablePropiedad.setModel(modelo);
+        DefaultTableModel modelo1 = new DefaultTableModel();
+        modelo1.addColumn("Nombre");
+        modelo1.addColumn("Paradas");
+        jTablePropiedad.setModel(modelo1);
         Object[] propiedad = new Object[2];
         while (temporal.next()) {
             String URL = temporal.getString("URL");
@@ -347,7 +364,7 @@ static int precioCiudad;
             int paradas = RestAPIClass.obtenerParadas(URL);
             propiedad[0] = nombreCiudad;
             propiedad[1] = paradas;
-            modelo.addRow(propiedad);
+            modelo1.addRow(propiedad);
         }
         JDBC.state.close();
     }
@@ -359,7 +376,7 @@ static int precioCiudad;
         ResultSet temporal = JDBC.consulta1(sql);
         while (temporal.next()) {
             String pais = temporal.getString("pais");
-            ComboPaises.addItem(pais);             
+            ComboPaises.addItem(pais);
         }
         JDBC.state.close();
         // Create and display the form 

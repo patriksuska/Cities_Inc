@@ -132,12 +132,17 @@ public class RegisterScreen extends javax.swing.JFrame {
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
         // TODO add your handling code here:
         // codigo para insertar un usuario en la base de datos usando el JDBC class
+        
         try {
             JDBCclass JDBC = new JDBCclass();
             String nombreUsuario = TextUsuario.getText();
             String password = String.valueOf(TextoPassword.getPassword());
             int CSP = Integer.valueOf(TextCSP.getText());
             int saldo = 333000;
+            if(TextUsuario.getText().equals(null) && TextoPassword.getPassword().equals(null)){
+                JOptionPane.showMessageDialog(null, "¡Introduzca todos los datos!");
+            }
+            else{
             String sql1;
             sql1 = "SELECT COUNT(nombreUsuario) ";
             sql1 += "FROM usuario ";
@@ -150,6 +155,8 @@ public class RegisterScreen extends javax.swing.JFrame {
             }           
             if (a == 1) {
                 JOptionPane.showMessageDialog(null, "¡El usuario ya existe!");
+                nombreUsuario=null;
+                password=null;
             } else {
                 String sql;
                 sql = "INSERT INTO usuario (nombreUsuario,password,saldo,CSP) ";
@@ -160,6 +167,7 @@ public class RegisterScreen extends javax.swing.JFrame {
                 this.setVisible(false);
             }
             JDBC.state.close();
+            }
         } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "¡No se ha podido realizar la operacion!");
         }

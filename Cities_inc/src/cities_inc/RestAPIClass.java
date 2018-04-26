@@ -25,7 +25,7 @@ public class RestAPIClass {
     paradas=estacion.length();
     }
     catch(Exception e){
-    System.out.print("Error");
+    System.out.print("Error de paradas");
     }
     return paradas;
     }

@@ -134,7 +134,7 @@ static String nombreUsuario;
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
         // Iniciar sesion en el programa
         nombreUsuario = TextUsuario.getText();
-        String password = String.valueOf(TextoPassword.getPassword());
+        String password = String.valueOf(TextoPassword.getPassword());  
         String sql;
                 sql = "SELECT COUNT(nombreUsuario) ";
                 sql += "FROM usuario ";
@@ -146,7 +146,6 @@ static String nombreUsuario;
             this.setVisible(false);
         } else {
             try {
-                MainScreen MS = new MainScreen();
                 System.out.println(sql);
                 JDBCclass JDBC = new JDBCclass();
                 ResultSet temp = JDBC.consulta1(sql);
@@ -155,11 +154,16 @@ static String nombreUsuario;
                     System.out.println(temp.getInt(1));
                     a=temp.getInt(1);
                 }
-                if (a == 1) {                       
+                if (a == 1) {
+                        MainScreen MS = new MainScreen();
                         MS.setVisible(true);                        
                         this.setVisible(false);
                     } else {
                         JOptionPane.showMessageDialog(null, "Debe de registrarse previamente");
+                        TextUsuario.setText(null);
+                        TextoPassword.setText(null);
+                        nombreUsuario=null;
+                        password=null;                      
                     }
                 JDBC.state.close();
             } catch (SQLException ex) {
