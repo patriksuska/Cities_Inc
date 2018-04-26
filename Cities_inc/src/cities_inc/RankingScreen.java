@@ -98,7 +98,7 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
         try {
             // codigo para añadir los usuarios y su saldo a la tabla
             String sql;
-            sql = "SELECT * FROM usuario;";
+            sql = "SELECT * FROM usuario ORDER BY saldo DESC;";
             JDBCclass JDBC = new JDBCclass();
             ResultSet temporal = JDBC.consulta1(sql);
             DefaultTableModel modelo = new DefaultTableModel();

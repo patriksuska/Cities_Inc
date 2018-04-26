@@ -233,9 +233,17 @@ public class MainScreen extends javax.swing.JFrame {
         //codigo query para comprar una ciudad
         try {
             JDBCclass JDBC = new JDBCclass();
-            String ciudadcomprada = String.valueOf(jTableCiudades.getValueAt(jTableCiudades.getSelectedRow(), 0));
+            int filasseleccionadas=jTableCiudades.getSelectedRowCount();
+            if(filasseleccionadas!=0){
+            String ciudadcomprada = String.valueOf(jTableCiudades.getValueAt(jTableCiudades.getSelectedRow(), 0));      
             precioCiudad = (int) (jTableCiudades.getValueAt(jTableCiudades.getSelectedRow(), 1));
             int bonificacion = (int) (jTableCiudades.getValueAt(jTableCiudades.getSelectedRow(), 2));
+            if(precioCiudad==0){
+                JOptionPane.showMessageDialog(null, "¡No puedes comprar esta ciudad!");
+            }else{
+                if(saldo<precioCiudad){
+                    JOptionPane.showMessageDialog(null, "¡No dispones de saldo suficiente para comprar esta ciudad!");
+                }else{
             String sql;
             sql = "UPDATE ciudad SET precioCiudad=" + precioCiudad + ", nombreUsuario='" + user + "', bonificacion=" + bonificacion + " WHERE nombreCiudad='" + ciudadcomprada + "';";
             System.out.println(sql);
@@ -248,6 +256,12 @@ public class MainScreen extends javax.swing.JFrame {
             rellenatablapropiedad();
             JOptionPane.showMessageDialog(null, "Operacion de compra realizada correctamente");
             JDBC.state.close();
+                }
+            }
+            }else{
+                JOptionPane.showMessageDialog(null, "¡Selecciona una ciudad a comprar!");
+            }
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se puede comprar la ciudad");
         }
@@ -258,6 +272,8 @@ public class MainScreen extends javax.swing.JFrame {
         //codigo query para vender una ciudad
         try {
             JDBCclass JDBC = new JDBCclass();
+            int filasseleccionadas=jTablePropiedad.getSelectedRowCount();
+            if(filasseleccionadas!=0){
             String ciudadvendida = String.valueOf(jTablePropiedad.getValueAt(jTablePropiedad.getSelectedRow(), 0));
             String sql3="SELECT precioCiudad FROM ciudad WHERE nombreCiudad='"+ciudadvendida+"';";
             ResultSet tmp=JDBC.consulta1(sql3);
@@ -276,6 +292,9 @@ public class MainScreen extends javax.swing.JFrame {
             insertarciudades();
             JOptionPane.showMessageDialog(null, "Operacion de venta realizada correctamente");
             JDBC.state.close();
+            }else{
+                JOptionPane.showMessageDialog(null, "¡Selecciona una ciudad a vender!");
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se puede vender la ciudad");
         }
@@ -295,6 +314,9 @@ public class MainScreen extends javax.swing.JFrame {
         try {
             // codigo para insertar ciudades de un pais seleccionado en la tabla
             String pais = String.valueOf(ComboPaises.getSelectedItem());
+            if(pais.equals("Selecciona Pais")){
+                JOptionPane.showMessageDialog(null, "¡Selecciona un pais existente!");
+            }else{
             String sql;
             sql = "SELECT * ";
             sql += "FROM ciudad ";
@@ -315,6 +337,7 @@ public class MainScreen extends javax.swing.JFrame {
                 modelo.addRow(ciudades);
             }
             JDBC.state.close();
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al mostrar el listado de ciudades");
         }

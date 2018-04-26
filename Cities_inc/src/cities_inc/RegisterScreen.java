@@ -139,7 +139,7 @@ public class RegisterScreen extends javax.swing.JFrame {
             String password = String.valueOf(TextoPassword.getPassword());
             int CSP = Integer.valueOf(TextCSP.getText());
             int saldo = 333000;
-            if(TextUsuario.getText().equals(null) && TextoPassword.getPassword().equals(null)){
+            if(TextUsuario.getText().isEmpty() || TextoPassword.getPassword().length==0 || TextCSP.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "¡Introduzca todos los datos!");
             }
             else{

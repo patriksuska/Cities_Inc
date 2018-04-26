@@ -179,6 +179,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
         sql += "values ('" + nombreUsuario + "',MD5('" + password + "'),'" + saldo + "','" + CSP + "');";
         try {
             JDBCclass.consulta3(sql);
+            main();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "El usuario ya existe");
         }
@@ -186,15 +187,38 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
 
     private void BtnBorrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBorrarUsuarioActionPerformed
         // TODO add your handling code here:
-        //codigo query para eliminar un usuario seleccionado
-        String sql;
-        String nombreUsuario = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 0));
-        sql = "DELETE * FROM usuario WHERE nombreUsuario='" + nombreUsuario + "';";
-        String sql2;
-        sql2="UPDATE ciudad SET precioCiudad=null, nombreUsuario=null, bonificacion=null WHERE nombreUsuario='"+nombreUsuario+"';";
+        //codigo query para eliminar un usuario seleccionado 
         try {
-            JDBCclass.consulta3(sql);
-            JDBCclass.consulta3(sql2);
+            JDBCclass JDBC=new JDBCclass();
+            String nombreUsuario = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+            if(nombreUsuario.isEmpty()){
+                JOptionPane.showMessageDialog(null, "No se puede eliminar el usuario");
+            }else{
+            String sql3="SELECT COUNT(nombreCiudad) FROM ciudad WHERE nombreUsuario='"+nombreUsuario+"';";
+            ResultSet rs=JDBC.consulta1(sql3);
+            int temporary=0;
+            if(rs.next()){
+                temporary=rs.getInt(1);
+                System.out.println(temporary);
+            }
+            if(temporary!=0){
+            String sql2;
+            sql2="UPDATE ciudad SET precioCiudad=null, nombreUsuario=null, bonificacion=null WHERE nombreUsuario='"+nombreUsuario+"';";
+            JDBC.consulta3(sql2);          
+            String sql;          
+            sql = "DELETE FROM usuario WHERE nombreUsuario='" + nombreUsuario + "';";
+            JDBC.consulta3(sql);
+            JOptionPane.showMessageDialog(null, "¡Usuario eliminado correctamente!");
+            main();
+            }else{
+                String sql;          
+                sql = "DELETE FROM usuario WHERE nombreUsuario='" + nombreUsuario + "';";
+                JDBC.consulta3(sql);
+                JOptionPane.showMessageDialog(null, "¡Usuario eliminado correctamente!");
+                main();
+            }
+            }
+            JDBC.state.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se puede eliminar el usuario");
         }
@@ -250,7 +274,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             }
             //</editor-fold>
             // codigo para añadir a la tabla los usuarios y sus contraseñas
-           DefaultTableModel modelo = new DefaultTableModel();
+            DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Nombre");
             modelo.addColumn("Contraseña MD5");
             jTable1.setModel(modelo);
