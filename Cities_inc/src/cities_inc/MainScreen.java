@@ -302,7 +302,9 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void BtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogoutActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        this.setVisible(false);
+        LoginScreen lg=new LoginScreen();
+        lg.setVisible(true);
     }//GEN-LAST:event_BtnLogoutActionPerformed
     public void insertarciudades() {
         DefaultTableModel modelo = new DefaultTableModel();
