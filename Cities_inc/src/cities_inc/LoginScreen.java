@@ -159,7 +159,9 @@ static String nombreUsuario;
                         MS.setVisible(true);                        
                         this.setVisible(false);
                     } else {
-                        JOptionPane.showMessageDialog(null, "Debe de registrarse previamente");
+                        this.setVisible(false);
+                        JOptionPane.showMessageDialog(null, "¡Inserte todos los datos previamente solicitados!");
+                        this.setVisible(true);
                         TextUsuario.setText(null);
                         TextoPassword.setText(null);
                         nombreUsuario=null;

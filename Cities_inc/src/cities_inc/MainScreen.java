@@ -176,7 +176,7 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(BtnSeleccionar)))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(BtnLogout)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -200,7 +200,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -216,7 +216,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(BtnComprar)
                     .addComponent(BtnVender)
                     .addComponent(BtnRanking))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -254,7 +254,7 @@ public class MainScreen extends javax.swing.JFrame {
             rellenausuario();
             insertarciudades();
             rellenatablapropiedad();
-            JOptionPane.showMessageDialog(null, "Operacion de compra realizada correctamente");
+            JOptionPane.showMessageDialog(null, "Compra realizada correctamente");
             JDBC.state.close();
                 }
             }
@@ -284,13 +284,13 @@ public class MainScreen extends javax.swing.JFrame {
             String sql;
             sql = "UPDATE ciudad SET precioCiudad=null, nombreUsuario=null, bonificacion=null WHERE nombreCiudad='" + ciudadvendida + "';";           
             JDBC.consulta3(sql);
-            saldo = saldo+75*preuCiudad/100;
+            saldo = saldo+(75*preuCiudad/100);
             String sql2 = "UPDATE usuario SET saldo=" + saldo + " where nombreUsuario='" + user + "';";          
             JDBC.consulta3(sql2);
             rellenausuario();
             rellenatablapropiedad();
             insertarciudades();
-            JOptionPane.showMessageDialog(null, "Operacion de venta realizada correctamente");
+            JOptionPane.showMessageDialog(null, "Venta realizada correctamente");
             JDBC.state.close();
             }else{
                 JOptionPane.showMessageDialog(null, "¡Selecciona una ciudad a vender!");

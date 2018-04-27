@@ -4,22 +4,26 @@
  * and open the template in the editor.
  */
 package cities_inc;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author Patrik
  */
 public class RegisterScreen extends javax.swing.JFrame {
+
     /**
      * Creates new form Register
      */
     public RegisterScreen() {
         initComponents();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -132,44 +136,45 @@ public class RegisterScreen extends javax.swing.JFrame {
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
         // TODO add your handling code here:
         // codigo para insertar un usuario en la base de datos usando el JDBC class
-        
+
         try {
             JDBCclass JDBC = new JDBCclass();
-            String nombreUsuario = TextUsuario.getText();
-            String password = String.valueOf(TextoPassword.getPassword());
-            int CSP = Integer.valueOf(TextCSP.getText());
-            int saldo = 333000;
-            if(TextUsuario.getText().isEmpty() || TextoPassword.getPassword().length==0 || TextCSP.getText().isEmpty()){
+            if (TextUsuario.getText().isEmpty() || TextoPassword.getPassword().length == 0 || TextCSP.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "¡Introduzca todos los datos!");
-            }
-            else{
-            String sql1;
-            sql1 = "SELECT COUNT(nombreUsuario) ";
-            sql1 += "FROM usuario ";
-            sql1 += "WHERE nombreUsuario='" + nombreUsuario + "' and password=MD5('" + password + "') and CSP='" + CSP + "';";
-            ResultSet temp = JDBC.consulta1(sql1);
-            int a = 0;
-            if (temp.next()) {
-                System.out.println(temp.getInt(1));
-                a = temp.getInt(1);
-            }           
-            if (a == 1) {
-                JOptionPane.showMessageDialog(null, "¡El usuario ya existe!");
-                nombreUsuario=null;
-                password=null;
             } else {
-                String sql;
-                sql = "INSERT INTO usuario (nombreUsuario,password,saldo,CSP) ";
-                sql += "values ('" + nombreUsuario + "',MD5('" + password + "'),'" + saldo + "','" + CSP + "');";
-                JDBC.consulta3(sql);
-                LoginScreen Ls = new LoginScreen();
-                Ls.setVisible(true);
-                this.setVisible(false);
-            }
-            JDBC.state.close();
+                String nombreUsuario = TextUsuario.getText();
+                String password = String.valueOf(TextoPassword.getPassword());
+                int CSP = Integer.valueOf(TextCSP.getText());
+                int saldo = 333000;
+                System.out.println(TextUsuario.getText() + " " + (TextUsuario.getText().isEmpty()));
+                String sql1;
+                sql1 = "SELECT COUNT(nombreUsuario) ";
+                sql1 += "FROM usuario ";
+                sql1 += "WHERE nombreUsuario='" + nombreUsuario + "' and password=MD5('" + password + "') and CSP='" + CSP + "';";
+                ResultSet temp = JDBC.consulta1(sql1);
+                int a = 0;
+                if (temp.next()) {
+                    System.out.println(temp.getInt(1));
+                    a = temp.getInt(1);
+                }
+                if (a == 1) {
+                    JOptionPane.showMessageDialog(null, "¡El usuario ya existe!");
+                    nombreUsuario = null;
+                    password = null;
+                } else {
+                    String sql;
+                    sql = "INSERT INTO usuario (nombreUsuario,password,saldo,CSP) ";
+                    sql += "values ('" + nombreUsuario + "',MD5('" + password + "'),'" + saldo + "','" + CSP + "');";
+                    JDBC.consulta3(sql);
+                    JOptionPane.showMessageDialog(null, "¡Creacion del usuario realizada correctamente!");
+                    LoginScreen Ls = new LoginScreen();
+                    Ls.setVisible(true);
+                    this.setVisible(false);
+                }
+                JDBC.state.close();
             }
         } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "¡No se ha podido realizar la operacion!");
+            JOptionPane.showMessageDialog(null, "¡No se ha podido realizar la operacion!");
         }
     }//GEN-LAST:event_BtnAceptarActionPerformed
 

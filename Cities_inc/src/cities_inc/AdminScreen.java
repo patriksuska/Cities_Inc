@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 package cities_inc;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Patrik
@@ -60,6 +62,11 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
 
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         BtnCrearUsuario.setText("Crear Usuario");
@@ -131,7 +138,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
                             .addComponent(BtnCambiarPassword)
                             .addComponent(BtnCrearUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BtnBorrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -171,71 +178,84 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
         // TODO add your handling code here:
         //codigo query para crear un usuario desde la pantalla de administrador
         String sql;
-        String nombreUsuario=jTextFieldNombre.getText();
-        String password=String.valueOf(jPasswordFieldContrasena.getPassword());
-        int CSP=Integer.valueOf(jTextFieldCSP.getText());
-        int saldo=333000;
-        sql = "INSERT INTO usuario (nombreUsuario,password,saldo,CSP) ";
-        sql += "values ('" + nombreUsuario + "',MD5('" + password + "'),'" + saldo + "','" + CSP + "');";
-        try {
-            JDBCclass.consulta3(sql);
-            main();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "El usuario ya existe");
+        if (jTextFieldNombre.getText().isEmpty() || jPasswordFieldContrasena.getPassword().length == 0 || jTextFieldCSP.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "¡Introduzca todos los datos!");
+        } else {
+            String nombreUsuario = jTextFieldNombre.getText();
+            String password = String.valueOf(jPasswordFieldContrasena.getPassword());
+            int CSP = Integer.valueOf(jTextFieldCSP.getText());
+            int saldo = 333000;
+            sql = "INSERT INTO usuario (nombreUsuario,password,saldo,CSP) ";
+            sql += "values ('" + nombreUsuario + "',MD5('" + password + "'),'" + saldo + "','" + CSP + "');";
+            try {
+                JDBCclass.consulta3(sql);
+                JOptionPane.showMessageDialog(null, "¡Creacion del usuario realizada correctamente!");
+                main();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "El usuario ya existe");
+            }
         }
     }//GEN-LAST:event_BtnCrearUsuarioActionPerformed
 
     private void BtnBorrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBorrarUsuarioActionPerformed
         // TODO add your handling code here:
         //codigo query para eliminar un usuario seleccionado 
+        if (jTable1.getSelectedRow()<0) {
+            JOptionPane.showMessageDialog(null, "¡Selecciona un usuario a borrar!");
+        } else {
         try {
-            JDBCclass JDBC=new JDBCclass();
+            JDBCclass JDBC = new JDBCclass();
             String nombreUsuario = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 0));
-            if(nombreUsuario.isEmpty()){
+            if (nombreUsuario.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "No se puede eliminar el usuario");
-            }else{
-            String sql3="SELECT COUNT(nombreCiudad) FROM ciudad WHERE nombreUsuario='"+nombreUsuario+"';";
-            ResultSet rs=JDBC.consulta1(sql3);
-            int temporary=0;
-            if(rs.next()){
-                temporary=rs.getInt(1);
-                System.out.println(temporary);
-            }
-            if(temporary!=0){
-            String sql2;
-            sql2="UPDATE ciudad SET precioCiudad=null, nombreUsuario=null, bonificacion=null WHERE nombreUsuario='"+nombreUsuario+"';";
-            JDBC.consulta3(sql2);          
-            String sql;          
-            sql = "DELETE FROM usuario WHERE nombreUsuario='" + nombreUsuario + "';";
-            JDBC.consulta3(sql);
-            JOptionPane.showMessageDialog(null, "¡Usuario eliminado correctamente!");
-            main();
-            }else{
-                String sql;          
-                sql = "DELETE FROM usuario WHERE nombreUsuario='" + nombreUsuario + "';";
-                JDBC.consulta3(sql);
-                JOptionPane.showMessageDialog(null, "¡Usuario eliminado correctamente!");
-                main();
-            }
+            } else {
+                String sql3 = "SELECT COUNT(nombreCiudad) FROM ciudad WHERE nombreUsuario='" + nombreUsuario + "';";
+                ResultSet rs = JDBC.consulta1(sql3);
+                int temporary = 0;
+                if (rs.next()) {
+                    temporary = rs.getInt(1);
+                    System.out.println(temporary);
+                }
+                if (temporary != 0) {
+                    String sql2;
+                    sql2 = "UPDATE ciudad SET precioCiudad=null, nombreUsuario=null, bonificacion=null WHERE nombreUsuario='" + nombreUsuario + "';";
+                    JDBC.consulta3(sql2);
+                    String sql;
+                    sql = "DELETE FROM usuario WHERE nombreUsuario='" + nombreUsuario + "';";
+                    JDBC.consulta3(sql);
+                    JOptionPane.showMessageDialog(null, "¡Usuario eliminado correctamente!");
+                    main();
+                } else {
+                    String sql;
+                    sql = "DELETE FROM usuario WHERE nombreUsuario='" + nombreUsuario + "';";
+                    JDBC.consulta3(sql);
+                    JOptionPane.showMessageDialog(null, "¡Usuario eliminado correctamente!");
+                    main();
+                }
             }
             JDBC.state.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se puede eliminar el usuario");
+        }
         }
     }//GEN-LAST:event_BtnBorrarUsuarioActionPerformed
 
     private void BtnCambiarPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCambiarPasswordActionPerformed
         // TODO add your handling code here:
         //codigo query para actualizar la contraseña del usuario
-        String nombreUsuario=null;
-        String password=null;
-        int CSP=0;
+        if(jTable1.getSelectedRow()>=0){
+        String nombreUsuario =jTextFieldNombre.getText();
+        String password =String.valueOf(jPasswordFieldContrasena.getPassword());        
         String sql;
-        sql="UPDATE usuario SET password=MD5('"+password+"') WHERE nombreUsuario='"+nombreUsuario+"'; ";
+        sql = "UPDATE usuario SET password=MD5('" + password + "') WHERE nombreUsuario='" + nombreUsuario + "'; ";
         try {
             JDBCclass.consulta3(sql);
+            JOptionPane.showMessageDialog(null, "¡Modificacion realizada correctamente!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se puede cambiar la contraseña");
+            JOptionPane.showMessageDialog(null, "No se puede modificar el usuario");
+        }
+        }else{
+            JOptionPane.showMessageDialog(null, "¡Selecciona a un usuario!");
         }
     }//GEN-LAST:event_BtnCambiarPasswordActionPerformed
 
@@ -245,6 +265,20 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
         logscreen.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BtnSalirActionPerformed
+    public void insertadatos(){
+        String usr=String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(),0));
+        String pwd=String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(),1));
+        int Csp=(int)(jTable1.getValueAt(jTable1.getSelectedRow(),2));
+        jTextFieldNombre.setText(usr);
+        jTextFieldNombre.setEnabled(false);
+        jPasswordFieldContrasena.setText(pwd);
+        jTextFieldCSP.setText(String.valueOf(Csp));
+        jTextFieldCSP.setEnabled(false);
+        }
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        insertadatos();
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -277,8 +311,9 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Nombre");
             modelo.addColumn("Contraseña MD5");
+            modelo.addColumn("CSP");
             jTable1.setModel(modelo);
-            Object[] usuarios= new Object[2];         
+            Object[] usuarios = new Object[3];
             String sql;
             sql = "SELECT * FROM usuario; ";
             JDBCclass JDBC = new JDBCclass();
@@ -286,9 +321,11 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             while (temporal.next()) {
                 String nombreUsuario = temporal.getString("nombreUsuario");
                 String contraseña = temporal.getString("password");
-                usuarios[0]=nombreUsuario;
-                usuarios[1]=contraseña;
-                modelo.addRow(usuarios);          
+                int CSp=temporal.getInt("CSP");
+                usuarios[0] = nombreUsuario;
+                usuarios[1] = contraseña;
+                usuarios[2] = CSp;
+                modelo.addRow(usuarios);
             }
             JDBC.state.close();
         } catch (SQLException ex) {
