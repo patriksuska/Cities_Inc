@@ -200,61 +200,61 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     private void BtnBorrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBorrarUsuarioActionPerformed
         // TODO add your handling code here:
         //codigo query para eliminar un usuario seleccionado 
-        if (jTable1.getSelectedRow()<0) {
+        if (jTable1.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(null, "¡Selecciona un usuario a borrar!");
         } else {
-        try {
-            JDBCclass JDBC = new JDBCclass();
-            String nombreUsuario = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 0));
-            if (nombreUsuario.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "No se puede eliminar el usuario");
-            } else {
-                String sql3 = "SELECT COUNT(nombreCiudad) FROM ciudad WHERE nombreUsuario='" + nombreUsuario + "';";
-                ResultSet rs = JDBC.consulta1(sql3);
-                int temporary = 0;
-                if (rs.next()) {
-                    temporary = rs.getInt(1);
-                    System.out.println(temporary);
-                }
-                if (temporary != 0) {
-                    String sql2;
-                    sql2 = "UPDATE ciudad SET precioCiudad=null, nombreUsuario=null, bonificacion=null WHERE nombreUsuario='" + nombreUsuario + "';";
-                    JDBC.consulta3(sql2);
-                    String sql;
-                    sql = "DELETE FROM usuario WHERE nombreUsuario='" + nombreUsuario + "';";
-                    JDBC.consulta3(sql);
-                    JOptionPane.showMessageDialog(null, "¡Usuario eliminado correctamente!");
-                    main();
+            try {
+                JDBCclass JDBC = new JDBCclass();
+                String nombreUsuario = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+                if (nombreUsuario.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "No se puede eliminar el usuario");
                 } else {
-                    String sql;
-                    sql = "DELETE FROM usuario WHERE nombreUsuario='" + nombreUsuario + "';";
-                    JDBC.consulta3(sql);
-                    JOptionPane.showMessageDialog(null, "¡Usuario eliminado correctamente!");
-                    main();
+                    String sql3 = "SELECT COUNT(nombreCiudad) FROM ciudad WHERE nombreUsuario='" + nombreUsuario + "';";
+                    ResultSet rs = JDBC.consulta1(sql3);
+                    int temporary = 0;
+                    if (rs.next()) {
+                        temporary = rs.getInt(1);
+                        System.out.println(temporary);
+                    }
+                    if (temporary != 0) {
+                        String sql2;
+                        sql2 = "UPDATE ciudad SET precioCiudad=null, nombreUsuario=null, bonificacion=null WHERE nombreUsuario='" + nombreUsuario + "';";
+                        JDBC.consulta3(sql2);
+                        String sql;
+                        sql = "DELETE FROM usuario WHERE nombreUsuario='" + nombreUsuario + "';";
+                        JDBC.consulta3(sql);
+                        JOptionPane.showMessageDialog(null, "¡Usuario eliminado correctamente!");
+                        main();
+                    } else {
+                        String sql;
+                        sql = "DELETE FROM usuario WHERE nombreUsuario='" + nombreUsuario + "';";
+                        JDBC.consulta3(sql);
+                        JOptionPane.showMessageDialog(null, "¡Usuario eliminado correctamente!");
+                        main();
+                    }
                 }
+                JDBC.state.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "No se puede eliminar el usuario");
             }
-            JDBC.state.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se puede eliminar el usuario");
-        }
         }
     }//GEN-LAST:event_BtnBorrarUsuarioActionPerformed
 
     private void BtnCambiarPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCambiarPasswordActionPerformed
         // TODO add your handling code here:
         //codigo query para actualizar la contraseña del usuario
-        if(jTable1.getSelectedRow()>=0){
-        String nombreUsuario =jTextFieldNombre.getText();
-        String password =String.valueOf(jPasswordFieldContrasena.getPassword());        
-        String sql;
-        sql = "UPDATE usuario SET password=MD5('" + password + "') WHERE nombreUsuario='" + nombreUsuario + "'; ";
-        try {
-            JDBCclass.consulta3(sql);
-            JOptionPane.showMessageDialog(null, "¡Modificacion realizada correctamente!");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se puede modificar el usuario");
-        }
-        }else{
+        if (jTable1.getSelectedRow() >= 0) {
+            String nombreUsuario = jTextFieldNombre.getText();
+            String password = String.valueOf(jPasswordFieldContrasena.getPassword());
+            String sql;
+            sql = "UPDATE usuario SET password=MD5('" + password + "') WHERE nombreUsuario='" + nombreUsuario + "'; ";
+            try {
+                JDBCclass.consulta3(sql);
+                JOptionPane.showMessageDialog(null, "¡Modificacion realizada correctamente!");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "No se puede modificar el usuario");
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "¡Selecciona a un usuario!");
         }
     }//GEN-LAST:event_BtnCambiarPasswordActionPerformed
@@ -265,19 +265,25 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
         logscreen.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BtnSalirActionPerformed
-    public void insertadatos(){
-        String usr=String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(),0));
-        String pwd=String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(),1));
-        int Csp=(int)(jTable1.getValueAt(jTable1.getSelectedRow(),2));
-        jTextFieldNombre.setText(usr);
-        jTextFieldNombre.setEnabled(false);
-        jPasswordFieldContrasena.setText(pwd);
-        jTextFieldCSP.setText(String.valueOf(Csp));
-        jTextFieldCSP.setEnabled(false);
-        }
+    public void insertadatos() {
+        if (jTable1.getSelectedRow() >= 0) {
+            String usr = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+            String pwd = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 1));
+            int Csp = (int) (jTable1.getValueAt(jTable1.getSelectedRow(), 2));
+            jTextFieldNombre.setText(usr);
+            jTextFieldNombre.setEnabled(false);
+            jPasswordFieldContrasena.setText(pwd);
+            jTextFieldCSP.setText(String.valueOf(Csp));
+            jTextFieldCSP.setEnabled(false);
+        }else{
+        jTextFieldNombre.setEnabled(true);
+        jTextFieldCSP.setEnabled(true);
+    }
+    }
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         insertadatos();
+        //aqui un codigo para que se deseleccione una vez acabado de insertar los datos a los jlabel
     }//GEN-LAST:event_jTable1MouseClicked
 
     /**
@@ -321,7 +327,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             while (temporal.next()) {
                 String nombreUsuario = temporal.getString("nombreUsuario");
                 String contraseña = temporal.getString("password");
-                int CSp=temporal.getInt("CSP");
+                int CSp = temporal.getInt("CSP");
                 usuarios[0] = nombreUsuario;
                 usuarios[1] = contraseña;
                 usuarios[2] = CSp;
