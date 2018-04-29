@@ -49,11 +49,6 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(500, 250));
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                formMouseClicked(evt);
-            }
-        });
 
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -292,17 +287,6 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
         insertadatos();
         //aqui un codigo para que se deseleccione una vez acabado de insertar los datos a los jlabel
     }//GEN-LAST:event_jTable1MouseClicked
-
-    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        // TODO add your handling code here:
-        jTable1.setColumnSelectionAllowed(false);
-        jTable1.setCellSelectionEnabled(false);
-        jTextFieldNombre.setEnabled(true);
-        jTextFieldCSP.setEnabled(true);
-        jTextFieldNombre.setText(null);
-        jPasswordFieldContrasena.setText(null);
-        jTextFieldCSP.setText(null);
-    }//GEN-LAST:event_formMouseClicked
 
     /**
      * @param args the command line arguments
