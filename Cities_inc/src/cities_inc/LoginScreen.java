@@ -160,7 +160,7 @@ static String nombreUsuario;
                         this.setVisible(false);
                     } else {
                         this.setVisible(false);
-                        JOptionPane.showMessageDialog(null, "¡Inserte todos los datos previamente solicitados!");
+                        JOptionPane.showMessageDialog(null, "¡El usuario no existe!");
                         this.setVisible(true);
                         TextUsuario.setText(null);
                         TextoPassword.setText(null);
