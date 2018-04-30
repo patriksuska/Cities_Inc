@@ -146,18 +146,18 @@ public class RegisterScreen extends javax.swing.JFrame {
                 String password = String.valueOf(TextoPassword.getPassword());
                 int CSP = Integer.valueOf(TextCSP.getText());
                 int saldo = 333000;
-                System.out.println(TextUsuario.getText() + " " + (TextUsuario.getText().isEmpty()));
+                //System.out.println(TextUsuario.getText() + " " + (TextUsuario.getText().isEmpty()));
                 String sql1;
                 sql1 = "SELECT COUNT(nombreUsuario) ";
                 sql1 += "FROM usuario ";
-                sql1 += "WHERE nombreUsuario='" + nombreUsuario + "' and password=MD5('" + password + "') and CSP='" + CSP + "';";
+                sql1 += "WHERE nombreUsuario='" + nombreUsuario + "' or password=MD5('" + password + "') or CSP='" + CSP + "';";
                 ResultSet temp = JDBC.consulta1(sql1);
                 int a = 0;
                 if (temp.next()) {
                     System.out.println(temp.getInt(1));
                     a = temp.getInt(1);
                 }
-                if (a == 1) {
+                if (a >= 1) {
                     JOptionPane.showMessageDialog(null, "¡El usuario ya existe!");
                     nombreUsuario = null;
                     password = null;
@@ -169,7 +169,7 @@ public class RegisterScreen extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "¡Creacion del usuario realizada correctamente!");
                     LoginScreen Ls = new LoginScreen();
                     Ls.setVisible(true);
-                    this.setVisible(false);
+                    this.dispose();
                 }
                 JDBC.state.close();
             }
@@ -182,7 +182,7 @@ public class RegisterScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         LoginScreen Ls = new LoginScreen();
         Ls.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_BtnCancelarActionPerformed
 
     /**

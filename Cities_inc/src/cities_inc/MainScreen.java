@@ -57,6 +57,10 @@ public class MainScreen extends javax.swing.JFrame {
         BtnRanking = new javax.swing.JButton();
         ComboPaises = new javax.swing.JComboBox<>();
         BtnSeleccionar = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(500, 250));
@@ -141,6 +145,12 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Cobrar");
+
+        jLabel8.setText("€");
+
+        jLabel9.setText("Dinero acumulado/mes:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,13 +159,6 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnComprar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BtnVender)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BtnRanking)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -175,11 +178,29 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addComponent(ComboPaises, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(BtnSeleccionar)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(BtnLogout)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(BtnComprar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BtnVender)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BtnRanking)
+                        .addGap(239, 239, 239)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
+                        .addGap(147, 147, 147))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BtnLogout))
+                    .addComponent(jScrollPane2)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -200,22 +221,24 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ComboPaises, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BtnSeleccionar))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnComprar)
                     .addComponent(BtnVender)
-                    .addComponent(BtnRanking))
+                    .addComponent(BtnRanking)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9))
                 .addContainerGap())
         );
 
@@ -232,6 +255,7 @@ public class MainScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         //codigo query para comprar una ciudad
         try {
+            String usr=jLabel2.getText();
             JDBCclass JDBC = new JDBCclass();
             int filasseleccionadas=jTableCiudades.getSelectedRowCount();
             if(filasseleccionadas!=0){
@@ -245,15 +269,16 @@ public class MainScreen extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "¡No dispones de saldo suficiente para comprar esta ciudad!");
                 }else{
             String sql;
-            sql = "UPDATE ciudad SET precioCiudad=" + precioCiudad + ", nombreUsuario='" + user + "', bonificacion=" + bonificacion + " WHERE nombreCiudad='" + ciudadcomprada + "';";
+            sql = "UPDATE ciudad SET precioCiudad=" + precioCiudad + ", nombreUsuario='" + usr + "', bonificacion=" + bonificacion + " WHERE nombreCiudad='" + ciudadcomprada + "';";
             System.out.println(sql);
             JDBC.consulta3(sql);
             saldo = saldo - precioCiudad;           
-            String sql2 = "UPDATE usuario SET saldo=" + saldo + " where nombreUsuario='" + user + "';";
+            String sql2 = "UPDATE usuario SET saldo=" + saldo + " where nombreUsuario='" + usr + "';";
             JDBC.consulta3(sql2);
             rellenausuario();
             insertarciudades();
             rellenatablapropiedad();
+            
             JOptionPane.showMessageDialog(null, "Compra realizada correctamente");
             JDBC.state.close();
                 }
@@ -271,6 +296,7 @@ public class MainScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         //codigo query para vender una ciudad
         try {
+            String usr=jLabel2.getText();
             JDBCclass JDBC = new JDBCclass();
             int filasseleccionadas=jTablePropiedad.getSelectedRowCount();
             if(filasseleccionadas!=0){
@@ -285,7 +311,7 @@ public class MainScreen extends javax.swing.JFrame {
             sql = "UPDATE ciudad SET precioCiudad=null, nombreUsuario=null, bonificacion=null WHERE nombreCiudad='" + ciudadvendida + "';";           
             JDBC.consulta3(sql);
             saldo = saldo+(75*preuCiudad/100);
-            String sql2 = "UPDATE usuario SET saldo=" + saldo + " where nombreUsuario='" + user + "';";          
+            String sql2 = "UPDATE usuario SET saldo=" + saldo + " where nombreUsuario='" + usr + "';";          
             JDBC.consulta3(sql2);
             rellenausuario();
             rellenatablapropiedad();
@@ -302,7 +328,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void BtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogoutActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        dispose();     
         LoginScreen lg=new LoginScreen();
         lg.setVisible(true);
     }//GEN-LAST:event_BtnLogoutActionPerformed
@@ -331,7 +357,7 @@ public class MainScreen extends javax.swing.JFrame {
                 String nombreCiudad = temporal.getString("nombreCiudad");
                 int paradas = RestAPIClass.obtenerParadas(URL);
                 precioCiudad = CiudadClass.precioCiudad(paradas);
-                int bonificacion = CiudadClass.bonificacion();
+                int bonificacion = CiudadClass.bonificacion(paradas);
                 ciudades[0] = nombreCiudad;
                 ciudades[1] = precioCiudad;
                 ciudades[2] = bonificacion;
@@ -352,47 +378,65 @@ public class MainScreen extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    static String user = LoginScreen.nombreUsuario;
     static int saldo;
 
     //codigo para rellenar los campos sobre el usuario(nombre y su saldo)
     public static void rellenausuario() throws SQLException {
+        String usr=LoginScreen.nombreUsuario;
         JDBCclass JDBC = new JDBCclass();
         String sql;
-        sql = "SELECT saldo FROM usuario WHERE nombreUsuario='" + user + "';";
+        sql = "SELECT saldo FROM usuario WHERE nombreUsuario='" + usr + "';";
         ResultSet temp = JDBC.consulta1(sql);
         while (temp.next()) {
             saldo = temp.getInt("saldo");
             TextSaldoActual.setText(String.valueOf(saldo));
         }
-        jLabel2.setText(user);
+        jLabel2.setText(usr);
         JDBC.state.close();
     }
 
     //codigo para rellenar la tabla de tus ciudades
     public static void rellenatablapropiedad() throws SQLException {
         //aqui todo el query para obtener las ciudades compradas
+        String usr=LoginScreen.nombreUsuario;
         String sql;
         sql = "SELECT * ";
         sql += "FROM ciudad ";
-        sql += "WHERE nombreUsuario='" + user + "';";
+        sql += "WHERE nombreUsuario='" + usr + "';";
         JDBCclass JDBC = new JDBCclass();
         ResultSet temporal = JDBC.consulta1(sql);
         DefaultTableModel modelo1 = new DefaultTableModel();
         modelo1.addColumn("Nombre");
+        modelo1.addColumn("Bonificacion");
         modelo1.addColumn("Paradas");
+        modelo1.addColumn("Recaudacion/mes (€)");
         jTablePropiedad.setModel(modelo1);
-        Object[] propiedad = new Object[2];
+        Object[] propiedad = new Object[4];
         while (temporal.next()) {
             String URL = temporal.getString("URL");
             String nombreCiudad = temporal.getString("nombreCiudad");
             int paradas = RestAPIClass.obtenerParadas(URL);
+            int bon = temporal.getInt("bonificacion");
+            int preciociudad=temporal.getInt("precioCiudad");
+            int boneuros = CiudadClass.boneuro(bon, preciociudad);
             propiedad[0] = nombreCiudad;
-            propiedad[1] = paradas;
+            propiedad[1] = bon;
+            propiedad[2] = paradas;
+            propiedad[3] = boneuros;
             modelo1.addRow(propiedad);
+            
         }
         JDBC.state.close();
+        
     }
+    //codigo para sumar todos los benificios de las ciudades en uno
+//    public static void sumarbenificios(){
+//        int benificios=0;
+//        benificios=(int)jTablePropiedad.getValueAt(jTablePropiedad.getSelectedColumn(),4);
+//        int beni=0;
+//             beni+=benificios;
+//        System.out.println(beni);
+//    }
     //codigo para rellenar el combobox de paises desde la BD
     public static void rellenapais(/*String args[]*/) throws SQLException {
         JDBCclass JDBC = new JDBCclass();
@@ -415,6 +459,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton BtnVender;
     public static javax.swing.JComboBox<String> ComboPaises;
     public static javax.swing.JTextField TextSaldoActual;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     public static javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -422,9 +467,12 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JTable jTableCiudades;
     public static javax.swing.JTable jTablePropiedad;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

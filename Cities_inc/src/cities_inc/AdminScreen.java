@@ -177,23 +177,60 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     private void BtnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCrearUsuarioActionPerformed
         // TODO add your handling code here:
         //codigo query para crear un usuario desde la pantalla de administrador
-        String sql;
-        if (jTextFieldNombre.getText().isEmpty() || jPasswordFieldContrasena.getPassword().length == 0 || jTextFieldCSP.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "¡Introduzca todos los datos!");
-        } else {
-            String nombreUsuario = jTextFieldNombre.getText();
-            String password = String.valueOf(jPasswordFieldContrasena.getPassword());
-            int CSP = Integer.valueOf(jTextFieldCSP.getText());
-            int saldo = 333000;
-            sql = "INSERT INTO usuario (nombreUsuario,password,saldo,CSP) ";
-            sql += "values ('" + nombreUsuario + "',MD5('" + password + "'),'" + saldo + "','" + CSP + "');";
-            try {
-                JDBCclass.consulta3(sql);
-                JOptionPane.showMessageDialog(null, "¡Creacion del usuario realizada correctamente!");
-                main();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "El usuario ya existe");
+        try {
+            if (jTextFieldNombre.getText().isEmpty() || jPasswordFieldContrasena.getPassword().length == 0 || jTextFieldCSP.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "¡Introduzca todos los datos!");
+            } else {
+                String nombreUsuario = jTextFieldNombre.getText();
+                String password = String.valueOf(jPasswordFieldContrasena.getPassword());
+                int CSP = Integer.valueOf(jTextFieldCSP.getText());
+                int saldo = 333000;
+                String sql1;
+                JDBCclass JDBC = new JDBCclass();
+                sql1 = "SELECT COUNT(nombreUsuario) ";
+                sql1 += "FROM usuario ";
+                sql1 += "WHERE nombreUsuario='" + nombreUsuario + "' or password=MD5('" + password + "') or CSP='" + CSP + "';";
+                ResultSet temp = JDBC.consulta1(sql1);
+                int a = 0;
+                if (temp.next()) {
+                    System.out.println(temp.getInt(1));
+                    a = temp.getInt(1);
+                }
+                if (a >= 1) {
+                    JOptionPane.showMessageDialog(null, "¡El usuario ya existe!");
+//                    nombreUsuario = null;
+//                    password = null;
+//                    CSP = 0;
+                    jTextFieldNombre.setEnabled(true);
+                    jTextFieldCSP.setEnabled(true);
+                    jTextFieldNombre.setText(null);
+                    jTextFieldCSP.setText(null);
+                    jPasswordFieldContrasena.setText(null);
+                } else {
+                    String sql;
+                    sql = "INSERT INTO usuario (nombreUsuario,password,saldo,CSP) ";
+                    sql += "values ('" + nombreUsuario + "',MD5('" + password + "'),'" + saldo + "','" + CSP + "');";
+
+                    JDBCclass.consulta3(sql);
+                    JOptionPane.showMessageDialog(null, "¡Usuario creado correctamente!");
+                    main();
+//                    nombreUsuario = null;
+//                    password = null;
+                    jTextFieldNombre.setEnabled(true);
+                    jTextFieldCSP.setEnabled(true);
+                    jTextFieldNombre.setText(null);
+                    jTextFieldCSP.setText(null);
+                    jPasswordFieldContrasena.setText(null);
+                }
             }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Hubo un problema");
+
+            jTextFieldNombre.setEnabled(true);
+            jTextFieldCSP.setEnabled(true);
+            jTextFieldNombre.setText(null);
+            jTextFieldCSP.setText(null);
+            jPasswordFieldContrasena.setText(null);
         }
     }//GEN-LAST:event_BtnCrearUsuarioActionPerformed
 
@@ -231,6 +268,11 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
                         JDBC.consulta3(sql);
                         JOptionPane.showMessageDialog(null, "¡Usuario eliminado correctamente!");
                         main();
+                        jTextFieldNombre.setEnabled(true);
+                        jTextFieldCSP.setEnabled(true);
+                        jTextFieldNombre.setText(null);
+                        jTextFieldCSP.setText(null);
+                        jPasswordFieldContrasena.setText(null);
                     }
                 }
                 JDBC.state.close();
@@ -261,9 +303,9 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
 
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
         // TODO add your handling code here:
+        this.dispose();
         LoginScreen logscreen = new LoginScreen();
         logscreen.setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_BtnSalirActionPerformed
     public void insertadatos() {
         if (jTable1.getSelectedRow() >= 0) {
@@ -275,16 +317,19 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             jPasswordFieldContrasena.setText(pwd);
             jTextFieldCSP.setText(String.valueOf(Csp));
             jTextFieldCSP.setEnabled(false);
-        }else{
-        jTextFieldNombre.setEnabled(true);
-        jTextFieldCSP.setEnabled(true);
+        } else {
+            jTextFieldNombre.setEnabled(true);
+            jTextFieldCSP.setEnabled(true);
+        }
     }
-    }
+
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         jTable1.setColumnSelectionAllowed(true);
         jTable1.setCellSelectionEnabled(true);
         insertadatos();
+        jTable1.setColumnSelectionAllowed(false);
+        jTable1.setCellSelectionEnabled(false);
         //aqui un codigo para que se deseleccione una vez acabado de insertar los datos a los jlabel
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -292,6 +337,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
      * @param args the command line arguments
      */
     public static void main() {
+
         try {
             /* Set the Nimbus look and feel */
             //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -336,6 +382,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
                 modelo.addRow(usuarios);
             }
             JDBC.state.close();
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Hubo un problema con la visualizacion de las tablas");
         }

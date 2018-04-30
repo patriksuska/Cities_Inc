@@ -42,7 +42,6 @@ static String nombreUsuario;
         TextoPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setAlwaysOnTop(true);
         setBackground(new java.awt.Color(153, 153, 153));
         setLocation(new java.awt.Point(500, 250));
         setType(java.awt.Window.Type.POPUP);
@@ -143,7 +142,7 @@ static String nombreUsuario;
             AdminScreen AD = new AdminScreen();
             AD.setVisible(true);
             AdminScreen.main();
-            this.setVisible(false);
+            this.dispose();
         } else {
             try {
                 System.out.println(sql);
@@ -157,7 +156,7 @@ static String nombreUsuario;
                 if (a == 1) {
                         MainScreen MS = new MainScreen();
                         MS.setVisible(true);                        
-                        this.setVisible(false);
+                        this.dispose();
                     } else {
                         this.setVisible(false);
                         JOptionPane.showMessageDialog(null, "¡El usuario no existe!");
@@ -171,14 +170,14 @@ static String nombreUsuario;
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Ha ocurrido un error en el SQL");
             }
-        }
+        }    
     }//GEN-LAST:event_BtnAceptarActionPerformed
 
     private void BtnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegisterActionPerformed
         // Abre la ventana de registrarse
         RegisterScreen regscreen = new RegisterScreen();
         regscreen.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_BtnRegisterActionPerformed
 
     private void BtnGuestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuestActionPerformed
@@ -222,18 +221,18 @@ static String nombreUsuario;
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                LoginScreen dialog = new LoginScreen();
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                LoginScreen dialog = new LoginScreen();
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
