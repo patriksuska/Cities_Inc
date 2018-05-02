@@ -10,7 +10,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 /**
  *
  * @author Patrik
@@ -20,8 +21,9 @@ public class RegisterScreen extends javax.swing.JFrame {
     /**
      * Creates new form Register
      */
-    public RegisterScreen() {
+    public RegisterScreen() throws SQLException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException, ClassNotFoundException {
         setUndecorated(true);
+        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         initComponents();
     }
 
@@ -178,6 +180,7 @@ public class RegisterScreen extends javax.swing.JFrame {
                     nombreUsuario = null;
                     password = null;
                 } else {
+                    try{
                     String sql;
                     sql = "INSERT INTO usuario (nombreUsuario,password,saldo,CSP) ";
                     sql += "values ('" + nombreUsuario + "',MD5('" + password + "'),'" + saldo + "','" + CSP + "');";
@@ -187,6 +190,9 @@ public class RegisterScreen extends javax.swing.JFrame {
                     Ls.setLocationRelativeTo(null);
                     Ls.setVisible(true);
                     this.dispose();
+                    }catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
                 }
                 JDBC.state.close();
             }
@@ -196,11 +202,15 @@ public class RegisterScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnAceptarActionPerformed
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
-        // TODO add your handling code here:
-        LoginScreen Ls = new LoginScreen();
-        Ls.setLocationRelativeTo(null);
-        Ls.setVisible(true);
-        this.dispose();
+        try {
+            // TODO add your handling code here:
+            LoginScreen Ls = new LoginScreen();
+            Ls.setLocationRelativeTo(null);
+            Ls.setVisible(true);
+            this.dispose();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(RegisterScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BtnCancelarActionPerformed
 
     /**
@@ -232,18 +242,22 @@ public class RegisterScreen extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                RegisterScreen dialog = new RegisterScreen();
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                try {
+//                    RegisterScreen dialog = new RegisterScreen();
+//                    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                        @Override
+//                        public void windowClosing(java.awt.event.WindowEvent e) {
+//                            System.exit(0);
+//                        }
+//                    });
+//                    dialog.setVisible(true);
+//                } catch (SQLException | UnsupportedLookAndFeelException | InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
+//                    Logger.getLogger(RegisterScreen.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
