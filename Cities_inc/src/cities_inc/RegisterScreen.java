@@ -21,6 +21,7 @@ public class RegisterScreen extends javax.swing.JFrame {
      * Creates new form Register
      */
     public RegisterScreen() {
+        setUndecorated(true);
         initComponents();
     }
 

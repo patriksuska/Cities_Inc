@@ -22,6 +22,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
      * Creates new form AdminScreen
      */
     public AdminScreen() {
+        setUndecorated(true);
         initComponents();
     }
 

@@ -19,6 +19,7 @@ static String nombreUsuario;
      * Creates new form MainScreen
      */
     LoginScreen() {
+        setUndecorated(true);
         initComponents();
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

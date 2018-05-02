@@ -24,6 +24,8 @@ public class MainScreen extends javax.swing.JFrame {
      * @throws java.sql.SQLException
      */
     public MainScreen() throws SQLException {
+        setUndecorated(true);
+        //setLocationRelativeTo(null);
         initComponents();
         rellenausuario();
         rellenapais();
@@ -57,7 +59,7 @@ public class MainScreen extends javax.swing.JFrame {
         BtnRanking = new javax.swing.JButton();
         ComboPaises = new javax.swing.JComboBox<>();
         BtnSeleccionar = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldAcumulado = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -146,6 +148,11 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         jButton1.setText("Cobrar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jLabel8.setText("€");
 
@@ -190,7 +197,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldAcumulado, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -235,7 +242,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(BtnComprar)
                     .addComponent(BtnVender)
                     .addComponent(BtnRanking)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldAcumulado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1)
                     .addComponent(jLabel8)
                     .addComponent(jLabel9))
@@ -278,7 +285,7 @@ public class MainScreen extends javax.swing.JFrame {
             rellenausuario();
             insertarciudades();
             rellenatablapropiedad();
-            
+//            sumarbenificios();
             JOptionPane.showMessageDialog(null, "Compra realizada correctamente");
             JDBC.state.close();
                 }
@@ -375,6 +382,22 @@ public class MainScreen extends javax.swing.JFrame {
         insertarciudades();
     }//GEN-LAST:event_BtnSeleccionarMouseClicked
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+//        try {
+//        saldo=saldo+beni;
+//        String usr=jLabel2.getText();
+//        JDBCclass JDBC = new JDBCclass();
+//        String sql2 = "UPDATE usuario SET saldo=" + saldo + " where nombreUsuario='" + usr + "';";
+//            JDBC.consulta3(sql2);
+//            rellenausuario();
+//            beni=0;
+//            JDBC.state.close();
+//        }catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al actualizar el saldo del jugador");
+//        }
+    }//GEN-LAST:event_jButton1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -430,12 +453,16 @@ public class MainScreen extends javax.swing.JFrame {
         
     }
     //codigo para sumar todos los benificios de las ciudades en uno
+    public static int beni;
 //    public static void sumarbenificios(){
 //        int benificios=0;
-//        benificios=(int)jTablePropiedad.getValueAt(jTablePropiedad.getSelectedColumn(),4);
-//        int beni=0;
+//        
+//        int filascantidad=jTablePropiedad.getRowCount();
+//        for (int i=0;i<filascantidad;i++){
+//        benificios=(int)jTablePropiedad.getValueAt(i,3);       
 //             beni+=benificios;
-//        System.out.println(beni);
+//    }
+//        jTextFieldAcumulado.setText(String.valueOf(beni));
 //    }
     //codigo para rellenar el combobox de paises desde la BD
     public static void rellenapais(/*String args[]*/) throws SQLException {
@@ -473,6 +500,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JTable jTableCiudades;
     public static javax.swing.JTable jTablePropiedad;
-    private javax.swing.JTextField jTextField1;
+    public static javax.swing.JTextField jTextFieldAcumulado;
     // End of variables declaration//GEN-END:variables
 }

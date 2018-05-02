@@ -20,6 +20,7 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
      * Creates new form RankingScreen
      */
     public RankingScreen() {
+        setUndecorated(true);
         initComponents();
     }
 
