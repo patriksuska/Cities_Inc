@@ -193,7 +193,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         jLabel10.setIcon(new javax.swing.ImageIcon("C:\\Users\\Patrik\\Documents\\NetBeansProjects\\Cities_Inc\\Cities_inc\\lib\\city-wallpaper-1.jpg")); // NOI18N
         jLabel10.setText("jLabel10");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 944, 506));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -2, 950, 510));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -421,16 +421,16 @@ public class MainScreen extends javax.swing.JFrame {
     }
     //codigo para sumar todos los benificios de las ciudades en uno
     public static int beni;
-//    public static void sumarbenificios(){
-//        int benificios=0;
-//        
-//        int filascantidad=jTablePropiedad.getRowCount();
-//        for (int i=0;i<filascantidad;i++){
-//        benificios=(int)jTablePropiedad.getValueAt(i,3);       
-//             beni+=benificios;
-//    }
-//        jTextFieldAcumulado.setText(String.valueOf(beni));
-//    }
+    public static void sumarbenificios(){
+        int benificios=0;
+        
+        int filascantidad=jTablePropiedad.getRowCount();
+        for (int i=0;i<filascantidad;i++){
+        benificios=(int)jTablePropiedad.getValueAt(i,3);       
+             beni+=benificios;
+    }
+        jTextFieldAcumulado.setText(String.valueOf(beni));
+    }
     //codigo para rellenar el combobox de paises desde la BD
 
     public static void rellenapais(/*String args[]*/) throws SQLException {
