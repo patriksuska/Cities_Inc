@@ -10,20 +10,18 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class MainClass {
     /**
      *
+     * @param <error>
      * @param args
      * @throws JSONException
      */
-    public static void main(String[] args)  {
+    public static void main(/*String[] args*/)  {
         try {
             //abre la pantalla de Login
             LoginScreen logscreen = new LoginScreen();
             logscreen.setLocationRelativeTo(null);
             logscreen.setVisible(true);
-            /**
-             *
-             */ } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+    }catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
+}
+}
 }

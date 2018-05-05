@@ -5,6 +5,7 @@
  */
 package cities_inc;
 
+import cities_inc.Hilos.Hilo2;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -25,6 +26,7 @@ public class MainScreen extends javax.swing.JFrame {
      *
      * @throws java.sql.SQLException
      */
+    
     public MainScreen() throws SQLException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException, ClassNotFoundException {
         setUndecorated(true);
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -32,6 +34,7 @@ public class MainScreen extends javax.swing.JFrame {
         rellenausuario();
         rellenapais();
         rellenatablapropiedad();
+        
     }
 
     /**
@@ -250,6 +253,7 @@ public class MainScreen extends javax.swing.JFrame {
 //            sumarbenificios();
                         JOptionPane.showMessageDialog(null, "Compra realizada correctamente");
                         JDBC.state.close();
+                        filascantidad++;
                     }
                 }
             } else {
@@ -287,6 +291,7 @@ public class MainScreen extends javax.swing.JFrame {
                 insertarciudades();
                 JOptionPane.showMessageDialog(null, "Venta realizada correctamente");
                 JDBC.state.close();
+                filascantidad--;
             } else {
                 JOptionPane.showMessageDialog(null, "¡Selecciona una ciudad a vender!");
             }
@@ -351,18 +356,25 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-//        try {
-//        saldo=saldo+beni;
-//        String usr=jLabel2.getText();
-//        JDBCclass JDBC = new JDBCclass();
-//        String sql2 = "UPDATE usuario SET saldo=" + saldo + " where nombreUsuario='" + usr + "';";
-//            JDBC.consulta3(sql2);
-//            rellenausuario();
-//            beni=0;
-//            JDBC.state.close();
-//        }catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al actualizar el saldo del jugador");
-//        }
+        try {
+            if(beni==0){
+                JOptionPane.showMessageDialog(null, "No tienes dinero acumulado");
+            }else{
+            saldo = saldo + beni;
+            String usr = jLabel2.getText();
+            JDBCclass JDBC = new JDBCclass();
+            String sql2 = "UPDATE usuario SET saldo=" + saldo + " where nombreUsuario='" + usr + "';";
+            JDBC.consulta3(sql2);
+            rellenausuario();
+            beni = 0;
+            jTextFieldAcumulado.setText(String.valueOf(beni));
+            JDBC.state.close();
+            JOptionPane.showMessageDialog(null, "Cobro realizado correctamente");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar el saldo del jugador");
+        }
+       
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**
@@ -416,20 +428,34 @@ public class MainScreen extends javax.swing.JFrame {
             modelo1.addRow(propiedad);
 
         }
+        Thread hilo2 = new Hilo2();
+        hilo2.start();
         JDBC.state.close();
-
     }
     //codigo para sumar todos los benificios de las ciudades en uno
     public static int beni;
-    public static void sumarbenificios(){
-        int benificios=0;
-        
-        int filascantidad=jTablePropiedad.getRowCount();
-        for (int i=0;i<filascantidad;i++){
-        benificios=(int)jTablePropiedad.getValueAt(i,3);       
-             beni+=benificios;
-    }
+ public static int filascantidad=0;
+    public static void sumarbenificios() {
+        int benificios = 0;
+        beni=0;
+       int filascant = jTablePropiedad.getRowCount();
+        if (filascantidad >= filascant) {
+            for (int i = 0; i < filascant; i++) {
+                benificios = (int) jTablePropiedad.getValueAt(i, 3);
+                beni += benificios;
+            }
+            
         jTextFieldAcumulado.setText(String.valueOf(beni));
+        } else if (filascantidad < filascant) {
+            benificios=0;
+            beni=0;
+            for (int i = 0; i < filascant; i++) {
+                benificios = (int) jTablePropiedad.getValueAt(i, 3);
+                beni = beni + benificios;
+            }
+            jTextFieldAcumulado.setText(String.valueOf(beni));
+        }
+        
     }
     //codigo para rellenar el combobox de paises desde la BD
 
@@ -445,6 +471,8 @@ public class MainScreen extends javax.swing.JFrame {
         JDBC.state.close();
         // Create and display the form 
     }
+     
+        
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnComprar;
