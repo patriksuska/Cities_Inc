@@ -125,13 +125,14 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
         // Iniciar sesion en el programa
+
         nombreUsuario = TextUsuario.getText();
         String password = String.valueOf(TextoPassword.getPassword());
         String sql;
         sql = "SELECT COUNT(nombreUsuario) ";
         sql += "FROM usuario ";
         sql += "WHERE nombreUsuario='" + nombreUsuario + "' and password=MD5('" + password + "')";
-        if (nombreUsuario.equals("administrador") && password.equals("admin12345")) {       
+        if (nombreUsuario.equals("administrador") && password.equals("admin12345")) {
             try {
                 AdminScreen AD = new AdminScreen();
                 AD.setLocationRelativeTo(null);
@@ -158,6 +159,7 @@ public class LoginScreen extends javax.swing.JFrame {
                         //MS.setExtendedState(MS.MAXIMIZED_BOTH);
                         MS.setLocationRelativeTo(null);
                         MS.setVisible(true);
+//                        MainScreen.main();
                         this.dispose();
                     } catch (SQLException | UnsupportedLookAndFeelException | InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
                         Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
@@ -177,6 +179,7 @@ public class LoginScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Ha ocurrido un error en el SQL");
             }
         }
+
     }//GEN-LAST:event_BtnAceptarActionPerformed
 
     private void BtnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegisterActionPerformed

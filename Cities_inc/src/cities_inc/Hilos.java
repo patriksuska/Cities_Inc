@@ -19,29 +19,37 @@ public class Hilos {
 
         @Override
         public void run() {
-            System.out.println("Hola hilo1");    
-            MainClass.main(); 
+            System.out.println("Hola hilo1");
+            MainClass.main();
+            
         }
     }
 
     public static class Hilo2 extends Thread {//se encarga de lanzar la funcion de sumarbenificios cada hora
 
         @Override
-        public void run() {     
-                    try {
-                        System.out.println("Hola hilo2");
-                        //sleep(5*60*1000);
-                        
-                        MainScreen.sumarbenificios();  
-                        sleep(500);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Hilos.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+        public void run() {
+            while(true){
+            try {
+                Hilo2.sleep(60000);
+                
+                System.out.println("Hola hilo2");
+                //sleep(5*60*1000);
+                MainScreen.sumarbenificios();
+                
+                
+                
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Hilos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         }
     }
 
     public static void main(String[] args) throws Exception {
         Thread hilo1 = new Hilo1();
-        hilo1.start();    
+        hilo1.start();
+        
+
     }
 }
