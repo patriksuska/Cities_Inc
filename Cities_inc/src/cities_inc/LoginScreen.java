@@ -159,7 +159,7 @@ public class LoginScreen extends javax.swing.JFrame {
                         //MS.setExtendedState(MS.MAXIMIZED_BOTH);
                         MS.setLocationRelativeTo(null);
                         MS.setVisible(true);
-//                        MainScreen.main();
+                        MainScreen.main();
                         this.dispose();
                     } catch (SQLException | UnsupportedLookAndFeelException | InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
                         Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);

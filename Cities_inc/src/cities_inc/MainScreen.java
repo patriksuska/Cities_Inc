@@ -5,7 +5,6 @@
  */
 package cities_inc;
 
-import cities_inc.Hilos.Hilo2;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -14,6 +13,9 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -33,7 +35,7 @@ public class MainScreen extends javax.swing.JFrame {
         rellenausuario();
         rellenapais();
         rellenatablapropiedad();
-        
+
     }
 
     /**
@@ -222,7 +224,7 @@ public class MainScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BtnRankingActionPerformed
     static int precioCiudad;
-    
+
     private void BtnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnComprarActionPerformed
         // TODO add your handling code here:
         //codigo query para comprar una ciudad
@@ -401,7 +403,6 @@ public class MainScreen extends javax.swing.JFrame {
     //codigo para rellenar la tabla de tus ciudades
     public static void rellenatablapropiedad() throws SQLException {
         //aqui todo el query para obtener las ciudades compradas
-        Thread hilo2 = new Hilo2();
         String usr = LoginScreen.nombreUsuario;
         String sql;
         sql = "SELECT * ";
@@ -428,25 +429,26 @@ public class MainScreen extends javax.swing.JFrame {
             propiedad[2] = paradas;
             propiedad[3] = boneuros;
             modelo1.addRow(propiedad);
-            
+
         }
-        hilo2.start();
+        //hilo2.start();
         JDBC.state.close();
     }
     //codigo para sumar todos los benificios de las ciudades en uno
     public static int beni;
-    public static int filascantidad = 0;
+    public static int filascantidad;
 
     public static void sumarbenificios() {
         int benificios = 0;
-        beni = 0;
+//        beni = 0;
         int filascant = jTablePropiedad.getRowCount();
+        
+        System.out.println(filascant+""+filascantidad);
         if (filascantidad >= filascant) {
             for (int i = 0; i < filascant; i++) {
                 benificios = (int) jTablePropiedad.getValueAt(i, 3);
-                beni += benificios;
+                beni = beni + benificios;
             }
-
             jTextFieldAcumulado.setText(String.valueOf(beni));
         } else if (filascantidad < filascant) {
             benificios = 0;
@@ -457,7 +459,6 @@ public class MainScreen extends javax.swing.JFrame {
             }
             jTextFieldAcumulado.setText(String.valueOf(beni));
         }
-
     }
     //codigo para rellenar el combobox de paises desde la BD
 
@@ -473,13 +474,19 @@ public class MainScreen extends javax.swing.JFrame {
         JDBC.state.close();
         // Create and display the form 
     }
-    
+
     /**
      *
      */
-    public static void main(){
-        
-        
+    public static void main() {
+        filascantidad=jTablePropiedad.getRowCount();
+        ScheduledExecutorService execService= Executors.newScheduledThreadPool(5);
+        execService.scheduleAtFixedRate(() -> {
+            //La tarea a realizar de forma repetida
+            sumarbenificios();
+            System.out.println("Sumando benificios");
+        }, 0, 1, TimeUnit.MINUTES);//el retraso de inicio y cada cuanto se repite y la medida del tiempo
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

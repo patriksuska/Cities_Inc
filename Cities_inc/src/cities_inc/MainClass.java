@@ -1,5 +1,4 @@
 package cities_inc;
-import cities_inc.Hilos.Hilo2;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,8 +14,7 @@ public class MainClass {
      * @param args
      * @throws JSONException
      */
-    public static void main(/*String[] args*/)  {
-            
+    public static void main(String[] args)  {
         try {
             //abre la pantalla de Login
             LoginScreen logscreen = new LoginScreen();
