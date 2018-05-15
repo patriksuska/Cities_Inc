@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
 /**
  *
  * @author Patrik
@@ -24,7 +25,7 @@ public class RegisterScreen extends javax.swing.JFrame {
     public RegisterScreen() throws SQLException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException, ClassNotFoundException {
         setUndecorated(true);
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        
+
         initComponents();
     }
 
@@ -119,9 +120,7 @@ public class RegisterScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
-        // TODO add your handling code here:
         // codigo para insertar un usuario en la base de datos usando el JDBC class
-
         try {
             JDBCclass JDBC = new JDBCclass();
             if (TextUsuario.getText().isEmpty() || TextoPassword.getPassword().length == 0 || TextCSP.getText().isEmpty()) {
@@ -131,7 +130,6 @@ public class RegisterScreen extends javax.swing.JFrame {
                 String password = String.valueOf(TextoPassword.getPassword());
                 int CSP = Integer.valueOf(TextCSP.getText());
                 int saldo = 333000;
-                //System.out.println(TextUsuario.getText() + " " + (TextUsuario.getText().isEmpty()));
                 String sql1;
                 sql1 = "SELECT COUNT(nombreUsuario) ";
                 sql1 += "FROM usuario ";
@@ -147,19 +145,19 @@ public class RegisterScreen extends javax.swing.JFrame {
                     nombreUsuario = null;
                     password = null;
                 } else {
-                    try{
-                    String sql;
-                    sql = "INSERT INTO usuario (nombreUsuario,password,saldo,CSP) ";
-                    sql += "values ('" + nombreUsuario + "',MD5('" + password + "'),'" + saldo + "','" + CSP + "');";
-                    JDBC.consulta3(sql);
-                    JOptionPane.showMessageDialog(null, "¡Creacion del usuario realizada correctamente!");
-                    LoginScreen Ls = new LoginScreen();
-                    Ls.setLocationRelativeTo(null);
-                    Ls.setVisible(true);
-                    this.dispose();
-                    }catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                    try {
+                        String sql;
+                        sql = "INSERT INTO usuario (nombreUsuario,password,saldo,CSP) ";
+                        sql += "values ('" + nombreUsuario + "',MD5('" + password + "'),'" + saldo + "','" + CSP + "');";
+                        JDBC.consulta3(sql);
+                        JOptionPane.showMessageDialog(null, "¡Creacion del usuario realizada correctamente!");
+                        LoginScreen Ls = new LoginScreen();
+                        Ls.setLocationRelativeTo(null);
+                        Ls.setVisible(true);
+                        this.dispose();
+                    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+                        Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 JDBC.state.close();
             }
@@ -169,8 +167,8 @@ public class RegisterScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnAceptarActionPerformed
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
-        try {
-            // TODO add your handling code here:
+        // codigo para salir de la pantalla de registro
+        try {      
             LoginScreen Ls = new LoginScreen();
             Ls.setLocationRelativeTo(null);
             Ls.setVisible(true);
@@ -209,22 +207,6 @@ public class RegisterScreen extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the dialog */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                try {
-//                    RegisterScreen dialog = new RegisterScreen();
-//                    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-//                        @Override
-//                        public void windowClosing(java.awt.event.WindowEvent e) {
-//                            System.exit(0);
-//                        }
-//                    });
-//                    dialog.setVisible(true);
-//                } catch (SQLException | UnsupportedLookAndFeelException | InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
-//                    Logger.getLogger(RegisterScreen.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

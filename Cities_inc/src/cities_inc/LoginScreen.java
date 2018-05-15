@@ -124,8 +124,7 @@ public class LoginScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
-        // Iniciar sesion en el programa
-
+        // codigo para iniciar sesion en el programa escribiendo las credenciales del usuario
         nombreUsuario = TextUsuario.getText();
         String password = String.valueOf(TextoPassword.getPassword());
         String sql;
@@ -183,7 +182,7 @@ public class LoginScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnAceptarActionPerformed
 
     private void BtnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegisterActionPerformed
-        // Abre la ventana de registrarse
+        // codigo para abrir la ventana de registro
         try {
             RegisterScreen regscreen = new RegisterScreen();
             regscreen.setLocationRelativeTo(null);
@@ -195,7 +194,7 @@ public class LoginScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnRegisterActionPerformed
 
     private void BtnGuestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuestActionPerformed
-        // Abre la ventana de invitado(ranking)
+        // codigo para abrir la ventana de invitado(ventana de ranking)
         try {
             RankingScreen RK = new RankingScreen();
             RK.setLocationRelativeTo(null);
@@ -207,7 +206,7 @@ public class LoginScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnGuestActionPerformed
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
-        // Salir de la aplicacion
+        // Salir de la aplicacion por completo
         System.exit(0);
     }//GEN-LAST:event_BtnCancelarActionPerformed
 
@@ -238,20 +237,7 @@ public class LoginScreen extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
         /* Create and display the dialog */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                LoginScreen dialog = new LoginScreen();
-//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-//                    @Override
-//                    public void windowClosing(java.awt.event.WindowEvent e) {
-//                        System.exit(0);
-//                    }
-//                });
-//                dialog.setVisible(true);
-//            }
-//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

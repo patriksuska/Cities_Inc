@@ -35,7 +35,6 @@ public class MainScreen extends javax.swing.JFrame {
         rellenausuario();
         rellenapais();
         rellenatablapropiedad();
-
     }
 
     /**
@@ -214,6 +213,7 @@ public class MainScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRankingActionPerformed
+        //codigo para ver el ranking de usuarios
         try {
             RankingScreen RK = new RankingScreen();
             RK.setLocationRelativeTo(null);
@@ -226,8 +226,7 @@ public class MainScreen extends javax.swing.JFrame {
     static int precioCiudad;
 
     private void BtnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnComprarActionPerformed
-        // TODO add your handling code here:
-        //codigo query para comprar una ciudad
+        //codigo para comprar una ciudad
         try {
             String usr = jLabel2.getText();
             JDBCclass JDBC = new JDBCclass();
@@ -252,7 +251,6 @@ public class MainScreen extends javax.swing.JFrame {
                         rellenausuario();
                         insertarciudades();
                         rellenatablapropiedad();
-//            sumarbenificios();
                         JOptionPane.showMessageDialog(null, "Compra realizada correctamente");
                         JDBC.state.close();
                         filascantidad++;
@@ -269,7 +267,6 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnComprarActionPerformed
 
     private void BtnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVenderActionPerformed
-        // TODO add your handling code here:
         //codigo query para vender una ciudad
         try {
             String usr = jLabel2.getText();
@@ -304,8 +301,8 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnVenderActionPerformed
 
     private void BtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogoutActionPerformed
+        //codigo para cerrar sesion
         try {
-            // TODO add your handling code here:
             dispose();
             LoginScreen lg = new LoginScreen();
             lg.setLocationRelativeTo(null);
@@ -315,6 +312,7 @@ public class MainScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BtnLogoutActionPerformed
     public void insertarciudades() {
+        //codigo para insertar las ciudades en la tabla de ciudades disponibles de un pais seleccionado previamente
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Nombre");
         modelo.addColumn("Precio (€)");
@@ -322,7 +320,6 @@ public class MainScreen extends javax.swing.JFrame {
         modelo.addColumn("Paradas");
         jTableCiudades.setModel(modelo);
         try {
-            // codigo para insertar ciudades de un pais seleccionado en la tabla
             String pais = String.valueOf(ComboPaises.getSelectedItem());
             if (pais.equals("Selecciona Pais")) {
                 JOptionPane.showMessageDialog(null, "¡Selecciona un pais existente!");
@@ -330,7 +327,7 @@ public class MainScreen extends javax.swing.JFrame {
                 String sql;
                 sql = "SELECT * ";
                 sql += "FROM ciudad ";
-                sql += "WHERE pais='" + pais + "' and nombreUsuario is null;";
+                sql += "WHERE pais='" + pais + "' and nombreUsuario is null ORDER BY nombreCiudad;";
                 JDBCclass JDBC = new JDBCclass();
                 ResultSet temporal = JDBC.consulta1(sql);
                 Object[] ciudades = new Object[4];
@@ -353,12 +350,12 @@ public class MainScreen extends javax.swing.JFrame {
         }
     }
     private void BtnSeleccionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnSeleccionarMouseClicked
-        // TODO add your handling code here:
+//codigo para seleccionar el pais pulsando el boton seleccionar
         insertarciudades();
     }//GEN-LAST:event_BtnSeleccionarMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
+        //codigo para cobrar las bonificaciones acumuladas
         try {
             if (beni == 0) {
                 JOptionPane.showMessageDialog(null, "No tienes dinero acumulado");
@@ -385,8 +382,8 @@ public class MainScreen extends javax.swing.JFrame {
      */
     static int saldo;
 
-    //codigo para rellenar los campos sobre el usuario(nombre y su saldo)
     public static void rellenausuario() throws SQLException {
+        //codigo para rellenar los campos sobre el usuario(nombre y su saldo)
         String usr = LoginScreen.nombreUsuario;
         JDBCclass JDBC = new JDBCclass();
         String sql;
@@ -400,9 +397,8 @@ public class MainScreen extends javax.swing.JFrame {
         JDBC.state.close();
     }
 
-    //codigo para rellenar la tabla de tus ciudades
     public static void rellenatablapropiedad() throws SQLException {
-        //aqui todo el query para obtener las ciudades compradas
+        //codigo para rellenar la tabla de tus ciudades compradas
         String usr = LoginScreen.nombreUsuario;
         String sql;
         sql = "SELECT * ";
@@ -431,19 +427,17 @@ public class MainScreen extends javax.swing.JFrame {
             modelo1.addRow(propiedad);
 
         }
-        //hilo2.start();
         JDBC.state.close();
     }
-    //codigo para sumar todos los benificios de las ciudades en uno
+
     public static int beni;
     public static int filascantidad;
 
     public static void sumarbenificios() {
+        //codigo para sumar todos los benificios de las ciudades en un campo
         int benificios = 0;
-//        beni = 0;
         int filascant = jTablePropiedad.getRowCount();
-        
-        System.out.println(filascant+""+filascantidad);
+        System.out.println(filascant + "" + filascantidad);
         if (filascantidad >= filascant) {
             for (int i = 0; i < filascant; i++) {
                 benificios = (int) jTablePropiedad.getValueAt(i, 3);
@@ -460,9 +454,9 @@ public class MainScreen extends javax.swing.JFrame {
             jTextFieldAcumulado.setText(String.valueOf(beni));
         }
     }
-    //codigo para rellenar el combobox de paises desde la BD
 
     public static void rellenapais(/*String args[]*/) throws SQLException {
+        //codigo para rellenar el combobox de paises desde la BD
         JDBCclass JDBC = new JDBCclass();
         String sql;
         sql = "SELECT pais FROM ciudad GROUP BY pais;";
@@ -479,10 +473,10 @@ public class MainScreen extends javax.swing.JFrame {
      *
      */
     public static void main() {
-        filascantidad=jTablePropiedad.getRowCount();
-        ScheduledExecutorService execService= Executors.newScheduledThreadPool(5);
+        //funcion que se autoejecuta cada minuto y hace la funcion de sumarbenificios(); de forma repetida
+        filascantidad = jTablePropiedad.getRowCount();
+        ScheduledExecutorService execService = Executors.newScheduledThreadPool(5);
         execService.scheduleAtFixedRate(() -> {
-            //La tarea a realizar de forma repetida
             sumarbenificios();
             System.out.println("Sumando benificios");
         }, 0, 1, TimeUnit.MINUTES);//el retraso de inicio y cada cuanto se repite y la medida del tiempo

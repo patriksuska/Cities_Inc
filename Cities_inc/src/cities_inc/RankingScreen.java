@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package cities_inc;
+
 import java.util.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Patrik
@@ -92,7 +94,7 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCerrarActionPerformed
-        // TODO add your handling code here:
+        // codigo para cerrar la ventana
         dispose();
     }//GEN-LAST:event_BtnCerrarActionPerformed
 
@@ -100,8 +102,8 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
      * @param args the command line arguments
      */
     public static void main() {
+        // codigo para añadir los usuarios y su saldo a la tabla
         try {
-            // codigo para añadir los usuarios y su saldo a la tabla
             String sql;
             sql = "SELECT * FROM usuario ORDER BY saldo DESC;";
             JDBCclass JDBC = new JDBCclass();
@@ -110,12 +112,12 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
             modelo.addColumn("Usuario");
             modelo.addColumn("Saldo (€)");
             jTable1.setModel(modelo);
-            Object[] ranking= new Object[2];
+            Object[] ranking = new Object[2];
             while (temporal.next()) {
                 String user = temporal.getString("nombreUsuario");
                 String saldo = temporal.getString("saldo");
-                ranking[0]=user;
-                ranking[1]=saldo;
+                ranking[0] = user;
+                ranking[1] = saldo;
                 modelo.addRow(ranking);
             }
             JDBC.state.close();
@@ -145,7 +147,7 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
             java.util.logging.Logger.getLogger(RankingScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-      
+
     }
 
     // Variables declaration - do not modify

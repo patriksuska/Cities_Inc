@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.UnsupportedLookAndFeelException;
+
 /**
  *
  * @author Patrik
@@ -125,6 +126,11 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
 
         jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Patrik\\Documents\\NetBeansProjects\\Cities_Inc\\Cities_inc\\lib\\city-wallpaper-1.jpg")); // NOI18N
         jLabel4.setText("jLabel4");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-7, -2, 630, 300));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -142,8 +148,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCrearUsuarioActionPerformed
-        // TODO add your handling code here:
-        //codigo query para crear un usuario desde la pantalla de administrador
+//codigo para crear un usuario desde la pantalla de administrador
         try {
             if (jTextFieldNombre.getText().isEmpty() || jPasswordFieldContrasena.getPassword().length == 0 || jTextFieldCSP.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "¡Introduzca todos los datos!");
@@ -165,9 +170,6 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
                 }
                 if (a >= 1) {
                     JOptionPane.showMessageDialog(null, "¡El usuario ya existe!");
-//                    nombreUsuario = null;
-//                    password = null;
-//                    CSP = 0;
                     jTextFieldNombre.setEnabled(true);
                     jTextFieldCSP.setEnabled(true);
                     jTextFieldNombre.setText(null);
@@ -177,12 +179,9 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
                     String sql;
                     sql = "INSERT INTO usuario (nombreUsuario,password,saldo,CSP) ";
                     sql += "values ('" + nombreUsuario + "',MD5('" + password + "'),'" + saldo + "','" + CSP + "');";
-
                     JDBCclass.consulta3(sql);
                     JOptionPane.showMessageDialog(null, "¡Usuario creado correctamente!");
                     main();
-//                    nombreUsuario = null;
-//                    password = null;
                     jTextFieldNombre.setEnabled(true);
                     jTextFieldCSP.setEnabled(true);
                     jTextFieldNombre.setText(null);
@@ -192,7 +191,6 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Hubo un problema");
-
             jTextFieldNombre.setEnabled(true);
             jTextFieldCSP.setEnabled(true);
             jTextFieldNombre.setText(null);
@@ -202,8 +200,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     }//GEN-LAST:event_BtnCrearUsuarioActionPerformed
 
     private void BtnBorrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBorrarUsuarioActionPerformed
-        // TODO add your handling code here:
-        //codigo query para eliminar un usuario seleccionado 
+        //codigo para eliminar un usuario seleccionado de la tabla de usuarios de la derecha
         if (jTable1.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(null, "¡Selecciona un usuario a borrar!");
         } else {
@@ -250,15 +247,16 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     }//GEN-LAST:event_BtnBorrarUsuarioActionPerformed
 
     private void BtnCambiarPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCambiarPasswordActionPerformed
-        // TODO add your handling code here:
-        //codigo query para actualizar la contraseña del usuario
+        //codigo para actualizar la contraseña del usuario seleccionado de la tabla derecha
         if (jTable1.getSelectedRow() >= 0) {
             String nombreUsuario = jTextFieldNombre.getText();
             String password = String.valueOf(jPasswordFieldContrasena.getPassword());
             String sql;
             sql = "UPDATE usuario SET password=MD5('" + password + "') WHERE nombreUsuario='" + nombreUsuario + "'; ";
+            System.out.println(sql);
             try {
                 JDBCclass.consulta3(sql);
+                rellenausuarioscontrasena();
                 JOptionPane.showMessageDialog(null, "¡Modificacion realizada correctamente!");
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "No se puede modificar el usuario");
@@ -269,8 +267,8 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     }//GEN-LAST:event_BtnCambiarPasswordActionPerformed
 
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
+        // codigo para salir de la pantalla de administrador
         try {
-            // TODO add your handling code here:
             this.dispose();
             LoginScreen logscreen = new LoginScreen();
             logscreen.setLocationRelativeTo(null);
@@ -280,6 +278,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
         }
     }//GEN-LAST:event_BtnSalirActionPerformed
     public void insertadatos() {
+        // codigo para insertar los datos obtenidos de la seleccion de una fila de la tabla a los campos jTextField de la parte superior izquierda
         if (jTable1.getSelectedRow() >= 0) {
             String usr = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 0));
             String pwd = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 1));
@@ -296,20 +295,34 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     }
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
+        // selecciona la fila deseada y la remarca con fondo azulado
         jTable1.setColumnSelectionAllowed(true);
         jTable1.setCellSelectionEnabled(true);
+        System.out.println(jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+        System.out.println(jTable1.getValueAt(jTable1.getSelectedRow(), 1));
+        System.out.println(jTable1.getValueAt(jTable1.getSelectedRow(), 2));
         insertadatos();
+        //aqui un codigo para que se deseleccione una vez acabado de insertar los datos a los jTextField
         jTable1.setColumnSelectionAllowed(false);
         jTable1.setCellSelectionEnabled(false);
-        //aqui un codigo para que se deseleccione una vez acabado de insertar los datos a los jlabel
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // al seleccionar este label, se vacian los campos de texto de la parte superior izquierda
+        jTextFieldNombre.setEnabled(true);
+        jTextFieldCSP.setEnabled(true);
+        jTextFieldNombre.setText(null);
+        jTextFieldCSP.setText(null);
+        jPasswordFieldContrasena.setText(null);
+        jTable1.setColumnSelectionAllowed(false);
+        jTable1.setCellSelectionEnabled(false);
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
      */
-    public static void main() {
-
+    public static void rellenausuarioscontrasena() {
+        //codigo para rellenar los usuarios en la tabla de la derecha en la pantalla de administrador
         try {
             /* Set the Nimbus look and feel */
             //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -338,7 +351,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             modelo.addColumn("Nombre");
             modelo.addColumn("Contraseña MD5");
             modelo.addColumn("CSP");
-            jTable1.setModel(modelo);
+
             Object[] usuarios = new Object[3];
             String sql;
             sql = "SELECT * FROM usuario; ";
@@ -353,11 +366,17 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
                 usuarios[2] = CSp;
                 modelo.addRow(usuarios);
             }
+
+            jTable1.setModel(modelo);
             JDBC.state.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Hubo un problema con la visualizacion de las tablas");
         }
+    }
+
+    public static void main() {
+        rellenausuarioscontrasena();
         //</editor-fold>
     }
 
