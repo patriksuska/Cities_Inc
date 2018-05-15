@@ -122,7 +122,7 @@ public class MainScreen extends javax.swing.JFrame {
                 BtnVenderActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 474, -1, -1));
+        jPanel1.add(BtnVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 474, 70, -1));
 
         BtnLogout.setText("Cerrar Sesion");
         BtnLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -173,10 +173,10 @@ public class MainScreen extends javax.swing.JFrame {
                 BtnSeleccionarMouseClicked(evt);
             }
         });
-        jPanel1.add(BtnSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(383, 69, -1, -1));
+        jPanel1.add(BtnSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 69, 90, -1));
 
         jTextFieldAcumulado.setEditable(false);
-        jPanel1.add(jTextFieldAcumulado, new org.netbeans.lib.awtextra.AbsoluteConstraints(661, 475, 120, -1));
+        jPanel1.add(jTextFieldAcumulado, new org.netbeans.lib.awtextra.AbsoluteConstraints(661, 475, 140, -1));
 
         jButton1.setText("Cobrar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -188,21 +188,23 @@ public class MainScreen extends javax.swing.JFrame {
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("€");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(791, 478, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(807, 478, 20, -1));
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Dinero acumulado durante un mes:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(484, 478, -1, -1));
+        jLabel9.setText("Dinero acumulado durante el mes:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(484, 478, 170, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon("C:\\Users\\Patrik\\Documents\\NetBeansProjects\\Cities_Inc\\Cities_inc\\lib\\city-wallpaper-1.jpg")); // NOI18N
-        jLabel10.setText("jLabel10");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -2, 950, 510));
+        jLabel10.setText("jLabel11");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -13, 960, 520));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 947, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
