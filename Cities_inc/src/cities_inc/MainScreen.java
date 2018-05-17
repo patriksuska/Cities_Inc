@@ -218,7 +218,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     /**
      * Metodo autogenerado por Netbeans que abre la pantalla de Ranking al pulsar el boton llamado ranking
-     * @param evt 
+     * @param evt Evento
      */
     private void BtnRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRankingActionPerformed
         //codigo para ver el ranking de usuarios
@@ -238,7 +238,7 @@ public class MainScreen extends javax.swing.JFrame {
     public static int precioCiudad;
     /**
      * Metodo autogenerado por Netbeans para realizar la accion de compra de la ciudad al pulsar el boton Comprar
-     * @param evt 
+     * @param evt Evento
      */
     private void BtnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnComprarActionPerformed
         //codigo para comprar una ciudad
@@ -282,7 +282,7 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnComprarActionPerformed
     /**
      * Metodo autogenerado por Netbeans para vender una ciudad seleccionada al pulsar el boton de vender
-     * @param evt 
+     * @param evt Evento
      */
     private void BtnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVenderActionPerformed
         //codigo query para vender una ciudad
@@ -319,7 +319,7 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnVenderActionPerformed
     /**
      * Metodo autogenerado por Netbeans para que cuando se pulse el boton de cerrar sesion se cierra esta ventana y lanza la de Login
-     * @param evt 
+     * @param evt Evento
      */
     private void BtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogoutActionPerformed
         //codigo para cerrar sesion
@@ -375,7 +375,7 @@ public class MainScreen extends javax.swing.JFrame {
     }
     /**
      * Metodo autogenerado por Netbeans que llama a la funcion insertaciudades una vez que se ha seleccionado el pais y se le ha dado click al boton seleccionar
-     * @param evt 
+     * @param evt Evento
      */
     private void BtnSeleccionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnSeleccionarMouseClicked
 //codigo para seleccionar el pais pulsando el boton seleccionar
@@ -383,7 +383,7 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnSeleccionarMouseClicked
     /**
      * Metodo autogenerado por Netbeans que realiza el cobro de la bonificacion al pulsar el boton Cobrar
-     * @param evt 
+     * @param evt Evento
      */
     private void CobrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CobrarMouseClicked
         //codigo para cobrar las bonificaciones acumuladas

@@ -123,7 +123,7 @@ public class RegisterScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     /**
      * Metodo autogenerado por Netbeans que crea un usuario nuevo con los datos que se le pide al usuario en la base de datos cuando se da click al boton Aceptar
-     * @param evt 
+     * @param evt Evento
      */
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
         // codigo para insertar un usuario en la base de datos usando el JDBC class
@@ -173,7 +173,7 @@ public class RegisterScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnAceptarActionPerformed
     /**
      * Metodo autogenerado por Netbeans que cierra la pantalla de Registro e inicia la de Login cuando se pulsa el boton Cancelar
-     * @param evt 
+     * @param evt Evento
      */
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
         // codigo para salir de la pantalla de registro

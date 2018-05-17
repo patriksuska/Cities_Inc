@@ -152,7 +152,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     }// </editor-fold>//GEN-END:initComponents
     /**
      * Metodo autogenerado por Netbeans que crea un usuario nuevo con los datos que se le pide al usuario en la base de datos cuando se da click al boton crear usuario en la pantalla de administrador
-     * @param evt 
+     * @param evt Evento
      */
     private void BtnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCrearUsuarioActionPerformed
 //codigo para crear un usuario desde la pantalla de administrador
@@ -207,7 +207,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     }//GEN-LAST:event_BtnCrearUsuarioActionPerformed
     /**
      * Metodo autogenerado por Netbeans que borra un usuario previamente seleccionado en la tabla de usuarios en la pantalla de administrador
-     * @param evt
+     * @param evt Evento
      */
     private void BtnBorrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBorrarUsuarioActionPerformed
         //codigo para eliminar un usuario seleccionado de la tabla de usuarios de la derecha
@@ -257,7 +257,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     }//GEN-LAST:event_BtnBorrarUsuarioActionPerformed
     /**
      * Metodo autogenerado por Netbeans que cambia la contraseña de un usuario previamente seleccionado de la tabla de usuarios en la pantalla de administrador
-     * @param evt
+     * @param evt Evento
      */
     private void BtnCambiarPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCambiarPasswordActionPerformed
         //codigo para actualizar la contraseña del usuario seleccionado de la tabla derecha
@@ -280,7 +280,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     }//GEN-LAST:event_BtnCambiarPasswordActionPerformed
     /**
      * Metodo autogenerado por Netbeans que cierra la sesion y a su vez la ventana de administrador al pulsar el boton de salir
-     * @param evt
+     * @param evt Evento
      */
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
         // codigo para salir de la pantalla de administrador
@@ -314,7 +314,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     }
     /**
      * Metodo autogenerado por Netbeans que llama a la funcion de insertadatos cuando una fila sea seleccionada de la tabla usuarios en la pantalla de administrador
-     * @param evt
+     * @param evt Evento
      */
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // selecciona la fila deseada y la remarca con fondo azulado
@@ -329,7 +329,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     }//GEN-LAST:event_jTable1MouseClicked
     /**
      * Metodo autogenerado por Netbeans que al pulsar en todo lo que no son componentes, borra los valores de los textfield y deselecciona las filas en la tabla usuarios en la pantalla de administrador
-     * @param evt
+     * @param evt Evento
      */
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // al seleccionar este label, se vacian los campos de texto de la parte superior izquierda

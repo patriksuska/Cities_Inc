@@ -130,7 +130,7 @@ public class LoginScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     /**
      * Metodo autogenerado por Netbeans que confirma que el usuario existe en la Base de Datos y si es asi, deja entrar al usuario mostrandole la pantalla de MainScreen
-     * @param evt 
+     * @param evt Evento
      */
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
         // codigo para iniciar sesion en el programa escribiendo las credenciales del usuario
@@ -191,7 +191,7 @@ public class LoginScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnAceptarActionPerformed
     /**
      * Metodo autogenerado por Netbeans que abre la ventana de registro cuando se pulsa el boton de registrarse en la pantalla de registro
-     * @param evt 
+     * @param evt Evento
      */
     private void BtnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegisterActionPerformed
         // codigo para abrir la ventana de registro
@@ -206,7 +206,7 @@ public class LoginScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnRegisterActionPerformed
     /**
      * Metodo autogenerado por Netbeans que abre la pantalla de ranking en caso de que se pulse el boton invitado en la pantalla de registro
-     * @param evt 
+     * @param evt Evento
      */
     private void BtnGuestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuestActionPerformed
         // codigo para abrir la ventana de invitado(ventana de ranking)
@@ -221,7 +221,7 @@ public class LoginScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnGuestActionPerformed
     /**
      * Metodo autogenerado por Netbeans que cierra la ventana al pulsar el boton de cancelar en la pantalla de ranking y abre la ventana de login
-     * @param evt 
+     * @param evt Evento
      */
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
         // Salir de la aplicacion por completo

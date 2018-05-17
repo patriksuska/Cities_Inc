@@ -98,7 +98,7 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
     }// </editor-fold>//GEN-END:initComponents
     /**
      * Metodo autogenerado por Netbeans que cierra la ventana al pulsar el boton de cerrar en la pantalla de ranking
-     * @param evt 
+     * @param evt Evento
      */
     private void BtnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCerrarActionPerformed
         // codigo para cerrar la ventana
