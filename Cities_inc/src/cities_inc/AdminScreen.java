@@ -382,7 +382,6 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
      */
     public static void main() {
         rellenausuarioscontrasena();
-        //</editor-fold>
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

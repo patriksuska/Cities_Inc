@@ -130,9 +130,6 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
         } catch (SQLException ex) {
             Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        //</editor-fold>
-
     }
 
     // Variables declaration - do not modify
