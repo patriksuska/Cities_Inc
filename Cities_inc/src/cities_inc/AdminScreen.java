@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package cities_inc;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -15,13 +14,18 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
- *
+ * Clase llamada AdminScreen que es la pantalla de administrador
  * @author Patrik
  */
 public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos de todos los usuarios
 
     /**
-     * Creates new form AdminScreen
+     * Constructor de la clase AdminScreen
+     * @throws SQLException Excepcion SQL en caso de un sql mal escrito
+     * @throws UnsupportedLookAndFeelException  En caso de que no este soportado el LookAndFeel
+     * @throws InstantiationException  En caso de que la instanciacion falle
+     * @throws IllegalAccessException En caso de que hay un inicio no esperado
+     * @throws ClassNotFoundException Por si la clase no se encuentra
      */
     public AdminScreen() throws SQLException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException, ClassNotFoundException {
         setUndecorated(true);
@@ -146,7 +150,10 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Metodo autogenerado por Netbeans que crea un usuario nuevo con los datos que se le pide al usuario en la base de datos cuando se da click al boton crear usuario en la pantalla de administrador
+     * @param evt 
+     */
     private void BtnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCrearUsuarioActionPerformed
 //codigo para crear un usuario desde la pantalla de administrador
         try {
@@ -198,7 +205,10 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             jPasswordFieldContrasena.setText(null);
         }
     }//GEN-LAST:event_BtnCrearUsuarioActionPerformed
-
+    /**
+     * Metodo autogenerado por Netbeans que borra un usuario previamente seleccionado en la tabla de usuarios en la pantalla de administrador
+     * @param evt
+     */
     private void BtnBorrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBorrarUsuarioActionPerformed
         //codigo para eliminar un usuario seleccionado de la tabla de usuarios de la derecha
         if (jTable1.getSelectedRow() < 0) {
@@ -245,7 +255,10 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             }
         }
     }//GEN-LAST:event_BtnBorrarUsuarioActionPerformed
-
+    /**
+     * Metodo autogenerado por Netbeans que cambia la contraseña de un usuario previamente seleccionado de la tabla de usuarios en la pantalla de administrador
+     * @param evt
+     */
     private void BtnCambiarPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCambiarPasswordActionPerformed
         //codigo para actualizar la contraseña del usuario seleccionado de la tabla derecha
         if (jTable1.getSelectedRow() >= 0) {
@@ -265,7 +278,10 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             JOptionPane.showMessageDialog(null, "¡Selecciona a un usuario!");
         }
     }//GEN-LAST:event_BtnCambiarPasswordActionPerformed
-
+    /**
+     * Metodo autogenerado por Netbeans que cierra la sesion y a su vez la ventana de administrador al pulsar el boton de salir
+     * @param evt
+     */
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
         // codigo para salir de la pantalla de administrador
         try {
@@ -277,6 +293,9 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             Logger.getLogger(AdminScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnSalirActionPerformed
+    /**
+     * Metodo de creacion propia que inserta los datos de los usuarios (nombre, el MD5 de la contraseña y el codigo CSP) en los textfield de la pantalla de administrador
+     */
     public void insertadatos() {
         // codigo para insertar los datos obtenidos de la seleccion de una fila de la tabla a los campos jTextField de la parte superior izquierda
         if (jTable1.getSelectedRow() >= 0) {
@@ -293,7 +312,10 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             jTextFieldCSP.setEnabled(true);
         }
     }
-
+    /**
+     * Metodo autogenerado por Netbeans que llama a la funcion de insertadatos cuando una fila sea seleccionada de la tabla usuarios en la pantalla de administrador
+     * @param evt
+     */
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // selecciona la fila deseada y la remarca con fondo azulado
         jTable1.setColumnSelectionAllowed(true);
@@ -306,7 +328,10 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
         jTable1.setColumnSelectionAllowed(false);
         jTable1.setCellSelectionEnabled(false);
     }//GEN-LAST:event_jTable1MouseClicked
-
+    /**
+     * Metodo autogenerado por Netbeans que al pulsar en todo lo que no son componentes, borra los valores de los textfield y deselecciona las filas en la tabla usuarios en la pantalla de administrador
+     * @param evt
+     */
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // al seleccionar este label, se vacian los campos de texto de la parte superior izquierda
         jTextFieldNombre.setEnabled(true);
@@ -317,9 +342,8 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
         jTable1.setColumnSelectionAllowed(false);
         jTable1.setCellSelectionEnabled(false);
     }//GEN-LAST:event_jLabel4MouseClicked
-
     /**
-     * @param args the command line arguments
+     * Metodo de creacion propia que rellena la tabla de usuarios de la pantalla de administrador con los datos obtenidos de la consulta de Base de Datos (nombre y MD5 de la contraseña)
      */
     public static void rellenausuarioscontrasena() {
         //codigo para rellenar los usuarios en la tabla de la derecha en la pantalla de administrador
@@ -374,7 +398,10 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
             JOptionPane.showMessageDialog(null, "Hubo un problema con la visualizacion de las tablas");
         }
     }
-
+    /**
+     * Metodo de creacion propia que nada mas ser lanzada la ventana de administrador, llama a la funcion de rellenausuarioscontrasena
+     * @see rellenausuarioscontrasena()
+     */
     public static void main() {
         rellenausuarioscontrasena();
         //</editor-fold>

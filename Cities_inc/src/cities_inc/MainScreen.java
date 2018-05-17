@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package cities_inc;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -18,15 +17,18 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
+ * Clase llamada MainScreen que es la pantalla de juego
  * @author Patrik
  */
 public class MainScreen extends javax.swing.JFrame {
 
     /**
-     * Creates new form MainScreen
-     *
-     * @throws java.sql.SQLException
+     * Constructor de la clase MainScreen el cual lanza los metodos que tiene en el constructor (rellenausuario,rellenapais,rellenatablapropiedad)
+     * @throws SQLException Excepcion SQL en caso de un sql mal escrito
+     * @throws UnsupportedLookAndFeelException  En caso de que no este soportado el LookAndFeel
+     * @throws InstantiationException  En caso de que la instanciacion falle
+     * @throws IllegalAccessException En caso de que hay un inicio no esperado
+     * @throws ClassNotFoundException Por si la clase no se encuentra
      */
     public MainScreen() throws SQLException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException, ClassNotFoundException {
         setUndecorated(true);
@@ -66,7 +68,7 @@ public class MainScreen extends javax.swing.JFrame {
         ComboPaises = new javax.swing.JComboBox<>();
         BtnSeleccionar = new javax.swing.JButton();
         jTextFieldAcumulado = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        Cobrar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -178,13 +180,13 @@ public class MainScreen extends javax.swing.JFrame {
         jTextFieldAcumulado.setEditable(false);
         jPanel1.add(jTextFieldAcumulado, new org.netbeans.lib.awtextra.AbsoluteConstraints(661, 475, 140, -1));
 
-        jButton1.setText("Cobrar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        Cobrar.setText("Cobrar");
+        Cobrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                CobrarMouseClicked(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(846, 474, 90, -1));
+        jPanel1.add(Cobrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(846, 474, 90, -1));
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("€");
@@ -214,6 +216,10 @@ public class MainScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metodo autogenerado por Netbeans que abre la pantalla de Ranking al pulsar el boton llamado ranking
+     * @param evt 
+     */
     private void BtnRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRankingActionPerformed
         //codigo para ver el ranking de usuarios
         try {
@@ -225,8 +231,15 @@ public class MainScreen extends javax.swing.JFrame {
             Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnRankingActionPerformed
-    static int precioCiudad;
-
+    /**
+     * Variable que contiene el precio de una ciudad autogenerada en la clase Ciudad
+     * @see precioCiudad
+     */
+    public static int precioCiudad;
+    /**
+     * Metodo autogenerado por Netbeans para realizar la accion de compra de la ciudad al pulsar el boton Comprar
+     * @param evt 
+     */
     private void BtnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnComprarActionPerformed
         //codigo para comprar una ciudad
         try {
@@ -267,7 +280,10 @@ public class MainScreen extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_BtnComprarActionPerformed
-
+    /**
+     * Metodo autogenerado por Netbeans para vender una ciudad seleccionada al pulsar el boton de vender
+     * @param evt 
+     */
     private void BtnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVenderActionPerformed
         //codigo query para vender una ciudad
         try {
@@ -301,7 +317,10 @@ public class MainScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se puede vender la ciudad");
         }
     }//GEN-LAST:event_BtnVenderActionPerformed
-
+    /**
+     * Metodo autogenerado por Netbeans para que cuando se pulse el boton de cerrar sesion se cierra esta ventana y lanza la de Login
+     * @param evt 
+     */
     private void BtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogoutActionPerformed
         //codigo para cerrar sesion
         try {
@@ -313,6 +332,9 @@ public class MainScreen extends javax.swing.JFrame {
             Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnLogoutActionPerformed
+    /**
+     * Metodo de creacion propia que inserta las ciudades de un pais seleccionado previamente
+     */
     public void insertarciudades() {
         //codigo para insertar las ciudades en la tabla de ciudades disponibles de un pais seleccionado previamente
         DefaultTableModel modelo = new DefaultTableModel();
@@ -351,12 +373,19 @@ public class MainScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al mostrar el listado de ciudades");
         }
     }
+    /**
+     * Metodo autogenerado por Netbeans que llama a la funcion insertaciudades una vez que se ha seleccionado el pais y se le ha dado click al boton seleccionar
+     * @param evt 
+     */
     private void BtnSeleccionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnSeleccionarMouseClicked
 //codigo para seleccionar el pais pulsando el boton seleccionar
         insertarciudades();
     }//GEN-LAST:event_BtnSeleccionarMouseClicked
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    /**
+     * Metodo autogenerado por Netbeans que realiza el cobro de la bonificacion al pulsar el boton Cobrar
+     * @param evt 
+     */
+    private void CobrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CobrarMouseClicked
         //codigo para cobrar las bonificaciones acumuladas
         try {
             if (beni == 0) {
@@ -377,13 +406,16 @@ public class MainScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al actualizar el saldo del jugador");
         }
 
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_CobrarMouseClicked
 
     /**
-     * @param args the command line arguments
+     * Variable estatica de tipo entero que contiene el saldo del usuario
      */
     static int saldo;
-
+    /**
+     * Metodo de creacion propia que rellena los datos del usuario en el label de usuario y en el textfield de saldo 
+     * @throws SQLException En caso de que falle la consulta sql
+     */
     public static void rellenausuario() throws SQLException {
         //codigo para rellenar los campos sobre el usuario(nombre y su saldo)
         String usr = LoginScreen.nombreUsuario;
@@ -398,7 +430,10 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel2.setText(usr);
         JDBC.state.close();
     }
-
+    /**
+     * Metodo de creacion propia que rellena la tabla de TusCiudades en la pantalla del juego con las ciudades que tiene el usuario en propiedad
+     * @throws SQLException En caso de que falle la consulta sql
+     */
     public static void rellenatablapropiedad() throws SQLException {
         //codigo para rellenar la tabla de tus ciudades compradas
         String usr = LoginScreen.nombreUsuario;
@@ -431,10 +466,18 @@ public class MainScreen extends javax.swing.JFrame {
         }
         JDBC.state.close();
     }
-
+    /**
+     * Variable de tipo entero que contiene el benificio generado por el metodo llamado sumarbenificios
+     * @see sumarbenificios()
+     */
     public static int beni;
+    /**
+     * Variable que contiene la cantidad de filas existentes en la tabla TusCiudades a la hora de realizar la suma de los benificios
+     */
     public static int filascantidad;
-
+    /**
+     * Metodo de creacion propia que suma los benificios de cada una de las ciudades en propiedad del usuario y las junta todas en un textfield llamado jTextFieldAcumulado
+     */
     public static void sumarbenificios() {
         //codigo para sumar todos los benificios de las ciudades en un campo
         int benificios = 0;
@@ -456,8 +499,11 @@ public class MainScreen extends javax.swing.JFrame {
             jTextFieldAcumulado.setText(String.valueOf(beni));
         }
     }
-
-    public static void rellenapais(/*String args[]*/) throws SQLException {
+    /**
+     * Metodo de creacion propia que inserta los paises existentes de la Base de Datos en un comboBox antes de que el usuario realize cualquier operacion
+     * @throws SQLException En caso de que el sql no se realize correctamente 
+     */
+    public static void rellenapais() throws SQLException {
         //codigo para rellenar el combobox de paises desde la BD
         JDBCclass JDBC = new JDBCclass();
         String sql;
@@ -472,7 +518,8 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     /**
-     *
+     * Metodo de creacion propia que autoejecuta cada X tiempo la funcion de sumarbenificios
+     * @see sumarbenificios()
      */
     public static void main() {
         //funcion que se autoejecuta cada minuto y hace la funcion de sumarbenificios(); de forma repetida
@@ -491,9 +538,9 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton BtnRanking;
     private javax.swing.JButton BtnSeleccionar;
     private javax.swing.JButton BtnVender;
+    private javax.swing.JButton Cobrar;
     public static javax.swing.JComboBox<String> ComboPaises;
     public static javax.swing.JTextField TextSaldoActual;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     public static javax.swing.JLabel jLabel2;

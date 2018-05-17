@@ -15,13 +15,17 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Clase llamada RankingScreen que es la pantalla de ranking y de invitado
  * @author Patrik
  */
 public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombre de cada usuario y su saldo de la BD
 
     /**
-     * Creates new form RankingScreen
+     * Constructor de la clase RankingScreen
+     * @throws UnsupportedLookAndFeelException  En caso de que no este soportado el LookAndFeel
+     * @throws InstantiationException  En caso de que la instanciacion falle
+     * @throws IllegalAccessException En caso de que hay un inicio no esperado
+     * @throws ClassNotFoundException Por si la clase no se encuentra
      */
     public RankingScreen() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         setUndecorated(true);
@@ -92,14 +96,16 @@ public class RankingScreen extends javax.swing.JFrame {//aqui aparecera el nombr
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Metodo autogenerado por Netbeans que cierra la ventana al pulsar el boton de cerrar en la pantalla de ranking
+     * @param evt 
+     */
     private void BtnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCerrarActionPerformed
         // codigo para cerrar la ventana
         dispose();
     }//GEN-LAST:event_BtnCerrarActionPerformed
-
     /**
-     * @param args the command line arguments
+     * Metodo de creacion propia que al inicializarse la pantalla de ranking inserta los datos de los usuarios(nombre y saldo) obtenidos de la consulta contra la Base de Datos en una tabla en la pantalla de ranking
      */
     public static void main() {
         // codigo para añadir los usuarios y su saldo a la tabla

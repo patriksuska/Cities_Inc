@@ -14,15 +14,17 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
- *
+ * Clase llamada LoginScreen que es la pantalla de login para el usuario
  * @author Patrik
  */
 public class LoginScreen extends javax.swing.JFrame {
-
+    /**
+     * Variable de tipo string que contiene el nombre del usuario
+     */
     static String nombreUsuario;
 
     /**
-     * Creates new form MainScreen
+     * Constructor de la clase LoginScreen
      */
     LoginScreen() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         setUndecorated(true);
@@ -122,7 +124,10 @@ public class LoginScreen extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Metodo autogenerado por Netbeans que confirma que el usuario existe en la Base de Datos y si es asi, deja entrar al usuario mostrandole la pantalla de MainScreen
+     * @param evt 
+     */
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
         // codigo para iniciar sesion en el programa escribiendo las credenciales del usuario
         nombreUsuario = TextUsuario.getText();
@@ -180,7 +185,10 @@ public class LoginScreen extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_BtnAceptarActionPerformed
-
+    /**
+     * Metodo autogenerado por Netbeans que abre la ventana de registro cuando se pulsa el boton de registrarse en la pantalla de registro
+     * @param evt 
+     */
     private void BtnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegisterActionPerformed
         // codigo para abrir la ventana de registro
         try {
@@ -192,7 +200,10 @@ public class LoginScreen extends javax.swing.JFrame {
             Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnRegisterActionPerformed
-
+    /**
+     * Metodo autogenerado por Netbeans que abre la pantalla de ranking en caso de que se pulse el boton invitado en la pantalla de registro
+     * @param evt 
+     */
     private void BtnGuestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuestActionPerformed
         // codigo para abrir la ventana de invitado(ventana de ranking)
         try {
@@ -204,13 +215,16 @@ public class LoginScreen extends javax.swing.JFrame {
             Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnGuestActionPerformed
-
+    /**
+     * Metodo autogenerado por Netbeans que cierra la ventana al pulsar el boton de cancelar en la pantalla de ranking y abre la ventana de login
+     * @param evt 
+     */
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
         // Salir de la aplicacion por completo
         System.exit(0);
     }//GEN-LAST:event_BtnCancelarActionPerformed
-
     /**
+     * Metodo main que en principio carece de funcionalidad
      * @param args the command line arguments
      */
     public static void main(String args[]) {

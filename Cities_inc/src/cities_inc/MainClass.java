@@ -6,16 +6,14 @@ import java.util.logging.Logger;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
- *
+ * Clase llamada MainClass que se ejecuta al inicio del programa y que lanza la ventana de login
  * @author Patrik
  */
 public class MainClass {
 
     /**
-     *
-     * @param <error>
-     * @param args
-     * @throws JSONException
+     * Metodo main para lanzar la pantalla principal que en este caso es la pantalla de Login
+     * @param args Argumentos del metodo main
      */
     public static void main(String[] args) {
         //abre la pantalla de Login

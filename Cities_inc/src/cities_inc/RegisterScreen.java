@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package cities_inc;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -14,18 +13,22 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
- *
+ * Clase llamada RegisterScreen que es la pantalla de registro del usuario
  * @author Patrik
  */
 public class RegisterScreen extends javax.swing.JFrame {
 
     /**
-     * Creates new form Register
+     * Constructor de la clase RegisterScreen 
+     * @throws SQLException Excepcion SQL en caso de un sql mal escrito
+     * @throws UnsupportedLookAndFeelException  En caso de que no este soportado el LookAndFeel
+     * @throws InstantiationException  En caso de que la instanciacion falle
+     * @throws IllegalAccessException En caso de que hay un inicio no esperado
+     * @throws ClassNotFoundException Por si la clase no se encuentra
      */
     public RegisterScreen() throws SQLException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException, ClassNotFoundException {
         setUndecorated(true);
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-
         initComponents();
     }
 
@@ -118,7 +121,10 @@ public class RegisterScreen extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Metodo autogenerado por Netbeans que crea un usuario nuevo con los datos que se le pide al usuario en la base de datos cuando se da click al boton Aceptar
+     * @param evt 
+     */
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
         // codigo para insertar un usuario en la base de datos usando el JDBC class
         try {
@@ -165,7 +171,10 @@ public class RegisterScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "¡No se ha podido realizar la operacion!");
         }
     }//GEN-LAST:event_BtnAceptarActionPerformed
-
+    /**
+     * Metodo autogenerado por Netbeans que cierra la pantalla de Registro e inicia la de Login cuando se pulsa el boton Cancelar
+     * @param evt 
+     */
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
         // codigo para salir de la pantalla de registro
         try {      
@@ -179,6 +188,7 @@ public class RegisterScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnCancelarActionPerformed
 
     /**
+     * Metodo main que en principio no tiene funcionalidad
      * @param args the command line arguments
      */
     public static void main(String args[]) {
