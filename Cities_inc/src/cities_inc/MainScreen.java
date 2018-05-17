@@ -468,7 +468,7 @@ public class MainScreen extends javax.swing.JFrame {
     }
     /**
      * Variable de tipo entero que contiene el benificio generado por el metodo llamado sumarbenificios
-     * @see sumarbenificios()
+     * @see #sumarbenificios()
      */
     public static int beni;
     /**
@@ -519,7 +519,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     /**
      * Metodo de creacion propia que autoejecuta cada X tiempo la funcion de sumarbenificios
-     * @see sumarbenificios()
+     * @see #sumarbenificios()
      */
     public static void main() {
         //funcion que se autoejecuta cada minuto y hace la funcion de sumarbenificios(); de forma repetida

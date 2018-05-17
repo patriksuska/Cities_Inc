@@ -29,7 +29,7 @@ public class CiudadClass {
     /**
      * Metodo que se encarga de calcular la bonificacion de las ciudades dependiendo de la cantidad de paradas que tiene
      * @param paradas Es la variable que contiene el numero de paradas obtenido previamente del metodo obtenerParadas de la clase RestAPIClass
-     * @see RestAPIClass.obtenerParadas()
+     * @see cities_inc.RestAPIClass#obtenerParadas(java.lang.String) 
      * @return Nos retorna el porcentaje de bonificacion de la ciudad en una variable de tipo entero
      */
     public static int bonificacion(int paradas) {
@@ -54,9 +54,8 @@ public class CiudadClass {
     /**
      * Metodo encargado de realizar la conversion del porcentaje de bonificacion a euros
      * @param bonificacion es la variable obtenida de la funcion bonificacion de esta misma clase y que contiene el numero en porcentaje de bonificacion de una ciudad
-     * @see bonificacion()
+     * @see cities_inc.CiudadClass#bonificacion(int) 
      * @param preciociudad es la variable obtenida de la funcion precioCiudad de esta misma clase y que contiene el precio de una ciudad
-     * @see precioCiudad
      * @return Nos retorna en una variable de tipo entera la cantidad en euros de la bonificacion obtenida por una ciudad
      */
     public static int boneuro(int bonificacion, int preciociudad) {

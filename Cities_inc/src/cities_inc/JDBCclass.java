@@ -47,7 +47,7 @@ public class JDBCclass {
     // funcion de conexion con la BD
     /**
      * Constructor de la clase JDBCclass que realiza la conexion con la base de datos remota
-     * @throws SQLException 
+     * @throws SQLException En el caso de que la consulta sql no se realize correctamente
      */
     public JDBCclass() throws SQLException {
         try {

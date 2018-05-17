@@ -400,7 +400,7 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     }
     /**
      * Metodo de creacion propia que nada mas ser lanzada la ventana de administrador, llama a la funcion de rellenausuarioscontrasena
-     * @see rellenausuarioscontrasena()
+     * @see #rellenausuarioscontrasena()
      */
     public static void main() {
         rellenausuarioscontrasena();
