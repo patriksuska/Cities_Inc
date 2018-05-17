@@ -319,14 +319,13 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // selecciona la fila deseada y la remarca con fondo azulado
         jTable1.setColumnSelectionAllowed(true);
-        jTable1.setCellSelectionEnabled(true);
-        System.out.println(jTable1.getValueAt(jTable1.getSelectedRow(), 0));
-        System.out.println(jTable1.getValueAt(jTable1.getSelectedRow(), 1));
-        System.out.println(jTable1.getValueAt(jTable1.getSelectedRow(), 2));
+        jTable1.setRowSelectionAllowed(true);
+//        System.out.println(jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+//        System.out.println(jTable1.getValueAt(jTable1.getSelectedRow(), 1));
+//        System.out.println(jTable1.getValueAt(jTable1.getSelectedRow(), 2));
         insertadatos();
         //aqui un codigo para que se deseleccione una vez acabado de insertar los datos a los jTextField
-        jTable1.setColumnSelectionAllowed(false);
-        jTable1.setCellSelectionEnabled(false);
+        
     }//GEN-LAST:event_jTable1MouseClicked
     /**
      * Metodo autogenerado por Netbeans que al pulsar en todo lo que no son componentes, borra los valores de los textfield y deselecciona las filas en la tabla usuarios en la pantalla de administrador
@@ -334,13 +333,14 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
      */
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // al seleccionar este label, se vacian los campos de texto de la parte superior izquierda
+        rellenausuarioscontrasena();
         jTextFieldNombre.setEnabled(true);
         jTextFieldCSP.setEnabled(true);
         jTextFieldNombre.setText(null);
         jTextFieldCSP.setText(null);
         jPasswordFieldContrasena.setText(null);
         jTable1.setColumnSelectionAllowed(false);
-        jTable1.setCellSelectionEnabled(false);
+        jTable1.setRowSelectionAllowed(false);
     }//GEN-LAST:event_jLabel4MouseClicked
     /**
      * Metodo de creacion propia que rellena la tabla de usuarios de la pantalla de administrador con los datos obtenidos de la consulta de Base de Datos (nombre y MD5 de la contraseña)
@@ -348,28 +348,6 @@ public class AdminScreen extends javax.swing.JFrame {//aqui apareceran los datos
     public static void rellenausuarioscontrasena() {
         //codigo para rellenar los usuarios en la tabla de la derecha en la pantalla de administrador
         try {
-            /* Set the Nimbus look and feel */
-            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-            /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-            * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-             */
-            try {
-                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                    if ("Nimbus".equals(info.getName())) {
-                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                        break;
-                    }
-                }
-            } catch (ClassNotFoundException ex) {
-                java.util.logging.Logger.getLogger(AdminScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (InstantiationException ex) {
-                java.util.logging.Logger.getLogger(AdminScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                java.util.logging.Logger.getLogger(AdminScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-                java.util.logging.Logger.getLogger(AdminScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            }
-            //</editor-fold>
             // codigo para añadir a la tabla los usuarios y sus contraseñas
             DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Nombre");

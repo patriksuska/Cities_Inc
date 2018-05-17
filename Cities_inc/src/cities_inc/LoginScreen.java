@@ -25,6 +25,10 @@ public class LoginScreen extends javax.swing.JFrame {
 
     /**
      * Constructor de la clase LoginScreen
+     * @throws UnsupportedLookAndFeelException  En caso de que no este soportado el LookAndFeel
+     * @throws InstantiationException  En caso de que la instanciacion falle
+     * @throws IllegalAccessException En caso de que hay un inicio no esperado
+     * @throws ClassNotFoundException Por si la clase no se encuentra
      */
     LoginScreen() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         setUndecorated(true);
@@ -171,7 +175,7 @@ public class LoginScreen extends javax.swing.JFrame {
 
                 } else {
                     this.setVisible(false);
-                    JOptionPane.showMessageDialog(null, "¡El usuario no existe!");
+                    JOptionPane.showMessageDialog(null,"¡El usuario no existe o se han introducido datos incorrectos!");
                     this.setVisible(true);
                     TextUsuario.setText(null);
                     TextoPassword.setText(null);
