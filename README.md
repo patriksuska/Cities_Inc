@@ -1,2 +1,2 @@
 # Cities_Inc
-Proyecto tercer trimestre 1DAW
+Es una aplicacion grafica hecha en codigo java y que tiene como proposito servir como un "juego" de compra / venta de ciudades. El programa se conecta a una base de datos MySQL y a una API llamada citybik.es para obtener ciertos datos que necesita el programa para funcionar. Para poder realizar las conexiones contra la Base de Datos, el programa utiliza varias clases enlazadas aparte de un conector MySQL llamado mysql-connector (version 5) y para realizar las peticiones contra la API de citybik.es el programa hace uso de una clase llamada RestAPIClass que a su vez usa a MiClienteREST para obtener la informacion necesaria. 
