@@ -389,7 +389,7 @@ public class MainScreen extends javax.swing.JFrame {
         //codigo para cobrar las bonificaciones acumuladas
         try {
             if (beni == 0) {
-                JOptionPane.showMessageDialog(null, "No tienes dinero acumulado");
+                JOptionPane.showMessageDialog(null, "¡No tienes dinero acumulado!");
             } else {
                 saldo = saldo + beni;
                 String usr = jLabel2.getText();
